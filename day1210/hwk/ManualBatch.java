@@ -46,8 +46,8 @@ public class ManualBatch extends Frame {
 		}//end for
 		
 		Label lbl4 = new Label("보기");
-		TextField tfsample = new TextField("AaBbYyZz");
-		tfsample.setFont(new Font("Dialog", Font.BOLD, 20));
+		Label lbl5 = new Label("AaBbYyZz");
+		lbl5.setFont(new Font("Dialog", Font.BOLD, 20));
 		Button btn1 = new Button("확인");
 		Button btn2 = new Button("취소");
 		
@@ -56,21 +56,21 @@ public class ManualBatch extends Frame {
 		
 		//3.배치
 		//컴포넌트의 좌표, 크기 설정
-		lbl1.setLocation(10, 25);//배치 좌표
+		lbl1.setLocation(30, 30);//배치 좌표
 		lbl1.setSize(30,35);//배치 크기
-		tf1.setLocation(10, 65);
+		tf1.setLocation(30, 65);
 		tf1.setSize(100,20);
-		list1.setLocation(10, 95);
+		list1.setLocation(30, 95);
 		list1.setSize(100,80);
 		
-		lbl2.setLocation(150, 25);//배치 좌표
+		lbl2.setLocation(160, 30);//배치 좌표
 		lbl2.setSize(80,35);//배치 크기
-		tf2.setLocation(150,65);
+		tf2.setLocation(160,65);
 		tf2.setSize(100,20);
-		list2.setLocation(150,95);
+		list2.setLocation(160,95);
 		list2.setSize(100,80);
 		
-		lbl3.setLocation(290, 25);//배치 좌표
+		lbl3.setLocation(290, 30);//배치 좌표
 		lbl3.setSize(80,35);//배치 크기
 		tf3.setLocation(290,65);
 		tf3.setSize(100,20);
@@ -79,8 +79,8 @@ public class ManualBatch extends Frame {
 		
 		lbl4.setLocation(150, 180);
 		lbl4.setSize(80, 35);
-		tfsample.setLocation(150, 220);
-		tfsample.setSize(120, 40);
+		lbl5.setLocation(150, 220);
+		lbl5.setSize(120, 40);
 		
 		btn1.setLocation(280, 280);
 		btn1.setSize(40, 35);
@@ -100,14 +100,14 @@ public class ManualBatch extends Frame {
 		add(list3);
 		
 		add(lbl4);
-		add(tfsample);
+		add(lbl5);
 		
 		add(btn1);
 		add(btn2);
 		
 		
 		//5.윈도우 크기 설정
-		setBounds(200, 100, 500, 350);
+		setBounds(200, 100, 450, 350);
 		
 		//6.사용자에게 보여주기
 		setVisible(true);
