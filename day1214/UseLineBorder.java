@@ -15,7 +15,7 @@ public class UseLineBorder extends JFrame implements ActionListener {
 
 	public UseLineBorder() {
 		super("LineBorder");
-		
+	
 		btn1= new JButton("확인");
 		btn2= new JButton("취소");
 		

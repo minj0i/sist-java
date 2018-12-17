@@ -20,7 +20,7 @@ public class UseJOptionPane extends JFrame implements ActionListener {
 		btn1 = new JButton("Input Dialog");
 		btn2 = new JButton("Message Dialog");
 		btn3 = new JButton("Confirm Dialog");
-
+		
 		jlOutput = new JLabel("출력");
 		jlOutput.setBorder(new TitledBorder("출력창"));
 
@@ -75,7 +75,7 @@ public class UseJOptionPane extends JFrame implements ActionListener {
 			}//switch end
 		} // end if
 	}// actionPerformed
-
+	
 	public static void main(String[] args) {
 		new UseJOptionPane();
 	}// main

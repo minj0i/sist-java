@@ -18,7 +18,6 @@ public class FriendsListEvt extends WindowAdapter implements ActionListener, Ite
 	// 이벤트를 처리하기위해 사용되는 모든 컴포넌트는 has a 관계의
 	// 객체를 사용하여 처리한다.
 	private FriendsList fl;
-
 	public FriendsListEvt(FriendsList fl) {
 		this.fl = fl;
 	}// FriendsListEvt

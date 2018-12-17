@@ -17,7 +17,7 @@ public class FriendsList extends Frame {
 	
 	public FriendsList() {
 		super("模备包府");
-		
+
 		Label lbl1 = new Label("模备 格废");
 		Label lbl2 = new Label("瞒窜等 模备");
 		

@@ -14,12 +14,12 @@ public class HomeworkEvt extends WindowAdapter implements ActionListener, ItemLi
 	public HomeworkEvt(HomeworkDesign hd) {
 		this.hd = hd;
 	}
-
+	
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		ckList();
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == hd.getBtnAdd()) {

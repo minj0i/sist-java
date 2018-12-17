@@ -25,7 +25,7 @@ public class HomeworkDesign extends Frame{
 	public TextField getTfName() {
 		return tfName;
 	}
-
+	
 	public TextField getTfAge() {
 		return tfAge;
 	}
@@ -53,7 +53,7 @@ public class HomeworkDesign extends Frame{
 	public List getListData() {
 		return listData;
 	}
-
+	
 	public HomeworkDesign() {
 		super("학생 정보 등록");
 		Label lblName = new Label("이름");

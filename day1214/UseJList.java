@@ -32,13 +32,12 @@ public class UseJList extends JFrame implements ActionListener, MouseListener/* 
 
 	public UseJList() {
 		super("JList»ç¿ë");
-
 		dlm = new DefaultListModel<String>();
 		dlm.addElement("Java SE");
 		dlm.addElement("Oracle");
 		dlm.addElement("JDBC");
 		dlm.addElement("HTML");
-		dlm.addElement("JavaScript");
+		dlm.addElement("JavaScriptE");
 		dlm.addElement("CSS");
 
 		jl = new JList<String>(dlm);
