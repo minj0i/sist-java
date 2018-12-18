@@ -34,7 +34,7 @@ public class Work1217 {
                   String inputData = JOptionPane.showInputDialog(null, "예) 이름, 자바점수, 오라클점수", "데이터입력",
                         JOptionPane.DEFAULT_OPTION);
 
-                  if (inputData == null || inputData.replaceAll(" ", "").split(",").length != 3) {
+                  if (inputData == null || inputData.replaceAll(" ","").split(",").length != 3) {
                      JOptionPane.showMessageDialog(null, "다시한번 입력하세요.", "값 입력 오류", JOptionPane.ERROR_MESSAGE);
                      inputCount();
                   } else {
