@@ -1,4 +1,4 @@
-package day1217;
+package day1217.hwk;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
