@@ -90,23 +90,30 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 	 */
 	public void newMemo() {
 		TextArea tempTa = jm.getTaNote();
+		boolean flagNew = false;
 		// 저장할 것인지 판단
 		if (!taNoteData.equals(tempTa.getText())) {
 			int flag = JOptionPane.showConfirmDialog(jm, "다른 이름으로 저장하시겠습니까?");
-			if (flag == JOptionPane.OK_OPTION) {
+			switch (flag) {
+			case JOptionPane.OK_OPTION:
 				newSaveMemo();
-			} // end if
+			case JOptionPane.NO_OPTION:
+				flagNew = false;
+				break;
+			default:
+				flagNew = true;
+			}// end if
+		} // end if
+		if (!flagNew) {
+			// 버그때문에 get, set
+			tempTa.getText();
+			tempTa.setText("");
+			// 새글이 된 이후에는 읽기한 내용을 초기화
+			taNoteData = tempTa.getText();
+			openPath = "";// 읽어들인 파일의 경로 초기화
+			jm.setTitle("메모장 - 새글");
 		} // end if
 
-		// 버그때문에 get, set
-		tempTa.getText();
-		tempTa.setText("");
-		//새글이 된 이후에는 읽기한 내용을 초기화
-		taNoteData=tempTa.getText();
-		openPath="";
-		
-		
-		jm.setTitle("메모장 - 새글");
 	}// newMemo
 
 	/**
@@ -117,56 +124,65 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 		// TextArea의 내용과 읽어들였던 내용이 다르다면 저장여부를 묻고
 		// 작업을 진행한다.
 		TextArea tempTa = jm.getTaNote();
+		boolean flagOpen=false;
 		if (!taNoteData.equals(tempTa.getText())) {
-			if (!openPath.equals("")) {
-				int flag = JOptionPane.showConfirmDialog(jm, openPath + "\n을 저장하시겠습니까?");
-				if (flag == JOptionPane.OK_OPTION)
-					// 기존의 이름에 저장할 것인지 판단
-					saveMemo();
-			} else {
-				// 다른이름으로 저장
-				newSaveMemo();
-			} // end else
-		} // end if
-
-		FileDialog fdOpen = new FileDialog(jm, "문서열기", FileDialog.LOAD);
-		fdOpen.setVisible(true);
-
-		String filePath = fdOpen.getDirectory();
-		String fileName = fdOpen.getFile();
-
-		if (filePath != null) {// 선택한파일이 있음
-			///////////////// 12-20-2018 스트림으로 파일의 내용을 읽는 코드 추가///////////////////
-
-			// 선택한 파일로 파일객체 생성.
-			File file = new File(filePath + fileName);
-			// 16bit stream사용
-			BufferedReader br = null;
-
-			try {
-				br = new BufferedReader(new FileReader(file));
-				String temp = "";
-				// T.A를 초기화한 후
-				tempTa.setText("");// 열기 상태에서 또 열기했을때 초기화 되고 들어가게 하는 코드
-				while ((temp = br.readLine()) != null) {
-					// 파일에서 읽어들인 내용을 설정한다.
-					tempTa.append(temp + "\r\n"); // \n이랑 결과는 같음
-				} // end while
-					// 변수에 읽어들인 내용을 저장
-				taNoteData = tempTa.getText();
-				// 열었던 파일명을 저장
-				openPath = file.getAbsolutePath();
-			} finally { // nullPointException떨어지는걸 미연에 방지
-				if (br != null) {
-					br.close();
+				int flag = JOptionPane.showConfirmDialog(jm, openPath + "\n 저장하시겠습니까?");
+				switch(flag) {
+				case JOptionPane.OK_OPTION:
+					if (!openPath.equals("")) {
+						// 기존의 이름에 저장할 것인지 판단
+						saveMemo();
+					} else {
+						// 다른이름으로 저장
+						newSaveMemo();
+					} // end else
+				case JOptionPane.NO_OPTION:
+					flagOpen=false;
+					break;
+				default:
+					flagOpen=true;
 				} // end if
-			} // end finally
+			} // end if
+			
+		if(!flagOpen) {
+			FileDialog fdOpen = new FileDialog(jm, "문서열기", FileDialog.LOAD);
+			fdOpen.setVisible(true);
 
-			///////////////// 12-20-2018 코드 추가///////////////////
+			String filePath = fdOpen.getDirectory();
+			String fileName = fdOpen.getFile();
+		
+			if (filePath != null) {// 선택한파일이 있음
+				///////////////// 12-20-2018 스트림으로 파일의 내용을 읽는 코드 추가///////////////////
 
-			// 파일의 경로와 이름을 Frame에 TitleBar에 설정
-			jm.setTitle("메모장 - 열기 " + filePath + fileName);
-		} // end if
+				// 선택한 파일로 파일객체 생성.
+				File file = new File(filePath + fileName);
+				// 16bit stream사용
+				BufferedReader br = null;
+			
+				try {
+					br = new BufferedReader(new FileReader(file));
+					String temp = "";
+					// T.A를 초기화한 후
+					tempTa.setText("");// 열기 상태에서 또 열기했을때 초기화 되고 들어가게 하는 코드
+					while ((temp = br.readLine()) != null) {
+						// 파일에서 읽어들인 내용을 설정한다.
+						tempTa.append(temp + "\r\n"); // \n이랑 결과는 같음
+					} // end while
+						// 변수에 읽어들인 내용을 저장
+					taNoteData = tempTa.getText();
+					// 열었던 파일명을 저장
+					openPath = file.getAbsolutePath();
+				} finally { // nullPointException떨어지는걸 미연에 방지
+					if (br != null) {
+						br.close();
+					} // end if
+				} // end finally
+				///////////////// 12-20-2018 코드 추가///////////////////
+
+				// 파일의 경로와 이름을 Frame에 TitleBar에 설정
+				jm.setTitle("메모장 - 열기 " + filePath + fileName);
+			} // end if
+		}//end if
 	}// openMemo
 
 	/**
