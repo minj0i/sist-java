@@ -1,0 +1,219 @@
+package day1128;
+
+/**
+ * 학생의 Oracle, Java, JDBC 과목 점수를 처리하는 프로그램
+ * 
+ * @author owner
+ */
+public class ScoreProcess2 {
+	private int total;
+	private int[] m_result;// 점수합 반환을 위한 멤버변수
+	private double[] m_resultD;// 점수평균 반환을 위한 멤버변수
+	private String m_name;
+	private int m_stdNum;
+	private int[] m_sortJavaScore;//정렬된 자바점수 저장
+
+	public ScoreProcess2() {
+		total = 0;
+		m_result = new int[3];
+		m_sortJavaScore = new int[6];
+	}
+
+	public String[] nameData() {
+		String[] name = { "김정운", "이재현", "정택성", "노진경", "최지우", "김건하" };
+		return name;
+	}
+
+	public int[][] scoreData() {
+		int[][] score = { { 85, 86, 81 }, { 95, 91, 100 }, { 89, 71, 59 }, { 97, 96, 91 }, { 78, 74, 77 },
+				{ 100, 95, 68 } };
+		return score;
+	}
+
+	// 숙제 - 모든일은 합당한 매개변수와 반환형을 사용. method로 정의하여 호출하여 사용
+	// 1. 각 학생의 평균을 구하여 출력( 소수이하 한자리)
+	public void printScore(String[] name, int[][] score) {
+		System.out.println("번호\t이름\tOracle\tJava\tJDBC\t총점\t평균");
+		for (int i = 0; i < score.length; i++) {
+			System.out.printf("%d\t%s\t", i + 1, name[i]);
+			for (int j = 0; j < score[i].length; j++) {
+				System.out.printf("%d\t", score[i][j]);
+				addTotal(score[i][j]);
+			}
+			System.out.printf("%d\t%.1f\n", getTotal(), avrUser());
+			resetTotal();
+		}
+		System.out.println("------------------------------------------------");
+
+		// 2. 각 과목당 총점
+		System.out.println("과목총점-------------------------------------------");
+		m_result = sumSub(score);
+		System.out.printf("오라클 : %d 자바 : %d JDBC : %d\n", m_result[0], m_result[1], m_result[2]);
+
+		// 3. 각 과목당 평균과 전체평균 (전체평균은 소수이하 두자리까지)
+		System.out.println("과목평균-------------------------------------------");
+		m_resultD = avrSub(score);
+		System.out.printf("오라클 : %.2f 자바 : %.2f JDBC : %.2f\n", m_resultD[0], m_resultD[1], m_resultD[2]);
+
+		// 4. 과목당 최고점수 출력
+		m_result = maxSub(score);
+		System.out.printf("최고점수 오라클[%d] 자바[%d] JDBC[%d]\n", m_result[0], m_result[1], m_result[2]);
+
+		// 5. 일등학생의 이름과 총점, 번호
+		System.out.printf("TOP 번호[%d] 이름[%s] 총점[%d]\n",topStd(name, score).m_stdNum, topStd(name, score).m_name, topStd(name, score).total);
+
+		// 6. 자바점수만 오름차순 정렬하여 출력
+		
+		m_sortJavaScore = acdJavaScore(score);
+		System.out.print("자바점수(오름차순) : ");
+		for(int i=0; i<m_sortJavaScore.length; i++) {
+			System.out.print(m_sortJavaScore[i] + " ");
+		}
+		System.out.println();
+	}
+
+	// 숙제2번
+	/*
+	 * 2차원 배열을 참조형 형식으로 만들고 아래와 같이 값을 넣어 출력하는 method를 작성. 
+	 * 1 1 1 1 1 1 1 1 1 
+	 * 1 0 0 0 0 0 0 0 1 
+	 * 1 0 0 0 0 0 0 0 1 
+	 * 1 0 0 0 0 0 0 0 1 
+	 * 1 0 0 0 0 0 0 0 1 
+	 * 1 1 1 1 1 1 1 1 1
+	 */
+	
+
+	/**
+	 * 총점 계산
+	 * 
+	 * @param score
+	 */
+	public void addTotal(int score) {
+		total += score;
+	}
+
+	/**
+	 * 점수를 얻음
+	 * 
+	 * @return
+	 */
+	public int getTotal() {
+		return total;
+	}
+
+	/**
+	 * 총합을 초기화
+	 */
+	public void resetTotal() {
+		total = 0;
+	}
+
+	// 1-1. 개인평균계산
+	public double avrUser() {
+		double result = (double) total / 3;
+		return result;
+	}
+
+	// 1-2. 각 과목당 총점
+	public int[] sumSub(int[][] score) {
+		int[] result = new int[3];
+
+		for (int i = 0; i < score.length; i++) {
+			for (int j = 0; j < score[i].length; j++) {
+				result[j] += score[i][j];
+			}
+		}
+		return result;
+	}
+
+	// 1-3. 각 과목별 평균
+	public double[] avrSub(int[][] score) {
+		double[] result = new double[3];
+
+		for (int i = 0; i < score[0].length; i++)
+			result[i] = (double) m_result[i] / score.length;
+		return result;
+	}
+
+	// 1-4. 각 과목별 최고점
+	public int[] maxSub(int[][] score) {
+		int[] result = new int[3];
+
+		for (int i = 0; i < score.length; i++) {
+			for (int j = 0; j < score[i].length; j++) {
+				if (result[j] < score[i][j])
+					result[j] = score[i][j];
+			}
+		}
+		return result;
+	}
+
+	// 1-5 일등 학생의 이름과 총점
+	public ScoreProcess2 topStd(String[] name, int[][] score) {
+		ScoreProcess2 tmp_sp2 = new ScoreProcess2();
+		int temp = 0;
+		resetTotal();
+
+		for (int i = 0; i < score.length; i++) {
+			for (int j = 0; j < score[i].length; j++) {
+				addTotal(score[i][j]);
+			}
+			if (temp < getTotal()) {
+				temp = getTotal();
+				tmp_sp2.m_stdNum = i + 1;
+				tmp_sp2.m_name = name[i];
+			}
+			resetTotal();
+		}
+		tmp_sp2.total = temp;
+		
+		return tmp_sp2;
+	}
+	
+	//1-6 자바점수만 오름차순 하여 출력
+	public int[] acdJavaScore(int[][] score) {
+		int[] result = new int[6];
+		int temp = 0;
+		//score에서 java점수만 따로 저장
+		for (int i = 0; i < score.length; i++) {
+			result[i] = score[i][1];
+		}
+		
+		//버블소트(오름차순)
+		for (int i = 0; i < result.length - 1; i++) {
+			for (int j = i + 1; j < result.length; j++) {
+				if (result[i] > result[j]) {
+					temp = result[i];
+					result[i] = result[j];
+					result[j] = temp;
+				}
+			}
+		}
+
+		return result;
+	}
+	
+	//숙제2
+	public void printArr2() {
+		int[][] arr = new int[6][9];
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<arr[i].length; j++) {
+				if(i==0 || j==0 || i==5 || j==8) {
+					arr[i][j] = 1;
+				}
+				System.out.print(arr[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	public static void main(String[] args) {
+		ScoreProcess2 sp2 = new ScoreProcess2();
+		String[] name = sp2.nameData();
+		int[][] score = sp2.scoreData();
+
+		sp2.printScore(name, score);
+		sp2.printArr2();
+	}
+}

@@ -1,0 +1,17 @@
+# 제외시킬 파일들
+.metadata
+.rercommenders
+
+# prj1 제외 파일들
+javase_prj/.settings
+javase_prj/bin
+javase_prj/doc
+javase_prj/.classpath
+javase_prj/.project
+
+# prj2 제외 파일들
+javase_prj2/.settings
+javase_prj2/bin
+javase_prj2/doc
+javase_prj2/.classpath
+javase_prj2/.project

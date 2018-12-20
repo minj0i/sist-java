@@ -1,0 +1,30 @@
+//지역변수 선언 사용
+//1 I l O 0
+class UseLocalVariable{
+
+	public static void main(String[] args){
+	//1. 지역변수 선언: 데이터형 변수명;
+	int i; //자동초기화가 안됨
+	int j=11; //변수의 초기화: 변수를 선언하면서 값 할당
+
+	//2. 값할당 : 변수명=값;
+	i=100;
+
+	//3. 값 사용: 출력, 연산, 재할당
+	System.out.println(i);
+	System.out.println(j);
+	
+	//int i=200; // 같은 이름의 변수는 작성할 수 없음.
+
+	//변수명은 한글로 가능하나 한글을 사용하지 x
+	int 변수 =300;
+	long l = 3000000000l;
+	System.out.println(변수);
+	System.out.println(변수);
+	System.out.println(변수);
+	System.out.println(변수);
+	System.out.println(변수);
+	System.out.println(변수);
+	System.out.println(l);
+	}//main
+}//class
