@@ -1,6 +1,6 @@
 # 제외시킬 파일들
 .metadata
-.rercommenders
+.recommenders
 
 # prj1 제외 파일들
 javase_prj/.settings
