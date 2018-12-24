@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.swing.JTextArea;
 
+import project1.hap.MainControlVO;
+
 public class ReportDialogEvt extends WindowAdapter {
 	private ReportDialogView rdv;
 	private String[] result;
@@ -47,7 +49,14 @@ public class ReportDialogEvt extends WindowAdapter {
 	public String setReport4(MainControlVO MCVO) {
 		return
 	}
+	/**
+	 * 비정상적인 요청(403)이 발생한 횟수, 비율 구하기
+	 * @param MCVO
+	 * @return
+	 */
 	public String setReport5(MainControlVO MCVO) {
+		Map map403 = new MCVO.getCodeMap();
+		
 		return
 	}
 	public String setReport6(MainControlVO MCVO, int start, int end) {
