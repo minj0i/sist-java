@@ -1,14 +1,14 @@
-package project1.hap;
+package evt;
 
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
-import project1.hap.LoginView;
+import view.LoginView;
+import view.MainControlView;
 
 public class LoginEvt extends WindowAdapter implements ActionListener {
 
@@ -36,7 +36,7 @@ public class LoginEvt extends WindowAdapter implements ActionListener {
 		String pass = new String(lv.pwTf.getPassword());
 
 		if ((id.equals("admin") && pass.equals("1234")) || id.equals("root") && pass.equals("1111")) {
-//			new MainControlView(); // 메인 컨트롤으로 연결
+			new MainControlView(); // 메인 컨트롤으로 연결
 			lv.dispose();
 		} else {
 			JOptionPane.showMessageDialog(lv, "아이디 혹은 비밀번호를 확인해 주세요", "Error", 0);

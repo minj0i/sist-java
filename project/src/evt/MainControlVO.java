@@ -1,4 +1,4 @@
-package project1.hap;
+package evt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,10 +11,9 @@ public class MainControlVO {
 	private Set<String> codeSet, urlSet, browserSet, timeSet;
 	private List<String> codeList, urlList, browserList, timeList;
 	private Map<String, Integer> codeMap, urlMap, browserMap, timeMap;
-
-	private int[] selectedLine;
 	
 	public MainControlVO() {
+		
 		codeSet = new HashSet<String>();
 		urlSet = new HashSet<String>();
 		browserSet = new HashSet<String>();
@@ -30,7 +29,6 @@ public class MainControlVO {
 		browserMap = new HashMap<String, Integer>();
 		timeMap = new HashMap<String, Integer>();
 		
-		selectedLine = new int[2];
 	}
 
 	public Set<String> getCodeSet() {
@@ -80,11 +78,6 @@ public class MainControlVO {
 	public Map<String, Integer> getTimeMap() {
 		return timeMap;
 	}
-
-	public int[] getSelectedLine() {
-		return selectedLine;
-	}
-	
 	
 	
 }
