@@ -9,6 +9,10 @@ import java.io.InputStreamReader;
 
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author ÀÌºÀÇö
+ */
 public class FileRead {
 
    private String tempLog;

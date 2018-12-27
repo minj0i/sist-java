@@ -10,6 +10,10 @@ import javax.swing.JOptionPane;
 import view.LoginView;
 import view.MainControlView;
 
+/**
+ *
+ * @author πÈ¿Œ¿Á
+ */
 public class LoginEvt extends WindowAdapter implements ActionListener {
 
 	private LoginView lv;

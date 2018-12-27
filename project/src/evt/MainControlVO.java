@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ * @author ÀÌºÀÇö
+ */
 public class MainControlVO {
 	private Set<String> codeSet, urlSet, browserSet, timeSet;
 	private List<String> codeList, urlList, browserList, timeList;

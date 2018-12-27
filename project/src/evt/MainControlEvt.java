@@ -23,6 +23,8 @@ import view.ReportDialogView;
  * 
  * 18.12.26 2차 작성 완료 - 통합 거의 완료. 출력하는 데이터만 조금 손보면 끝 
  * 
+ * 18.12.27 fileForm 메서드 추가 
+ * 
  * @author 이재찬
  */
 public class MainControlEvt implements ActionListener {
@@ -30,7 +32,8 @@ public class MainControlEvt implements ActionListener {
 	private String filePath; // 파일 패스를 VO에 전달
 	private int startLine; // startLine 변수 추가됨 (클래스명세서에 추가 - 6번문제에 이용하는 라인
 	private int endLine; // endLine 변수 추가됨 (클래스명세서에 추가 - 6번문제에 이용하는 라인
-	private String tempResult;// tempResult 변수 추가됨(클래스명세서에 추가 - Report로 내보내기 위해 문제 결과를 임시로 저장하는 변수
+	private String[] tempProblem;// tempResult 변수 추가됨(클래스명세서에 추가 - Report로 내보내기 위해 문제 결과를 임시로 저장하는 변수
+	private String[] tempResult;// tempResult 변수 추가됨(클래스명세서에 추가 - Report로 내보내기 위해 문제 결과를 임시로 저장하는 변수
 	private boolean flag;// flag 변수 추가됨(클래스명세서에 추가 - view가 최소 한번 실행되었음을 판단
 	
 	private FileRead fr;// FileRead 변수 추가됨 (클래스 명세서에 추가 - log 전체를 사용한 data)
@@ -40,7 +43,8 @@ public class MainControlEvt implements ActionListener {
 		this.mcv = mcv;
 		startLine = -1;
 		endLine = -1;
-		tempResult = "";
+		tempProblem = new String[6];
+		tempResult = new String[6];
 		flag = false;
 
 	}
@@ -170,7 +174,7 @@ public class MainControlEvt implements ActionListener {
 		int select = -1;
 
 		if (fileOutput.exists()) {// 파일이 존재 할 때
-			select = JOptionPane.showConfirmDialog(null, "같은 이름의 파일이 존재합니다. \n덮어쓰시겠습니까?");
+			select = JOptionPane.showConfirmDialog(mcv, "같은 이름의 파일이 존재합니다. \n덮어쓰시겠습니까?");
 			flagFile = temp[select];
 		}
 
@@ -178,9 +182,9 @@ public class MainControlEvt implements ActionListener {
 			try {
 				bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileOutput),"UTF-8"));
 				
-				bw.write(tempResult); // 결과 스트링을 입력 해준다. (인스턴스변수
+				bw.write(fileForm()); // 결과를 입력 해준다. (ReportDialogEvt의 결과를 받아와 출력 형태에 맞게 변경한 데이터
 				bw.flush();
-
+				JOptionPane.showMessageDialog(mcv, "파일이 성공적으로 출력되었습니다!", "파일 출력 성공", JOptionPane.INFORMATION_MESSAGE);
 			} finally {
 				if (bw != null)
 					bw.close();
@@ -188,6 +192,30 @@ public class MainControlEvt implements ActionListener {
 		}
 	}
 
+	/**
+	 * 파일 출력을 이쁘게 꾸미는 메서드
+	 * @return
+	 */
+	private String fileForm() {
+		StringBuilder sb = new StringBuilder();
+		String fileName = fileDateNaming();
+		fileName = fileName.substring(fileName.lastIndexOf("/")+1, fileName.length());
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		sb.append("-----------------------------------------------------------\n");
+		sb.append("파일명(").append(fileName).append(") log (생성된 날짜 ").append(sdf.format(d)).append(")\n");
+		sb.append("-----------------------------------------------------------\n");
+		for(int i=0; i<tempResult.length; i++) {
+			sb.append(tempProblem[i]+"\n");
+			sb.append(tempResult[i]+"\n\n");
+			
+		}
+		
+		
+		return sb.toString();
+	}
+	
 	/**
 	 * 파일 이름에 생성날짜 추가하는 메서드- 클래스 명세서에 기술
 	 * @return
@@ -208,6 +236,8 @@ public class MainControlEvt implements ActionListener {
 
 	}
 
+	////////////////////////////필요할 때마다 만든 getter setter들 ,,, 
+	
 	public void setStartLine(int startLine) { // setter 추가됨 (클래스명세서에 추가 .
 		this.startLine = startLine;
 	}
@@ -232,8 +262,12 @@ public class MainControlEvt implements ActionListener {
 		return SelectedFr;
 	}
 
-	public void setTempResult(String tempResult) {
+	public void setTempResult(String tempResult[]) {
 		this.tempResult = tempResult;
+	}
+
+	public void setTempProblem(String[] tempProblem) {
+		this.tempProblem = tempProblem;
 	}
 
 	public int getStartLine() {

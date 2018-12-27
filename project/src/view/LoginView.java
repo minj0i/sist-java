@@ -2,18 +2,26 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import evt.LoginEvt;
 
+/**
+ *
+ * @author 백인재
+ */
 @SuppressWarnings("serial")
 public class LoginView extends JFrame {
 
@@ -58,12 +66,12 @@ public class LoginView extends JFrame {
 		idLbl.setBounds(35, 290, 50, 50);
 		pwLbl.setBounds(30, 330, 50, 50);
 
-//		try {
-//			img = ImageIO.read(new File("C:/dev/temp/loginimg.jpg"));
-//		} catch (IOException e) {
-//			JOptionPane.showMessageDialog(null, "can not load login image");
-//			System.exit(0);
-//		}
+		try {
+			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/loginimg.jpg"));
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "can not load login image");
+			System.exit(0);
+		}
 
 		backPanel panel = new backPanel();
 		panel.setSize(320, 569);
@@ -88,6 +96,10 @@ public class LoginView extends JFrame {
 
 	}
 
+	/**
+	 * 배경에 이미지를 넣는 매서드
+	 * @author 백인재
+	 */
 	class backPanel extends JPanel {
 		public void paint(Graphics g) {
 			g.drawImage(img, 0, 0, null);

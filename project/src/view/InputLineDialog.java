@@ -1,12 +1,19 @@
 package view;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import evt.MainControlEvt;
@@ -21,7 +28,8 @@ public class InputLineDialog extends JDialog implements ActionListener {
 	private MainControlEvt mce; // mce 변수 추가됨 (클래스명세서에 추가 - mce에 입력되는 값 전달 및 frame에 super로 띄우기 위해
 	private JTextField jtfStart, jtfEnd;
 	private JButton jbtnOk, jbtnCancle; // JButton 추가됨 (클래스명세서에 추가 - 이벤트 입력에 맞는 dialog행동을 위해
-
+	private BufferedImage img = null;
+	
 	public InputLineDialog(MainControlEvt mce) { // 생성자 dialog에 맞게 변경 .
 		super(mce.getMcv(), "라인입력 - Dialog", true);
 		this.mce = mce;
@@ -39,6 +47,21 @@ public class InputLineDialog extends JDialog implements ActionListener {
 
 		// 파일의 크기를 읽어와 라인 입력을 유도함
 		jlblFileInfo2.setText(mce.getFr().getMaxLine() + "입니다.");
+
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setSize(500, 200);
+		layeredPane.setLayout(null);
+		
+		try {
+			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/inputimg.jpg"));
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "can not load login image");
+			System.exit(0);
+		}
+		
+		backPanel panel = new backPanel();
+		panel.setSize(500, 200);
+		layeredPane.add(panel);
 
 		setLayout(null);
 
@@ -59,11 +82,13 @@ public class InputLineDialog extends JDialog implements ActionListener {
 		add(jtfEnd);
 		add(jbtnOk);
 		add(jbtnCancle);
-
+		add(layeredPane);
+		
 		jbtnOk.addActionListener(this);
 		jbtnCancle.addActionListener(this);
 
-		setBounds(100, 100, 500, 200);
+		setBounds(mce.getMcv().getX()+100, mce.getMcv().getY()+80, 500, 200);
+		setResizable(false);
 		setVisible(true);
 
 	}
@@ -115,4 +140,15 @@ public class InputLineDialog extends JDialog implements ActionListener {
 		return methodFlag;
 	}
 
+	/**
+	 * 배경에 이미지를 넣는 매서드
+	 * @author 백인재
+	 */
+	class backPanel extends JPanel {
+		public void paint(Graphics g) {
+			g.drawImage(img, 0, 0, null);
+		}
+	}
+	
+	
 }

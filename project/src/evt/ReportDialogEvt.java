@@ -10,15 +10,23 @@ import java.util.Set;
 
 import view.ReportDialogView;;
 
+/**
+ * 
+ * @author 다같이
+ */
 public class ReportDialogEvt extends WindowAdapter implements ActionListener {
    private ReportDialogView rdv;
 
-   public ReportDialogEvt(view.ReportDialogView rdv) {
+   /**
+    * 생성자에서 호출한 각 문제별 메서드의 결과값을
+    * MainControl의 TempResult로 세팅 - 이재찬
+    * @param rdv
+ 	*/
+   public ReportDialogEvt(ReportDialogView rdv) {
       this.rdv = rdv;
       String[] result = new String[6];
       FileRead fr = rdv.getMce().getFr(); // 각 문제별 메서드에 정제된 데이터를 메개변수로 뿌려줌
       FileRead SelectedFr = rdv.getMce().getSelectedFr(); // 6번 문제 메서드에 필요한 데이터를 메개변수로 사용
-      StringBuilder sb = new StringBuilder();// 결과 출력을 위한 StringBuilder
 
       // 문제 결과 임시 저장
       result[0] = setReport1(fr);
@@ -28,7 +36,7 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
       result[4] = setReport5(fr);
       result[5] = setReport6(SelectedFr);
 
-      // 결과창에 각 문제별 결과 출력
+      // 결과창에 각 문제별 결과를 ReportDialogView의 JTextArea에 출력
       rdv.getReport1().setText(result[0]);
       rdv.getReport2().setText(result[1]);
       rdv.getReport3().setText(result[2]);
@@ -36,14 +44,16 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
       rdv.getReport5().setText(result[4]);
       rdv.getReport6().setText(result[5]);
 
-      sb.append(result[0]).append("\n").append(result[1]).append("\n").append(result[2]).append("\n")
-            .append(result[3]).append("\n").append(result[4]).append("\n").append(result[5]).append("\n");
-
       // 최종결과 setting
-      rdv.getMce().setTempResult(sb.toString());
+      rdv.getMce().setTempResult(result);
 
    }// ReportDialogEvt
 
+   /**
+    * 이봉현 구현 메서드 
+    * @param map
+    * @return
+    */
    public String getMaxKVP(Map<String, Integer> map) {// 매개변수로 입력된 map에서
       Set<String> keySet = map.keySet();// 모든 key를 set으로 받아내서
       int maxValue = 0;
@@ -58,6 +68,11 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
       return rtnValue;
    }// getMaxKVP
 
+   /**
+    * 이봉현 구현 메서드 
+    * @param map
+    * @return
+    */
    public int getSumValue(Map<String, Integer> map) {// 매개변수로 입력된 map에서
       int sumValue = 0;
       Set<String> keySet = map.keySet();// 모든 key를 set으로 받아내서
@@ -65,15 +80,27 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
          sumValue += map.get(key);// 값을 더해준다.
       }
       return sumValue;
+      
    }
 
-   // 문제푸는 메소드
+   
+   /**
+    * 1번문제 - 박은영
+    * @param fr
+ 	* @return
+ 	*/
    public String setReport1(FileRead fr) {
       Map<String, Integer> map = fr.getMcvo().getUrlMap();
       String value = getMaxKVP(map);
       return value;
+      
    }
 
+   /**
+    * 2번문제 - 백인재
+    * @param fr
+ 	* @return
+ 	*/
    public String setReport2(FileRead fr) {
 
       int valuesum = 0;
@@ -93,13 +120,18 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
       for (String key : fr.getMcvo().getBrowserMap().keySet()) {
          value = key + " " + fr.getMcvo().getBrowserMap().get(key) + "번 실행("
                + Math.round(((double) (fr.getMcvo().getBrowserMap().get(key)) / valuesum) * 1000) / 10.0 + "%)\n";
-         System.out.println(value);
+//         System.out.println(value);
          pValue += value;
       }
 
       return pValue;
    }
 
+   /**
+    * 3번문제 - 백인재
+    * @param fr
+ 	* @return
+ 	*/
    public String setReport3(FileRead fr) {
 
       Map<String, Integer> map = fr.getMcvo().getCodeMap();
@@ -111,6 +143,11 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
       return value;
    }
 
+   /**
+    * 4번문제 - 박은영
+    * @param fr
+ 	* @return
+ 	*/
    public String setReport4(FileRead fr) {
       Map<String, Integer> mapTime=fr.getMcvo().getTimeMap();
       String timeValue=getMaxKVP(mapTime).substring(0, 2)+"시";//10 : 871회
@@ -118,6 +155,11 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
       return timeValue;
    }
 
+   /**
+    * 5번문제 - 김민정
+    * @param fr
+ 	* @return
+ 	*/
    public String setReport5(FileRead fr) {
       Map<String, Integer> map = fr.getMcvo().getCodeMap();
 
@@ -130,10 +172,15 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
       return report5;
    }// setReport5
 
+   /**
+    * 6번문제 - 박은영
+    * @param SelectedFr
+ 	* @return
+ 	*/
    public String setReport6(FileRead SelectedFr) {
       Map<String, Integer> map = SelectedFr.getMcvo().getUrlMap();
       String value = getMaxKVP(map);
-      return value;
+      return value; 
    }
 
    @Override
