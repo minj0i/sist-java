@@ -80,8 +80,8 @@ public class ReportDialogView extends Dialog {
 		add(report4);
 		add(report5);
 		add(report6);
-		add(layeredPane);
 		add(jbtnClose);
+		add(layeredPane);
 		
 		jlNum1.setBounds(20,20,380,30);
 		jlNum2.setBounds(20,100,380,30);
