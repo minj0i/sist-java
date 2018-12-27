@@ -27,13 +27,13 @@ import evt.ReportDialogEvt;
 public class ReportDialogView extends Dialog {
 	private JLabel jlNum1, jlNum2, jlNum3, jlNum4,jlNum5, jlNum6;
 	private JTextArea report1, report2, report3, report4, report5, report6;
-	private MainControlEvt mce;
-	private BufferedImage img = null;
+	private MainControlEvt mce; //껍데기
+	private BufferedImage img = null; //배경화면 Image
 	
 	public ReportDialogView(MainControlEvt mce) {
-		super(mce.getMcv(), "로그분석-결과창", true);
-		this.mce = mce;
-		String issue6Lange = String.valueOf(mce.getStartLine()) + " ~ " + String.valueOf(mce.getEndLine());
+		super(mce.getMcv(), "로그분석-결과창", true);//MainControlView에서 다이얼로그창을 띄어줌, 제목, 부모창 조작불가(modal)
+		this.mce = mce;//매개변수로 받기 위해 클래스 인스턴스화(주소 할당): 클래스에서 쓰인 인스턴스변수들을 사용할 수 있음
+		String issue6Lange = String.valueOf(mce.getStartLine()) + " ~ " + String.valueOf(mce.getEndLine());//6번문제에 넣어주기위해
 		String[] tempIssue = new String[6]; //MainControlEvt에서 파일출력을 위해 문제를 넘겨주기 위한 임시변수 생성
 		
 		jlNum1 = new JLabel("1.	최다사용 키의 이름과 횟수");
@@ -44,7 +44,7 @@ public class ReportDialogView extends Dialog {
 		jlNum6 = new JLabel("<html>6. 입력된 라인 ("+ issue6Lange +")에 해당하는 정보 중,<br>최다사용 키의 이름과 횟수");
 		report1 = new JTextArea("");
 		report2 = new JTextArea("");
-		JScrollPane jsp2 = new JScrollPane(report2);
+		JScrollPane jsp2 = new JScrollPane(report2); //문제가 길어서 스크롤
 		report3 = new JTextArea("");
 		report4 = new JTextArea("");
 		report5 = new JTextArea("");
@@ -56,13 +56,13 @@ public class ReportDialogView extends Dialog {
 		layeredPane.setLayout(null);
 		
 		try {
-			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/resultimg.jpg"));
-		} catch (IOException e) {
+			img = ImageIO.read(getClass().getResource("resultimg.jpg")); //배경img
+		} catch (IOException e) { //배경img를 불러오는 중 문제가 발생한 경우
 			JOptionPane.showMessageDialog(null, "can not load login image");
 			System.exit(0);
 		}
 		
-		backPanel panel = new backPanel();
+		backPanel panel = new backPanel(); //배경img크기
 		panel.setSize(360, 630);
 		layeredPane.add(panel);
 		
@@ -100,10 +100,10 @@ public class ReportDialogView extends Dialog {
 		jbtnClose.setBounds(10,590,330,30);
 	
 		//이벤트 등록
-		ReportDialogEvt rde = new ReportDialogEvt(this);
+		ReportDialogEvt rde = new ReportDialogEvt(this); 
 		
-		addWindowListener(rde);
-		jbtnClose.addActionListener(rde);
+		addWindowListener(rde); //WindowClosing
+		jbtnClose.addActionListener(rde); //ReportDialogEvt에서 창닫기
 		
 		setBounds(mce.getMcv().getX()+150, mce.getMcv().getY()+80, 360, 630);
 		report1.setEditable(false);
@@ -115,7 +115,7 @@ public class ReportDialogView extends Dialog {
 		setResizable(false);
 		setVisible(true);
 		
-		tempIssue = passIssues();
+		tempIssue = passIssues(); //String 배열로 된 메소드
 		tempIssue[5] = "6. 입력된 라인 ("+ issue6Lange +")에 해당하는 정보 중, 최다사용 키의 이름과 횟수";
 		mce.setTempProblem(tempIssue);//문제를 mainControlEvt에 넘겨준다
 	}//LogAnalysisView

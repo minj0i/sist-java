@@ -53,7 +53,7 @@ public class InputLineDialog extends JDialog implements ActionListener {
 		layeredPane.setLayout(null);
 		
 		try {
-			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/inputimg.jpg"));
+			img = ImageIO.read(getClass().getResource("inputimg.jpg"));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "can not load login image");
 			System.exit(0);

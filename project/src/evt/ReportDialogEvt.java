@@ -103,28 +103,20 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
  	*/
    public String setReport2(FileRead fr) {
 
-      int valuesum = 0;
-      for (String key : fr.getMcvo().getBrowserMap().keySet()) {
-         valuesum += fr.getMcvo().getBrowserMap().get(key);
-      }
+	   Map<String,Integer> map=fr.getMcvo().getBrowserMap(); 
+		
+		int valuesum=getSumValue(map);
+		String value = "";
+		String pValue = "";
 
-      String value = "";
-      String pValue = "";
+		for (String key : map.keySet()) {
+			value = key + " " + map.get(key) + "번 실행("
+					+ Math.round(((double) (map.get(key)) / valuesum) * 1000) / 10.0 + "%)\n";
+			System.out.println(value);
+			pValue += value;
+		}
 
-//      String a="1";
-//      Integer[] arr= {};
-//      int i=0;
-//      arr[i]=fr.getMcvo().getBrowserMap().get(0);
-//      System.out.println(arr[0]);
-//      Arrays.sort(fr.getMcvo().getBrowserMap().keySet(), Collections.reverseOrder());
-      for (String key : fr.getMcvo().getBrowserMap().keySet()) {
-         value = key + " " + fr.getMcvo().getBrowserMap().get(key) + "번 실행("
-               + Math.round(((double) (fr.getMcvo().getBrowserMap().get(key)) / valuesum) * 1000) / 10.0 + "%)\n";
-//         System.out.println(value);
-         pValue += value;
-      }
-
-      return pValue;
+		return pValue;
    }
 
    /**
@@ -160,14 +152,16 @@ public class ReportDialogEvt extends WindowAdapter implements ActionListener {
     * @param fr
  	* @return
  	*/
-   public String setReport5(FileRead fr) {
-      Map<String, Integer> map = fr.getMcvo().getCodeMap();
+   public String setReport5(FileRead fr) {//FileRead의 인스턴스 변수를 받아옴
+	   //String, Integer로 된 map에 FileRead의 Code로 구분된 Map을 저장
+	   //Map : 키와 값의 쌍, 키는 중복될 수 없으나 값은 중복될 수 있음
+      Map<String, Integer> map = fr.getMcvo().getCodeMap(); 
 
-      int cnt = map.get("403");
-      double percent = ((cnt / (double) getSumValue(map)) * 100);
-      DecimalFormat df = new DecimalFormat("##.##");
+      int cnt = map.get("403");//403을 키로 갖는 값의 수를 cnt에 넣어줌
+      double percent = ((cnt / (double) getSumValue(map)) * 100); //위에서 만든 전체값으로 나눠주고
+      DecimalFormat df = new DecimalFormat("##.##"); //길어지기 때문에 숫자 형태 정리
 
-      String report5 = "403발생횟수: " + cnt + "회\n비율: " + df.format(percent) + "%";
+      String report5 = "403발생횟수: " + cnt + "회\n비율: " + df.format(percent) + "%"; 
 
       return report5;
    }// setReport5

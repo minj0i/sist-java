@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+
+
 import evt.LoginEvt;
 
 /**
@@ -66,8 +68,10 @@ public class LoginView extends JFrame {
 		idLbl.setBounds(35, 290, 50, 50);
 		pwLbl.setBounds(30, 330, 50, 50);
 
+		
 		try {
-			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/loginimg.jpg"));
+//			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/loginimg.jpg"));
+			img = ImageIO.read(getClass().getResource("loginimg.jpg"));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "can not load login image");
 			System.exit(0);

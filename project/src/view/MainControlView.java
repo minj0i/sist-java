@@ -35,7 +35,7 @@ public class MainControlView extends JFrame {
 		layeredPane.setLayout(null);
 		
 		try {
-			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/mainimg.jpg"));
+			img = ImageIO.read(getClass().getResource("mainimg.jpg"));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "can not load login image");
 			System.exit(0);
