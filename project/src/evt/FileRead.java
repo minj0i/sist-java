@@ -158,12 +158,12 @@ public class FileRead {
    public void setMap() {
 
       for (String key : mcvo.getCodeSet()) {
-         int tempCount = 0;
+         int tempCount = 0; 
          String tempKey = key;
-         while (mcvo.getCodeList().remove(tempKey)) {// List에서 key가 존재하면 지우고 카운트 +1
+         while (mcvo.getCodeList().remove(tempKey)) {//있는 동안 count 올리고 // List에서 key가 존재하면 지우고 카운트 +1
             tempCount += 1;
          }
-         mcvo.getCodeMap().put(tempKey, tempCount);// Map에 <key,count>를 입력
+         mcvo.getCodeMap().put(tempKey, tempCount);//없으면 while을 나가기때문에 Map에 <key,count>를 입력
       }
       for (String key : mcvo.getUrlSet()) {
          int tempCount = 0;

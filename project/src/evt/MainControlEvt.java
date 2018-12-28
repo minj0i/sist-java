@@ -21,9 +21,9 @@ import view.ReportDialogView;
  * 18.12.25 1차 작성 완료 - 통합을 제일 많이해야 되는 부분이라 중간중간 구멍이 너무 많음 인스턴스화한 클래스간 데이터 이동을 좀
  * 더 신경써야 할 듯 밑에 주석에 코드들이 추가로 들어가야하는 부분에 대한 설명이 기술되어 있음
  * 
- * 18.12.26 2차 작성 완료 - 통합 거의 완료. 출력하는 데이터만 조금 손보면 끝 
+ * 18.12.26 2차 작성 완료 - 통합 거의 완료. 출력하는 데이터만 조금 손보면 끝
  * 
- * 18.12.27 fileForm 메서드 추가 
+ * 18.12.27 fileForm 메서드 추가
  * 
  * @author 이재찬
  */
@@ -35,7 +35,7 @@ public class MainControlEvt implements ActionListener {
 	private String[] tempProblem;// tempResult 변수 추가됨(클래스명세서에 추가 - Report로 내보내기 위해 문제 결과를 임시로 저장하는 변수
 	private String[] tempResult;// tempResult 변수 추가됨(클래스명세서에 추가 - Report로 내보내기 위해 문제 결과를 임시로 저장하는 변수
 	private boolean flag;// flag 변수 추가됨(클래스명세서에 추가 - view가 최소 한번 실행되었음을 판단
-	
+
 	private FileRead fr;// FileRead 변수 추가됨 (클래스 명세서에 추가 - log 전체를 사용한 data)
 	private FileRead SelectedFr;// FileRead 변수 추가됨 (클래스 명세서에 추가 - log 일부를 사용한 data)
 
@@ -72,34 +72,44 @@ public class MainControlEvt implements ActionListener {
 
 		String path = fd.getDirectory();
 		String name = fd.getFile();
+		Boolean filrDiscrimination = name.contains(".log"); //endofIndex로 하는게 더 적합
 
-		if (path != null) {
-			filePath = path + name;// 읽은 파일의 path를 인스턴스변수에 저장
+		if (filrDiscrimination) {
+			if (path != null) {
+				filePath = path + name;// 읽은 파일의 path를 인스턴스변수에 저장
 
-			// fileReadHandling으로 log값을 사용한 데이터 생성
-			fileReadHandling();
+				// fileReadHandling으로 log값을 사용한 데이터 생성
+				fileReadHandling();
 
-			// InputLineDialog를 띄운다.
-			InputLineDialog ild = new InputLineDialog(this);
+				// InputLineDialog를 띄운다.
+				InputLineDialog ild = new InputLineDialog(this);
 
-			//라인입력이 제대로 됐을때 이후 로직을 실행
-			if(startLine != -1 && endLine != -1) {
-				// selectedFileReadHandling으로 log값 일부를 사용한 데이터 생성
-				selectedFileReadHandling();
-				
-				// 결과창 (로그분석 view 6문제짜리 ) 띄워줌 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-				ReportDialogView rdv = new ReportDialogView(this);
-				
-				//tempResult = "성공적인 결과물";
-				// 3. view가 실행되었음을 적용
-				flag = true;
+				// 라인입력이 제대로 됐을때 이후 로직을 실행
+				if (startLine != -1 && endLine != -1) {
+					// selectedFileReadHandling으로 log값 일부를 사용한 데이터 생성
+					selectedFileReadHandling();
 
-			}else {
-				JOptionPane.showMessageDialog(mcv, "올바른 라인값을 입력하지 않았습니다.", "라인입력 오류", JOptionPane.ERROR_MESSAGE); 
-				
+					// 결과창 (로그분석 view 6문제짜리 ) 띄워줌 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+					try {
+						ReportDialogView rdv = new ReportDialogView(this);
+						// 3. view가 실행되었음을 적용
+						flag = true;
+					} catch (NullPointerException npe) {
+						JOptionPane.showMessageDialog(mcv, "올바른 형태의 Log 파일이 아닙니다.", "파일 불러오기 오류",
+								JOptionPane.ERROR_MESSAGE);
+					}
+
+//					flag = true;
+
+				} else {
+					JOptionPane.showMessageDialog(mcv, "올바른 라인값을 입력하지 않았습니다.", "라인입력 오류", JOptionPane.ERROR_MESSAGE);
+
+				}
+			} else {// 파일이 안읽혔을때 예외처리
+				JOptionPane.showMessageDialog(mcv, "파일을 읽는데 실패했습니다.", "파일 불러오기 오류", JOptionPane.ERROR_MESSAGE);
 			}
-		} else {// 파일이 안읽혔을때 예외처리
-			JOptionPane.showMessageDialog(mcv, "파일을 읽는데 실패했습니다.", "파일 불러오기 오류", JOptionPane.ERROR_MESSAGE); 
+		} else {// log파일이 아닐때 예외처리
+			JOptionPane.showMessageDialog(mcv, "log형태의 파일이 아닙니다.", "파일 불러오기 오류", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -115,7 +125,7 @@ public class MainControlEvt implements ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -130,7 +140,7 @@ public class MainControlEvt implements ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -144,11 +154,12 @@ public class MainControlEvt implements ActionListener {
 			try {
 				useFileOutputStream();// "report_생성날짜.dat" 파일을 생성하여 1~6까지 작업을 write
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(mcv, "파일 출력 중 예상치 못한 오류가 발생했습니다.", "파일 출력 오류", JOptionPane.ERROR_MESSAGE); 
+				JOptionPane.showMessageDialog(mcv, "파일 출력 중 예상치 못한 오류가 발생했습니다.", "파일 출력 오류", JOptionPane.ERROR_MESSAGE);
 			}
 
 		} else {
-			JOptionPane.showMessageDialog(mcv, "view버튼을 눌러 파일을 읽고 결과화면을 출력한 뒤 \n리포트를 출력할 수 있습니다.", "파일 출력 오류", JOptionPane.ERROR_MESSAGE); 
+			JOptionPane.showMessageDialog(mcv, "view버튼을 눌러 파일을 읽고 결과화면을 출력한 뒤 \n리포트를 출력할 수 있습니다.", "파일 출력 오류",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -162,6 +173,7 @@ public class MainControlEvt implements ActionListener {
 
 	/**
 	 * 파일출력 메서드 추가 - 클래스 명세서에 기술 - day1220 UseFileOutputStream2 참고
+	 * 
 	 * @throws IOException
 	 */
 	private void useFileOutputStream() throws IOException {
@@ -180,8 +192,8 @@ public class MainControlEvt implements ActionListener {
 
 		if (flagFile) {
 			try {
-				bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileOutput),"UTF-8"));
-				
+				bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileOutput), "UTF-8"));
+
 				bw.write(fileForm()); // 결과를 입력 해준다. (ReportDialogEvt의 결과를 받아와 출력 형태에 맞게 변경한 데이터
 				bw.flush();
 				JOptionPane.showMessageDialog(mcv, "파일이 성공적으로 출력되었습니다!", "파일 출력 성공", JOptionPane.INFORMATION_MESSAGE);
@@ -194,30 +206,31 @@ public class MainControlEvt implements ActionListener {
 
 	/**
 	 * 파일 출력을 이쁘게 꾸미는 메서드
+	 * 
 	 * @return
 	 */
 	private String fileForm() {
 		StringBuilder sb = new StringBuilder();
 		String fileName = fileDateNaming();
-		fileName = fileName.substring(fileName.lastIndexOf("/")+1, fileName.length());
+		fileName = fileName.substring(fileName.lastIndexOf("/") + 1, fileName.length());
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
+
 		sb.append("-----------------------------------------------------------\n");
 		sb.append("파일명(").append(fileName).append(") log (생성된 날짜 ").append(sdf.format(d)).append(")\n");
 		sb.append("-----------------------------------------------------------\n");
-		for(int i=0; i<tempResult.length; i++) {
-			sb.append(tempProblem[i]+"\n");
-			sb.append(tempResult[i]+"\n\n");
-			
+		for (int i = 0; i < tempResult.length; i++) {
+			sb.append(tempProblem[i] + "\n");
+			sb.append(tempResult[i] + "\n\n");
+
 		}
-		
-		
+
 		return sb.toString();
 	}
-	
+
 	/**
 	 * 파일 이름에 생성날짜 추가하는 메서드- 클래스 명세서에 기술
+	 * 
 	 * @return
 	 */
 	private String fileDateNaming() {
@@ -236,8 +249,8 @@ public class MainControlEvt implements ActionListener {
 
 	}
 
-	////////////////////////////필요할 때마다 만든 getter setter들 ,,, 
-	
+	//////////////////////////// 필요할 때마다 만든 getter setter들 ,,,
+
 	public void setStartLine(int startLine) { // setter 추가됨 (클래스명세서에 추가 .
 		this.startLine = startLine;
 	}
@@ -253,7 +266,7 @@ public class MainControlEvt implements ActionListener {
 	public String getFilePath() {
 		return filePath;
 	}
-	
+
 	public FileRead getFr() {
 		return fr;
 	}

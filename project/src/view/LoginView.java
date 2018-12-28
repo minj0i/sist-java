@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import evt.LoginEvt;
 
 /**
- *
  * @author 백인재
  */
 @SuppressWarnings("serial")
@@ -30,18 +29,15 @@ public class LoginView extends JFrame {
 	public JTextField idTf;
 	public JPasswordField pwTf;
 	private JButton enterBtn, inforBtn, exitBtn;
-	private ImageIcon enterIi/* , inforIi, exitIi */;
 	private JLabel idLbl, pwLbl;
 	BufferedImage img = null;
 
 	public LoginView() {
 		super("Login");
 
-		enterIi = new ImageIcon();
-		enterBtn = new JButton("로그인", enterIi);
-
-		inforBtn = new JButton("정보", enterIi);
-		exitBtn = new JButton("종료", enterIi);
+		enterBtn = new JButton("로그인");
+		inforBtn = new JButton("정보");
+		exitBtn = new JButton("종료");
 
 		idTf = new JTextField();
 		pwTf = new JPasswordField();
@@ -55,7 +51,6 @@ public class LoginView extends JFrame {
 		add(idTf);
 		add(pwTf);
 		add(enterBtn);
-//		add(inforBtn);
 		add(exitBtn);
 		add(idLbl);
 		add(pwLbl);
@@ -67,10 +62,8 @@ public class LoginView extends JFrame {
 		pwTf.setBounds(65, 340, 120, 30);
 		idLbl.setBounds(35, 290, 50, 50);
 		pwLbl.setBounds(30, 330, 50, 50);
-
 		
 		try {
-//			img = ImageIO.read(new File("C:/dev/workspace/javase_teamprj1/src/view/loginimg.jpg"));
 			img = ImageIO.read(getClass().getResource("loginimg.jpg"));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "can not load login image");
@@ -101,12 +94,12 @@ public class LoginView extends JFrame {
 	}
 
 	/**
-	 * 배경에 이미지를 넣는 매서드
+	 * 배경에 이미지를 넣는 클래스
 	 * @author 백인재
 	 */
 	class backPanel extends JPanel {
 		public void paint(Graphics g) {
-			g.drawImage(img, 0, 0, null);
+			g.drawImage(img, 0, 0, this);
 		}
 	}
 

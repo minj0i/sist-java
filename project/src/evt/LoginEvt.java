@@ -29,9 +29,7 @@ public class LoginEvt extends WindowAdapter implements ActionListener {
 
 		if (exitButton == JOptionPane.OK_OPTION) {
 			lv.dispose();
-		} else if (exitButton == JOptionPane.CANCEL_OPTION) {
-
-		}
+		} 
 	} // closing
 
 	public void identifyIDPW() {
@@ -78,11 +76,6 @@ public class LoginEvt extends WindowAdapter implements ActionListener {
 		if (ae.getSource() == lv.getEnterBtn()) {
 			identifyIDPW();
 		}
-
-//		if (ae.getSource() == lv.getInforBtn()) {
-//			JOptionPane.showMessageDialog(lv, "준비중");
-//			// 정보 다이어로그 출력
-//		}
 
 		if (ae.getSource() == lv.getExitBtn()) {
 			closing();

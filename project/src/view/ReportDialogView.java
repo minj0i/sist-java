@@ -117,7 +117,7 @@ public class ReportDialogView extends Dialog {
 		
 		tempIssue = passIssues(); //String 배열로 된 메소드
 		tempIssue[5] = "6. 입력된 라인 ("+ issue6Lange +")에 해당하는 정보 중, 최다사용 키의 이름과 횟수";
-		mce.setTempProblem(tempIssue);//문제를 mainControlEvt에 넘겨준다
+		mce.setTempProblem(tempIssue);//6번 문제를 mainControlEvt에 넘겨준다
 	}//LogAnalysisView
 
 	
