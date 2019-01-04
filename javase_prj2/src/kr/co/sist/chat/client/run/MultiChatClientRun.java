@@ -7,5 +7,4 @@ public class MultiChatClientRun {
 	public static void main(String[] args) {
 		new MultiChatClientView();
 	}//main
-
 }//class

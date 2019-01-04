@@ -15,3 +15,10 @@ javase_prj2/bin
 javase_prj2/doc
 javase_prj2/.classpath
 javase_prj2/.project
+
+#javase_chatprj 제외 파일들
+javase_chatprj /.settings
+javase_chatprj/bin
+javase_chatprj/doc
+javase_chatprj/.classpath
+javase_chatprj/.project

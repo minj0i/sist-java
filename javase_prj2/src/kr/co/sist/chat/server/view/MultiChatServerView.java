@@ -8,28 +8,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
+import kr.co.sist.chat.server.evt.MultiChatServerEvt;
+
 /**
  * 채팅방 관리자 화면
  * @author owner
  */
 @SuppressWarnings("serial")
-public class MultiChatServerView extends JFrame {
+public class MultiChatServerView extends JFrame{
 	private JList<String> jlChatList;
 	private JScrollPane jspList;
-	private JButton jbtOpenServer, jbtCloseServer;
+	private JButton jbtOpenServer,jbtCloseServer;
 	private DefaultListModel<String> dlmChatList;
 	
 	public MultiChatServerView() {
-		super(":::::::::::::: 채팅방 관리자 :::::::::::::::");
+		super("::::::::채팅방 관리자::::::::");
+		dlmChatList=new DefaultListModel<String>();//인스턴스화
+		jlChatList = new JList<String>(dlmChatList);
+		jspList=new JScrollPane(jlChatList);
 		
-		dlmChatList = new DefaultListModel<String>();
-		jlChatList= new JList<String>(dlmChatList);
-		jspList = new JScrollPane(jlChatList);
+		jbtOpenServer=new JButton("서버 시작");
+		jbtCloseServer=new JButton("서버 중지");
 		
-		jbtOpenServer = new JButton("서버시작");
-		jbtCloseServer = new JButton("서버중지");
-		
-		JPanel btnPanel = new JPanel();
+		JPanel btnPanel =new JPanel();
 		btnPanel.add(jbtOpenServer);
 		btnPanel.add(jbtCloseServer);
 		
@@ -38,7 +39,14 @@ public class MultiChatServerView extends JFrame {
 		add("Center",jspList);
 		add("South",btnPanel);
 		
-		setBounds(100,100,300,500);
+		//이벤트 등록
+		MultiChatServerEvt mcse=new MultiChatServerEvt(this);
+		jbtOpenServer.addActionListener(mcse);
+		jbtCloseServer.addActionListener(mcse);
+		
+		addWindowListener(mcse);
+		
+		setBounds(100, 100, 400, 700);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -63,6 +71,6 @@ public class MultiChatServerView extends JFrame {
 	public DefaultListModel<String> getDlmChatList() {
 		return dlmChatList;
 	}
-	
 
+	
 }//class
