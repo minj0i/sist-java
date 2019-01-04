@@ -1,8 +1,17 @@
 package day0104;
 
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.TextArea;
 import java.sql.SQLException;
+import java.util.List;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class RunUseStatementCRUD { //DataAccessObject DB¿¡ °ü·ÃµÈ ¾÷¹«¸¦ Ã³¸®ÇÏ´Â Å¬·¡½º¸¦ DAO¶ó°í ºÎ¸§
 
@@ -136,10 +145,91 @@ public class RunUseStatementCRUD { //DataAccessObject DB¿¡ °ü·ÃµÈ ¾÷¹«¸¦ Ã³¸®ÇÏ´
 	
 	public void searchAllCpDept() {
 		
+		StringBuilder viewCpDept = new StringBuilder();
+		viewCpDept
+		.append("------------------------------------------------------------------------------------\n")
+		.append("¹øÈ£\tºÎ¼­¹øÈ£\tºÎ¼­¸í\tÀ§Ä¡\n")
+		.append("------------------------------------------------------------------------------------\n");
+		
+		int rowCount=0;
+		
+		try {
+			//DB¿¡¼­ Á¶È¸ÇÑ °á°ú ¹Þ±â
+			List<CpDeptVO> list = us_crud.selectAllCpDept();
+			CpDeptVO cdv = null;
+			
+			rowCount =list.size();
+			for(int i=0; i<list.size(); i++) {
+				cdv = list.get(i);
+				viewCpDept
+				.append(i+1).append("\t")
+				.append(cdv.getDeptno()).append("\t")
+				.append(cdv.getDname()).append("\t")
+				.append(cdv.getLoc()).append("\n");
+			}//end for
+			
+			if(list.isEmpty()) {//list.size()==0
+				viewCpDept.append("ÀÔ·ÂµÈ ºÎ¼­Á¤º¸°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+			}//end if
+			
+			
+		} catch (SQLException e) {
+			viewCpDept.append("DBMS¿¡¼­ ¹®Á¦°¡ ¹ß»ýÇß½À´Ï´Ù. ¤¸¤µ!\n");
+			e.printStackTrace();
+		}//end catch
+		
+		viewCpDept.append("------------------------------------------------------------------------------------\n")
+		.append("\t\tÃÑ").append(rowCount).append("°³ÀÇ ºÎ¼­Á¤º¸°¡ Á¶È¸µÇ¾ú½À´Ï´Ù.\n")
+		.append("------------------------------------------------------------------------------------\n");
+		
+		JTextArea jta = new JTextArea(20,50);
+		jta.setEditable(false);
+		jta.setText(viewCpDept.toString());//¸¸µé¾îÁø Ãâ·Âµ¥ÀÌÅÍ¸¦ T.A¿¡ ¼³Á¤ÇÑ´Ù.
+		
+		JScrollPane jsp = new JScrollPane(jta);
+		jsp.setBorder(new TitledBorder("ÀüÃ¼ ºÎ¼­ Á¶È¸ °á°ú"));
+		JOptionPane.showMessageDialog(null, jsp);
+		
 	}// searchAllCpDept
 	
 	public void searchOneCpDept() {
 		
+		String inputData = JOptionPane.showInputDialog("ºÎ¼­Á¶È¸\nÁ¶È¸ÇÒ ºÎ¼­¹øÈ£ ÀÔ·Â");
+		if(inputData!=null && !inputData.equals("")) {
+			try {
+			int deptno=Integer.parseInt(inputData);
+			//ºÎ¼­¹øÈ£¸¦ ÀÔ·ÂÇÏ¿© ºÎ¼­¹øÈ£¿¡ ÇØ´çÇÏ´Â ºÎ¼­Á¤º¸¸¦ Á¶È¸
+			//Á¶È¸ÇÑ ºÎ¼­°¡ ÀÖ´Ù¸é »ý¼ºµÈ °´Ã¼°¡ ¹ÝÈ¯µÇ°í Á¶È¸µÈ ºÎ¼­°¡ ¾ø´Ù¸é
+			//nullÀÌ ¹ÝÈ¯µÈ´Ù.
+			OneCpDeptVO ocd_vo = us_crud.selectCpDept(deptno);
+			
+			StringBuilder viewData = new StringBuilder();
+			viewData.append("ºÎ¼­¸í: ").append(ocd_vo.getDname())
+			.append(", À§Ä¡: ").append(ocd_vo.getLoc());
+			
+			JLabel lbl = new JLabel(viewData.toString());
+			lbl.setFont(new Font("SansSerif", Font.BOLD, 15));
+
+			JOptionPane.showMessageDialog(null, lbl);
+			}catch(NullPointerException npe) {
+				//Á¸ÀçÇÏ´Â ºÎ¼­¹øÈ£¸¦ Á¦°ø
+				StringBuilder deptno = new StringBuilder();
+				try {
+					List<Integer> list = us_crud.selectAllCpDeptNo();
+					for(Integer i:list) {
+						deptno.append(i.intValue()).append(" ");
+					}//end for
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}//end catch
+					JOptionPane.showMessageDialog(null, inputData+"¹øÈ£ÀÇ ºÎ¼­´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.\nÁ¸ÀçÇÏ´Â ºÎ¼­¹øÈ£´Â"+deptno+"ÀÔ´Ï´Ù.");
+			}catch(NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(null, "ºÎ¼­¹øÈ£´Â Á¤¼öÇüÅÂ·Î ÀÔ·ÂÇÏ¼¼¿ä.");
+			}catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "¼­¹ö¿¡¼­ ¹®Á¦¹ß»ý!");
+				e.printStackTrace();
+			}//end catch
+		}//end if
 	}// searchOneCpDept
 
 	public static void main(String[] args) {
@@ -149,7 +239,7 @@ public class RunUseStatementCRUD { //DataAccessObject DB¿¡ °ü·ÃµÈ ¾÷¹«¸¦ Ã³¸®ÇÏ´
 		String inputMenu = "";
 		do {
 			inputMenu = JOptionPane.showInputDialog("¸Þ´º¼±ÅÃ\n1.ºÎ¼­Ãß°¡ 2.ºÎ¼­º¯°æ 3.ºÎ¼­»èÁ¦ 4.ÀüÃ¼ºÎ¼­Á¶È¸ 5.Æ¯Á¤ºÎ¼­Á¶È¸ 6.Á¾·á");
-
+			if(inputMenu!=null && !inputMenu.equals("")) {
 			switch (inputMenu) {
 			case "1":
 				rus_crud.addCpDept();
@@ -172,8 +262,10 @@ public class RunUseStatementCRUD { //DataAccessObject DB¿¡ °ü·ÃµÈ ¾÷¹«¸¦ Ã³¸®ÇÏ´
 				
 			default: JOptionPane.showMessageDialog(null, inputMenu+"´Â Á¦°øµÇ´Â ¼­ºñ½º°¡ ¾Æ´Õ´Ï´Ù.");
 				break;
-			}//switch
-			
+			}//end switch
+		}else{
+			exitFlag=true;
+		}//end else
 		} while (!exitFlag);
 		JOptionPane.showMessageDialog(null, "»ç¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù");
 

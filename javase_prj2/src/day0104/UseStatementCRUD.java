@@ -153,17 +153,141 @@ public class UseStatementCRUD {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		
+		try {
 		//2. Connection얻기
+		String url="jdbc:oracle:thin:@127.0.0.1:1521:orcl";
+		String id = "scott";
+		String pass="tiger";
+		
+		con=DriverManager.getConnection(url, id, pass);
 		//3. 쿼리문 생성객체얻기
+		stmt=con.createStatement();
 		//4. 쿼리문 수행 후 결과 얻기
-		//5. 연결 끊기
+		String selectCpdept="select deptno,dname,loc from cp_dept";
+		
+		rs = stmt.executeQuery(selectCpdept);
+		CpDeptVO cdvo = null;
+		
+		while(rs.next()) {//조회된 레코드가 존재한다면
+			//컬럼의 인덱스로 조회 (무엇을 가지고 오는지 몰라서 가독성이 좋지 않음)
+			//프로시저 부를땐 어쩔수없이 인덱스로 조회
+//			System.out.println(/*rs.getInt(0):java.sql.SQLException: 부적합한 열 인덱스, 커서자리이기 때문에*/
+//					rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3));
+			
+			//컬럼의 이름으로 부르는게 가독성이 더 좋음
+//			System.out.println(rs.getInt("deptno")+" "+rs.getString("dname")+" "+rs.getString("loc"));
+			
+			//조회 결과를 VO에 저장
+			cdvo = new CpDeptVO(rs.getInt("deptno"),rs.getString("dname"),rs.getString("loc"));
+			//같은 이름으로 생성된 cdvo객체를 사라지지 않도록 관리하기 위해 List에 추가
+			list.add(cdvo);
+			
+		}//end while
+		
+		}finally {
+			//5. 연결 끊기
+			if(rs!=null) {rs.close();}//end if
+			if(stmt!=null) {stmt.close();}//end if
+			if(con!=null) {con.close();}//end if
+		}//end finally
 		return list;
 	}//selectAllCpDept
 	
-	public OneCpDeptVO selectCpDept(int deptno) {
+//	public static void main(String[] args) {//확인용
+//		UseStatementCRUD u = new UseStatementCRUD();
+//		try {
+//			u.selectAllCpDept();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}//end catch
+//	}
+	
+	public OneCpDeptVO selectCpDept(int deptno) throws SQLException {
 		OneCpDeptVO ocdvo = null;
+		//1.드라이버 로딩
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}//end catch
 		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+		//2.Connection 얻기
+		String url = "jdbc:oracle:thin:@127.0.0.1:1521:orcl";
+		String id = "scott";
+		String pass = "tiger";
+		
+		con=DriverManager.getConnection(url, id, pass);
+		//3.쿼리문 생성 객체 얻기
+		stmt=con.createStatement();
+		//4.쿼리문 수행 후 결과 얻기
+		StringBuilder selectCpDept = new StringBuilder();
+		selectCpDept.append("select dname,loc from cp_dept where deptno=")
+		.append(deptno);
+		
+		rs = stmt.executeQuery(selectCpDept.toString());
+		
+		if(rs.next()) {//조회된 레코드가 존재한다면 //어차피 key가 한개. 아니면 while써야함
+			ocdvo = new OneCpDeptVO(rs.getString("dname"),rs.getString("loc"));
+		}//end if
+		
+		}finally {
+		//5.연결 끊기
+			if(rs!=null) {rs.close();}//end if
+			if(stmt!=null) {stmt.close();}
+			if(con!=null) {con.close();}
+		}//end finally
 		return ocdvo;
 	}//selectCpDept
+	
+	/**
+	 * CP_DEPT 테이블의 모든 부서번호를 조회
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Integer> selectAllCpDeptNo() throws SQLException{
+		List<Integer> list = new ArrayList<Integer>();
+		//1.드라이버 로딩
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}//end catch
+	
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+		//2.Connection얻기
+		String url = "jdbc:oracle:thin:@127.0.0.1:1521:orcl";
+		String id = "scott";
+		String pass = "tiger";
+		
+		con = DriverManager.getConnection(url, id, pass);
+		//3.쿼리문 생성 객체 얻기
+		stmt = con.createStatement();	
+		//4.쿼리문 실행 후 결과 얻기
+		StringBuilder allCpDept = new StringBuilder();
+		allCpDept.append("select deptno from cp_dept");
+		
+		rs = stmt.executeQuery(allCpDept.toString());
+		
+		while(rs.next()) {
+			list.add(rs.getInt("deptno"));
+			}//end while
+		}finally {
+		//5.연결 끊기
+			if(rs!=null) {rs.close();}//end if
+			if(stmt!=null) {stmt.close();}
+			if(con!=null) {con.close();}
+		}//end finally
+		
+		return list;
+	}//selectAllCpDeptNo
+	
 	
 }//class
