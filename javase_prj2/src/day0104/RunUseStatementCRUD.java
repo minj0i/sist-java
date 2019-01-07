@@ -1,8 +1,6 @@
 package day0104;
 
 import java.awt.Font;
-import java.awt.HeadlessException;
-import java.awt.TextArea;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 public class RunUseStatementCRUD { //DataAccessObject DB에 관련된 업무를 처리하는 클래스를 DAO라고 부름

@@ -47,7 +47,7 @@ public class UseStatementCRUD {
 			//긴문자열인 경우 StringBuffer나 StringBuilder사용
 			//.찍어서 붙여쓰는 것 : method chain
 			StringBuilder insertCpdept = new StringBuilder();
-			insertCpdept.append("insert into cp_dept(deptno, dname, loc) values(")
+			insertCpdept.append("insert into cp_dept(deptno, dname, loc) values( ")
 			.append(cdvo.getDeptno()).append(",'")
 			.append(cdvo.getDname()).append("','")
 			.append(cdvo.getLoc()).append("')");
@@ -125,7 +125,7 @@ public class UseStatementCRUD {
 			stmt = con.createStatement();
 		//4.쿼리 수행 후 결과 얻기
 			StringBuilder deleteCpDept = new StringBuilder();
-			deleteCpDept.append("delete from cp_dept where deptno =").append(deptno);
+			deleteCpDept.append("delete from cp_dept where deptno = ").append(deptno);
 			
 			int cnt=stmt.executeUpdate(deleteCpDept.toString());
 			
@@ -164,7 +164,7 @@ public class UseStatementCRUD {
 		//3. 쿼리문 생성객체얻기
 		stmt=con.createStatement();
 		//4. 쿼리문 수행 후 결과 얻기
-		String selectCpdept="select deptno,dname,loc from cp_dept";
+		String selectCpdept="select deptno,dname,loc from cp_dept ";
 		
 		rs = stmt.executeQuery(selectCpdept);
 		CpDeptVO cdvo = null;
@@ -226,7 +226,7 @@ public class UseStatementCRUD {
 		stmt=con.createStatement();
 		//4.쿼리문 수행 후 결과 얻기
 		StringBuilder selectCpDept = new StringBuilder();
-		selectCpDept.append("select dname,loc from cp_dept where deptno=")
+		selectCpDept.append("select dname,loc from cp_dept where deptno= ")
 		.append(deptno);
 		
 		rs = stmt.executeQuery(selectCpDept.toString());
