@@ -14,6 +14,11 @@ public class HwSelectTableDAO {
 	public HwSelectTableDAO() {
 	}//기본 생성자
 	
+	/**
+	 * DB접속
+	 * @return
+	 * @throws SQLException
+	 */
 	private Connection getConn() throws SQLException{
 		Connection con = null;
 		//1.
@@ -31,6 +36,11 @@ public class HwSelectTableDAO {
 		return con;
 	}
 	
+	/**
+	 * Table이름을 List로 받기 => combobox에 넣기
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<String> getTableName() throws SQLException {
 		List<String> listTablenames = new ArrayList<String>();
 		String tableName = "";
@@ -62,6 +72,12 @@ public class HwSelectTableDAO {
 		return listTablenames;
 	}
 	
+	/**
+	 * 쿼리문을 통해 원하는 값을 Jtable에 넣기 위한 방법
+	 * @param tableName
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<String[]> getTableColumns(String tableName) throws SQLException {
 		List<String[]> listTableColumns = new ArrayList<String[]>();
 		String[] tableColumns = null;
@@ -94,6 +110,16 @@ public class HwSelectTableDAO {
 				tableColumns[1] = rs.getString("dtype");
 				tableColumns[2] = rs.getString("dlength");
 				tableColumns[3] = rs.getString("conName");
+				
+				if(tableColumns[3]!=null && !tableColumns[3].equals("")) {
+				switch(tableColumns[3].substring(0, 2)) {
+				case "FK" :tableColumns[3] = "Foreign Key"; break;
+				case "PK" :tableColumns[3] = "Primary Key"; break;
+				case "SY" :tableColumns[3] = "제약사항 조건 확인"; break;
+				default : tableColumns[3] = rs.getString("conName"); break;
+					}
+				}
+				
 				listTableColumns.add(tableColumns);
 			}
 		} finally {

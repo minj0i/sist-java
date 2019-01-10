@@ -36,7 +36,11 @@ public class HW1 extends JFrame {
 			// 1.드라이버 로딩
 			// 2.connection 얻기
 			GetConnection gc = GetConnection.getInstance();
-			con = gc.getConn();
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			String id ="scott";
+			String pass="tiger";
+			con = gc.getConn(url, id, pass);
+
 			// 3.쿼리문 생성 객체 얻기 : PreparedStatement 객체는 실행되는 쿼리문을 안다.
 			String selectTab = "select table_name from tabs";
 			pstmt = con.prepareStatement(selectTab);

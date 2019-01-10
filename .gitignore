@@ -22,3 +22,10 @@ javase_chatprj/bin
 javase_chatprj/doc
 javase_chatprj/.classpath
 javase_chatprj/.project
+
+#js_practice 제외 파일들
+js_practice/.settings
+js_practice/bin
+js_practice/doc
+js_practice/.classpath
+js_practice/.project

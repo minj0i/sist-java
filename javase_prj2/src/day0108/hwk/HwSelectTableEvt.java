@@ -30,6 +30,7 @@ public class HwSelectTableEvt extends WindowAdapter implements ActionListener {
 	
 	public HwSelectTableEvt(HwSelectTableView hstv) {
 		this.hstv = hstv;
+		
 		List<String> tableNames = new ArrayList<String>();
 		hstdao = new HwSelectTableDAO();
 		
@@ -73,7 +74,6 @@ public class HwSelectTableEvt extends WindowAdapter implements ActionListener {
 					rowData[1] = listTableColums.get(i)[1];
 					rowData[2] = listTableColums.get(i)[2];
 					rowData[3] = listTableColums.get(i)[3];
-					
 					dtm.addRow(rowData);
 				}
 				
