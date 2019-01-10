@@ -1,29 +1,29 @@
-# Á¦¿Ü½ÃÅ³ ÆÄÀÏµé
+ï»¿# ì „ì²´ ë¬´ì‹œ
 .metadata
 .recommenders
 
-# prj1 Á¦¿Ü ÆÄÀÏµé
+# prj1ë¬´ì‹œí•  íŒŒì¼ë“¤
 javase_prj/.settings
 javase_prj/bin
 javase_prj/doc
 javase_prj/.classpath
 javase_prj/.project
 
-# prj2 Á¦¿Ü ÆÄÀÏµé
+# prj2 ë¬´ì‹œí•  íŒŒì¼ë“¤
 javase_prj2/.settings
 javase_prj2/bin
 javase_prj2/doc
 javase_prj2/.classpath
 javase_prj2/.project
 
-#javase_chatprj Á¦¿Ü ÆÄÀÏµé
+#javase_chatprj ë¬´ì‹œí•  íŒŒì¼ë“¤
 javase_chatprj /.settings
 javase_chatprj/bin
 javase_chatprj/doc
 javase_chatprj/.classpath
 javase_chatprj/.project
 
-#js_practice Á¦¿Ü ÆÄÀÏµé
+#js_practice ë¬´ì‹œí•  íŒŒì¼ë“¤
 js_practice/.settings
 js_practice/bin
 js_practice/doc
