@@ -2,6 +2,9 @@
 .metadata
 .recommenders
 
+#html 생략
+.html
+
 # prj1무시할 파일들
 javase_prj/.settings
 javase_prj/bin
