@@ -10,7 +10,8 @@ import java.util.List;
 
 public class loginDAO {
 	
-	private loginDAO() {
+	public loginDAO() {
+		
 	}
 	
 	private Connection getConn() throws SQLException{
@@ -51,10 +52,13 @@ public class loginDAO {
 				idpass = new String[2];
 				idpass[0]= rs.getString("ID");
 				idpass[1]= rs.getString("PASS");
-				for(int i=0; i<idpass.length; i++) {
-				System.out.println(idpass);
-				}
+
+				
+//				System.out.println(idpass[0] + idpass[1]);
+				
+				
 				listInfo.add(idpass);
+				
 			}
 		//6.
 		}finally {
@@ -66,12 +70,12 @@ public class loginDAO {
 		return listInfo;
 	}//getInfo
 	
-	public static void main(String[] args) {
-		loginDAO l = new loginDAO();
-		try {
-			System.out.println(l.getInfo().size());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		loginDAO l = new loginDAO();
+//		try {
+//			l.getInfo();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }//class

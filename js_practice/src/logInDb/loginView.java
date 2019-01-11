@@ -32,6 +32,8 @@ public class loginView extends JFrame{
 		loginEvt le = new loginEvt(this);
 		
 		jbtLogin.addActionListener(le);
+		jfId.addActionListener(le);
+		jfPass.addActionListener(le);
 		addWindowListener(le);
 		
 		setBounds(100, 100, 200, 200);
