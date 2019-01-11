@@ -3,7 +3,7 @@
 .recommenders
 
 #html 생략
-.html
+*.html
 
 # prj1무시할 파일들
 javase_prj/.settings
