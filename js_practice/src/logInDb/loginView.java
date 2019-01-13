@@ -59,8 +59,4 @@ public class loginView extends JFrame{
 	public static void main(String[] args) {
 		new loginView();
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5f87042d2a977fec754c70f1526bc603ee3c4584
