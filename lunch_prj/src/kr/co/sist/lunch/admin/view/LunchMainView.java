@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 import kr.co.sist.lunch.admin.controller.LunchMainController;
 
+@SuppressWarnings("serial")
 public class LunchMainView extends JFrame {
 	private JTabbedPane jtb;
 	private DefaultTableModel dtmLunch, dtmOrder, dtmCalc; //메뉴, 주문, 정산

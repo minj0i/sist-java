@@ -1,27 +1,23 @@
 package kr.co.sist.lunch.admin.view;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import kr.co.sist.lunch.admin.controller.LunchAddController;
 import kr.co.sist.lunch.admin.controller.LunchMainController;
-import kr.co.sist.lunch.admin.vo.LunchDetailVO;
 
 /**
  * 도시락 테이블에서 선택된 도시락의 상세 정보를 출력하고 수정, 삭제를 할 수 있는 창
  * @author owner
  */
+@SuppressWarnings("serial")
 public class LunchAddView extends JDialog {
 
 	private JLabel jlLunchImg;
