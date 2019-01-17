@@ -87,12 +87,24 @@ public class LunchAddController extends WindowAdapter implements ActionListener{
 				file.getName(), jtaSpec.getText().trim(), price);
 		
 		try {
+			LunchAdminDAO.getInstance().insertLunch(lavo);
 			//이미지를, 사용하는 폴더로 복사 (=스트림 필요)
 			uploadImg(file);
-			//에러가 나면 catch로 빠져서 DB에 추가가 안됨
-			LunchAdminDAO.getInstance().insertLunch(lavo);//에러가 나지 않는 경우 DB에 추가
+			
+			//LunchDetailController에  modify 큰이미지, 작은이미지에 관한 내용을 넣으면서 다시 강사님 코드로 고침
+//			uploadImg(file);
+//			//에러가 나면 catch로 빠져서 DB에 추가가 안됨
+//			LunchAdminDAO.getInstance().insertLunch(lavo);//에러가 나지 않는 경우 DB에 추가
+			
 			//리스트 갱신
 			lmc.setLunch();
+			
+			//다음 도시락의 입력을 편하게 하기 위해서 입력폼 초기화
+			jtfName.setText("");
+			jtfPrice.setText("");
+			jtaSpec.setText("");
+			
+			lav.getJlLunchImg().setIcon(new ImageIcon("C:/dev/workspace/lunch_prj/src/kr/co/sist/lunch/admin/img/no_img.jpg"));
 			
 			JOptionPane.showMessageDialog(lav, "도시락이 추가되었습니다.");
 		} catch (IOException ie) {
@@ -114,6 +126,32 @@ public class LunchAddController extends WindowAdapter implements ActionListener{
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
 		try {
+//			//강사님코드
+//			//큰 이미지 업로드
+//			fis = new FileInputStream(file);
+//			byte[] readData = new byte[512];
+//			
+//			int len =0;
+//			String uploadPath = "C:/dev/workspace/lunch_prj/src/kr/co/sist/lunch/admin/img/";
+//			fos=new FileOutputStream(uploadPath+file.getName());
+//			
+//			while((len=fis.read(readData))!=-1) {
+//				fos.write(readData,0,len);
+//				fos.flush();
+//			}//end while
+//				fis.close();
+//				fos.close();
+//			
+//			//작은 이미지 업로드
+//			fis = new FileInputStream(file.getParent()+"/s_"+file.getName());//getParent를 쓰면 폴더까지가 나옴
+//			len =0; //len을 0으로 초기화
+//			fos=new FileOutputStream(uploadPath+"s_"+file.getName());
+//			while((len=fis.read(readData))!=-1) {
+//				fos.write(readData,0,len);
+//				fos.flush();
+//			}//end while
+			
+			//LunchDetailController에  modify 큰이미지,
 			byte[] readData = new byte[512];
 			String uploadPath = "C:/dev/workspace/lunch_prj/src/kr/co/sist/lunch/admin/img/";
 

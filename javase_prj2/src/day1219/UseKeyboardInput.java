@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * 사용자가 입력한 키도브 값을 처리하는 System.in
+ * 사용자가 입력한 키보드 값을 처리하는 System.in
  * @author owner
  */
 public class UseKeyboardInput {

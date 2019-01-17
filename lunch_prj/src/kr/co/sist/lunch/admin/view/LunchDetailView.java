@@ -32,6 +32,7 @@ public class LunchDetailView extends JDialog {
 		//DB에서 조회한 결과를 Component에서 채운다.
 		
 		ImageIcon iiLunch = new ImageIcon("C:/dev/workspace/lunch_prj/src/kr/co/sist/lunch/admin/img/"+ldvo.getImg());
+		
 		jlLunchImg = new JLabel(iiLunch);
 		jtfLunchCode = new JTextField();
 		jtfLunchName = new JTextField();

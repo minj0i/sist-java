@@ -25,7 +25,7 @@ public class UseFiles {
 				ioe.printStackTrace();
 			}//end catch
 			System.out.println("경로: "+file.getPath());
-			System.out.println("폴더명: "+file.getParent());//c:\dev\temp
+			System.out.println("폴더명: "+file.getParent());//c:/dev/temp
 			System.out.println("파일명: "+file.getName());//java_read.txt
 			
 			System.out.println(file.isFile()?"파일":"디렉토리");
@@ -39,7 +39,7 @@ public class UseFiles {
 			System.out.println("마지막수정일: "+file.lastModified());
 			//lastModified는 long형으로 나오기 때문에
 			Date d = new Date(file.lastModified());
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD a HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd a HH:mm:ss");
 			System.out.println("마지막수정일: "+ sdf.format(d));
 		} else {
 			System.out.println("경로를 확인해주세요");

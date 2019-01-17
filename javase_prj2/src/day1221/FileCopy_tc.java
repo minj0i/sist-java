@@ -76,13 +76,11 @@ public class FileCopy_tc extends JFrame implements ActionListener, Runnable {
 			if( fis != null ) { try {
 				fis.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} }//end if
 			if( fos != null ) { try {
 				fos.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} }//end if
 		}//end finally
