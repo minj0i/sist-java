@@ -310,6 +310,7 @@ public class LunchAdminDAO {
 			.append("	from Lunch l, Ordering o	")
 			.append("	where o.lunch_code=l.lunch_code	")
 			.append("	and to_char(o.order_date,'yyyy-mm-dd')=to_char(to_date(?,'yyyy-mm-dd'), 'yyyy-mm-dd')	")
+			.append("	and o.status='Y'	")//제작완료인 것만 정산
 			.append("	group by l.lunch_name, l.lunch_code, l.price	")//자바에는 쿼리안에 ';'를 넣으면 안됨		
 			.append("   order by l.lunch_code ");
 			pstmt=con.prepareStatement(selectCalc.toString());

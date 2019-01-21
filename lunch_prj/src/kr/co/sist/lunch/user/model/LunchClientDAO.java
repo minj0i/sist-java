@@ -1,5 +1,6 @@
 package kr.co.sist.lunch.user.model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +12,9 @@ import java.util.List;
 import kr.co.sist.lunch.user.vo.LunchDetailVO;
 import kr.co.sist.lunch.user.vo.LunchListVO;
 import kr.co.sist.lunch.user.vo.OrderAddVO;
+import kr.co.sist.lunch.user.vo.OrderInfoVO;
+import kr.co.sist.lunch.user.vo.OrderListVO;
+import oracle.jdbc.OracleTypes;
 
 /**
  * 도시락 주문자에 대한 DB처리
@@ -149,13 +153,56 @@ public class LunchClientDAO {
 		}//end finally
 	}//insertOrder
 	
-	public static void main(String[] args) {
+	public List<OrderListVO> selectOrderList(OrderInfoVO oivo) throws SQLException {//주문자의 정보를 넣음
+		List<OrderListVO> list = new ArrayList<OrderListVO>();
+		
+		Connection con = null;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
+		
 		try {
-			System.out.println(LunchClientDAO.getInstance().selectDetailLunch("L_000001"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}//end catch
-	}//main
+		//1.
+		//2.
+			con = getConn();
+		//3.
+			cstmt=con.prepareCall(" { call lunch_order_select(?,?,?) } ");
+		//4.
+			//in parameter
+			cstmt.setString(1, oivo.getOrderName());
+			cstmt.setString(2, oivo.getOrderTel());
+			//out parameter
+			cstmt.registerOutParameter(3,OracleTypes.CURSOR); //커서를 집어넣어야하는데 특정 데이터베이스에만 서비스되는게 없음//오라클 jdbc패키지에있는것
+		//5.쿼리실행(프로시저 실행)
+			cstmt.execute();
+			//out parameter에 저장된 값을 자바의 변수(rs)로 저장.
+			rs=(ResultSet)cstmt.getObject(3);//3번째 파라미터의 값을 얻음
+			
+			OrderListVO olvo = null;
+			
+			while(rs.next()) {
+//				olvo = new OrderListVO(rs.getString(1), rs.getString(2), rs.getInt(3));
+				olvo = new OrderListVO(rs.getString("lunch_name"), rs.getString("order_date"), rs.getInt("quan"));
+				list.add(olvo);
+			}//end while
+		}finally {
+		//6.
+			if(con!=null) {con.close();}//end if
+			if(cstmt!=null) {cstmt.close();}//end if
+			if(rs!=null) {rs.close();}//end if
+		}//end finally
+		
+		return list;
+	}//selectOrderList
+	
+	
+//	public static void main(String[] args) {
+//		try {
+//			System.out.println(LunchClientDAO.getInstance().selectOrderList(new OrderInfoVO("토끼", "222-3333-3333")));
+////			System.out.println(LunchClientDAO.getInstance().selectDetailLunch("L_000001"));
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}//end catch
+//	}//main
 	
 	
 }//class

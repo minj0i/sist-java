@@ -29,12 +29,14 @@ import kr.co.sist.lunch.admin.vo.LunchVO;
 import kr.co.sist.lunch.admin.vo.OrderVO;
 
 
-public class LunchMainController extends WindowAdapter implements ActionListener, MouseListener{
+public class LunchMainController extends WindowAdapter 
+implements ActionListener, MouseListener, Runnable{
 
 	private LunchMainView lmv;
 	private LunchAdminDAO la_dao;
 	private String orderNum;
 	private int selectedRow;
+	private Thread threadOrdering;
 	
 	public static final int DBL_CLICK = 2;
 	
@@ -222,9 +224,14 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 	@Override
 	public void mouseClicked(MouseEvent me) {
 		if(me.getSource()==lmv.getJtb()) {
-			if(lmv.getJtb().getSelectedIndex()==1) {//1번 탭에서 이벤트 발생
+			if(lmv.getJtb().getSelectedIndex()==1) {//두번째 탭(주문)에서 이벤트 발생
+				//주문현황을 계속 조회하여 실시간으로 실시간으로 DB를 조회하여 갱신
+				if(threadOrdering==null) { //이걸쓰지않으면 계속해서 객체가 만들어짐
+					threadOrdering= new Thread(this);
+					threadOrdering.start();
+				}//end if
 				//현재까지의 주문사항을 조회 (쓰레드로 돌려야 함)
-				searchOrder();
+//				searchOrder();
 			}//end if
 		}//end if
 
@@ -361,6 +368,21 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 		
 	}//actionPerformed
 
+	@Override
+	public void run() {
+		//30초마다 한번씩 조회 수행
+		try {
+		while(true) {//무한루프로 돌리면 CPU많이 잡아먹음. 컴퓨터가 느려짐
+		searchOrder();
+			Thread.sleep(1000*30);
+		}//end while
+		} catch (InterruptedException e) {
+			msgCenter(lmv, "주문 조회 중 문제가 발생했습니다.");
+			e.printStackTrace();
+		}//end catch
+	}//run
+
+	//////////////////////////////////////////////////////////////////
 	//mouseCliecked만 씀
 	@Override
 	public void mousePressed(MouseEvent e) {}
@@ -370,4 +392,7 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 	public void mouseEntered(MouseEvent e) {}
 	@Override
 	public void mouseExited(MouseEvent e) {}
+
+
+	
 }//class
