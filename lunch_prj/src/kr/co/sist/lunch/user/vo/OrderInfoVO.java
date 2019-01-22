@@ -2,7 +2,7 @@ package kr.co.sist.lunch.user.vo;
 
 public class OrderInfoVO {
 	private String orderName, orderTel;
-
+	
 	public OrderInfoVO(String orderName, String orderTel) {
 		this.orderName = orderName;
 		this.orderTel = orderTel;
@@ -15,5 +15,8 @@ public class OrderInfoVO {
 	public String getOrderTel() {
 		return orderTel;
 	}
+
+
+
 	
 }//class

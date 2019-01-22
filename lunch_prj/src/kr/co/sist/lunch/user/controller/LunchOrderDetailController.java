@@ -99,6 +99,8 @@ public class LunchOrderDetailController extends WindowAdapter implements ActionL
 			.append("-------------------------------------------\n")
 			.append("전화번호 : ").append(lodv.getJtfPhone().getText()).append("\n")
 			.append("-------------------------------------------\n")
+			.append("요구사항 : ").append(lodv.getJtaRequest().getText()).append("\n")
+			.append("-------------------------------------------\n")
 			.append("ip address : ").append(InetAddress.getLocalHost().getHostAddress()).append("\n")
 			.append("-------------------------------------------\n")
 			.append("위의 정보로 도시락을 주문하시겠습니까?\n")
@@ -116,7 +118,7 @@ public class LunchOrderDetailController extends WindowAdapter implements ActionL
 			try {
 				OrderAddVO oavo = new OrderAddVO(lodv.getJtfOrderName().getText(), 
 						lodv.getJtfPhone().getText(), InetAddress.getLocalHost().getHostAddress(),
-						lunchCode, lodv.getJbQuan().getSelectedIndex()+1);
+						lunchCode, lodv.getJtaRequest().getText(), lodv.getJbQuan().getSelectedIndex()+1);
 				
 				LunchClientDAO.getInstance().insertOrder(oavo);
 				showMessageDialog(lodv, "도시락 주문이 완료되었습니다.\n항상 최선을 다하는 재찬도시락이 되겠습니다.\n 감사합니다");

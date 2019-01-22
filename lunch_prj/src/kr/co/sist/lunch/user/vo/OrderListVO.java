@@ -7,8 +7,10 @@ public class OrderListVO {
 	public OrderListVO(String lunchName, String orderDate, int quantity) {
 		this.lunchName = lunchName;
 		this.orderDate = orderDate;
-		Quantity = quantity;
+		this.Quantity = quantity;
 	}
+	
+
 	public String getLunchName() {
 		return lunchName;
 	}

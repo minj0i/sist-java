@@ -1,14 +1,15 @@
 package kr.co.sist.lunch.user.vo;
 
 public class OrderAddVO {
-	private String orderName, phone,	ipAddress, lunchCode;
+	private String orderName, phone, ipAddress, lunchCode, request;
 	private int quan;
-	public OrderAddVO(String orderName, String phone, String ipAddress, String lunchCode, int quan) {
+	public OrderAddVO(String orderName, String phone, String ipAddress, String lunchCode, String request, int quan) {
 		this.orderName = orderName;
 		this.phone = phone;
 		this.ipAddress = ipAddress;
 		this.lunchCode = lunchCode;
 		this.quan = quan;
+		this.request=request;
 	}
 	public String getOrderName() {
 		return orderName;
@@ -24,6 +25,9 @@ public class OrderAddVO {
 	}
 	public int getQuan() {
 		return quan;
+	}
+	public String getRequest() {
+		return request;
 	}
 	
 	

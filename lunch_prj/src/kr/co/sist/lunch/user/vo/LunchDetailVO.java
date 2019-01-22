@@ -35,7 +35,7 @@ public class LunchDetailVO {
 	@Override
 	public String toString() {
 		return "LunchDetailVO [lunchCode=" + lunchCode + ", lunchName=" + lunchName + ", spec=" + spec + ", img=" + img
-				+ ", price=" + price + "]";
+				+ ", request=" + ", price=" + price + "]";
 	}
 
 	

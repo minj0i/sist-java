@@ -359,7 +359,8 @@ public class LunchAdminDAO {
 			.append("	select o.order_num, o.lunch_code, l.LUNCH_NAME, ")
 			.append("	o.quan, (o.quan)*l.price price,	o.order_name,				")
 			.append("	to_char(o.order_date,'yyyy-mm-dd hh:mi:ss')	 	")
-			.append("	order_date, o.phone, o.ip_address, o.status		")
+			.append("	order_date, o.phone, o.ip_address, o.status,		")
+			.append("	o.request		")
 			.append("	from   lunch l, ordering o		")
 			.append("	where  o.lunch_code=l.lunch_code		")
 			.append("	and to_char(o.order_date, 'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')	")
@@ -377,7 +378,7 @@ public class LunchAdminDAO {
 					ovo=new OrderVO(rs.getString("order_num"), rs.getString("lunch_code"), rs.getString("lunch_name"), 
 							rs.getString("order_name"), rs.getString("order_date"),
 							rs.getString("phone"), rs.getString("ip_address"), 
-							rs.getString("status"), rs.getInt("quan"), rs.getInt("price"));
+							rs.getString("status"), rs.getString("request"), rs.getInt("quan"), rs.getInt("price"));
 
 					list.add(ovo);
 				}//end while

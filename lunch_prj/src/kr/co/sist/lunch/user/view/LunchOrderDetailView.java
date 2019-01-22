@@ -23,7 +23,7 @@ public class LunchOrderDetailView extends JDialog{
 	
 	private JLabel jlLunchImg;
 	private JTextField jtfLunchName, jtfLunchPrice, jtfOrderName, jtfPhone, jtfTotalPrice;
-	private JTextArea jtaLunchSpec;
+	private JTextArea jtaLunchSpec, jtaRequest;
 	private JButton jbOrder, jbEnd;
 	private JComboBox<Integer> jbQuan;
 	
@@ -42,13 +42,17 @@ public class LunchOrderDetailView extends JDialog{
 		jtaLunchSpec = new JTextArea(ldvo.getSpec());
 		jtaLunchSpec.setEditable(false);
 		jtaLunchSpec.setBackground(Color.WHITE);
-		
 		jtaLunchSpec.setLineWrap(true);
+		
+		jtaRequest = new JTextArea();
+		jtaRequest.setBackground(Color.WHITE);
+		jtaRequest.setLineWrap(true);
 		
 		jbOrder = new JButton("주문");
 		jbEnd = new JButton("창 닫기");
 		
 		JScrollPane jspTaSpec = new JScrollPane(jtaLunchSpec);
+		JScrollPane jspRequest = new JScrollPane(jtaRequest);
 		setLayout(null);
 		
 		JLabel jlDetailTitle = new JLabel("도시락 상세정보");
@@ -61,7 +65,7 @@ public class LunchOrderDetailView extends JDialog{
 		JLabel jlOrderTel  = new JLabel("전화번호");
 		JLabel jlLunchTotalPrice  = new JLabel("총가격");
 		JLabel jlLunchSpec = new JLabel("특장점");
-		
+		JLabel jlLunchRequest = new JLabel("요구사항");
 		
 		DefaultComboBoxModel<Integer> dlmQuan = new DefaultComboBoxModel<Integer>();
 		for(int i=1; i<11; i++) {
@@ -82,6 +86,8 @@ public class LunchOrderDetailView extends JDialog{
 		jlOrderName.setBounds(270,250,80,25);
 		jlOrderTel.setBounds(270,285,80,25);
 		
+		jlLunchRequest.setBounds(30, 280, 80, 25);
+		
 		jtfLunchName.setBounds(340,65,185,25);
 		jtfLunchName.setEditable(false);
 		jtfLunchName.setBackground(Color.WHITE);
@@ -97,6 +103,7 @@ public class LunchOrderDetailView extends JDialog{
 		jtfTotalPrice.setBackground(Color.WHITE);
 		
 		jspTaSpec.setBounds(340, 185, 185, 60);
+		jspRequest.setBounds(30, 310, 185, 60);
 		
 		jtfOrderName.setBounds(340, 250, 185, 30);
 		jtfPhone.setBounds(340, 285, 185, 30);
@@ -112,6 +119,7 @@ public class LunchOrderDetailView extends JDialog{
 		add(jlLunchSpec);		add(jspTaSpec);
 		add(jlOrderName);		add(jtfOrderName);
 		add(jlOrderTel);		add(jtfPhone);
+		add(jlLunchRequest);	add(jspRequest);
 		add(jbOrder);
 		add(jbEnd);
 		
@@ -166,6 +174,11 @@ public class LunchOrderDetailView extends JDialog{
 	public JComboBox<Integer> getJbQuan() {
 		return jbQuan;
 	}
+
+	public JTextArea getJtaRequest() {
+		return jtaRequest;
+	}
+	
 	
 	
 }//class
