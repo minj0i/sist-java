@@ -3,9 +3,6 @@
 .recommenders
 .Servers
 
-#html 생략
-*.html
-
 # prj1무시할 파일들
 javase_prj/.settings
 javase_prj/bin
@@ -33,3 +30,12 @@ js_practice/bin
 js_practice/doc
 js_practice/.classpath
 js_practice/.project
+
+#html_prj 무시할 파일들
+html_prj/.settings
+html_prj/build
+html_prj/src
+html_prj/.classpath
+html_prj/.project
+html_prj/WebContent/META-INF
+html_prj/WebContent/WEB-INF
