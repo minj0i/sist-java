@@ -2,9 +2,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>다른 페이지와 연결 hyper link</title>
 </head>
 <body>
+[<a href="#kim" name="top"> 김정윤</a> | 
+<a href="#gong"> 공선의</a> | 
+<a href="#jung"> 정택성</a> ]<br/>
+
+<strong>URL(Uniform Resource Locator)사용</strong><br/>
+<a href="http://localhost:8080/html_prj/day0124/font.html">font 페이지 이동</a><br/>
+<a href="http://localhost:8080/html_prj/day0124/link_a/a.html">하위폴더 내 페이지 이동</a><br/>
+<a href="http://localhost:8080/html_prj/day0123/hello.html">다른폴더 내 hello페이지 이동</a><br/>
+<a href="http://localhost:8080/html_prj/day0123/link_b/b.html">다른폴더 내 하위폴더 b.html페이지 이동</a><br/>
+
+<strong>상대 경로 사용</strong><br/>
+<a href="font.html">font 페이지 이동</a><br/>
+<a href="link_a/a.html">하위폴더 내 a.html페이지 이동</a><br/>
+<a href="../day0123/hello.html">다른폴더 내 hello페이지 이동</a><br/>
+<a href="../day0123/link_b/b.html">다른폴더 내 하위폴더 b.html페이지 이동</a><br/>
+
+<!-- <strong>절대 경로(절대 사용하지 말아야 할 경로) 사용</strong><br/>
+<a href="C:\dev\workspace\html_prj\WebContent\day0124\font.html">font 페이지 이동</a><br/>
+절대경로는 우클릭 후 open with, web brower로만 열어서 열림
+file:///이라는 이름으로 열림
+-->
+
+<strong>새창</strong><br/>
+<!-- target="프레임의 이름" 프레임의 이름이 없는 이름이라면 새창으로 뜬다. -->
+<a href="http://daum.net" target="abort:blank">다음</a><br/>
+
+
+<p>
+<a name="kim"></a>
+	<h1> 김정윤</h1>
+	<h2> 수강생/30세(남)</h2>
+	<h3> 대구에서 태어나서 철권을 사랑하는 젊은이로....</h3>
+	<a href="#top">위로</a>
+</p>
+<p>
+<a name="gong"></a>
+	<h1> 공선의</h1>
+	<h2> 수강생/28세(남)</h2>
+	<h3> 청주에서 태어나 서울에서 살고 있으며 돈을 좋아하는 젊은이로...</h3>
+	<a href="#top">위로</a>
+</p>
+<p>
+<a name="jung"></a>
+	<h1> 정택성</h1>
+	<h2> 수강생/27세(남)</h2>
+	<h3> 서울시 구로구의 자랑 댄스를 좋아함...</h3>
+	<a href="#top">위로</a>
+</p>
+<br/>
+
 
 </body>
 </html>
