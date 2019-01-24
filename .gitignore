@@ -1,6 +1,7 @@
 ﻿# 전체 무시
 .metadata
 .recommenders
+.Servers
 
 #html 생략
 *.html
