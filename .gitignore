@@ -39,3 +39,5 @@ html_prj/.classpath
 html_prj/.project
 html_prj/WebContent/META-INF
 html_prj/WebContent/WEB-INF
+
+Servers/*
