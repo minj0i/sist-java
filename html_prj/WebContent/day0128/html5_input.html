@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML5에서 추가된 HTML Form Control</title>
+</head>
+<body>
+<div>
+	<strong>의미적 Form Control</strong>
+	<!-- 디자인은 text와 같지만 소스보기 할 때 입력값이 무엇인지 의미적으로 전달하는 객체들 -->
+	<label>이름</label><input type="text" name="name"/><br/>
+	<label>이메일</label><input type="email" name="email"/><br/>
+	<label>전화번호</label><input type="tel" name="tel"/><br/>
+	<label>사이트 URL</label><input type="url" name="url"/><br/>
+
+</div>
+<div>
+	<strong> 기능을 가진 HTML Form Control</strong>
+	<br/>
+	<label>날짜</label>
+	<!-- value는 "년-월-일" 형식의 값이입력되면 해당 날짜 정보가 입력되어 보여진다. -->
+	<input type="date" name="date" value="2018-10-19"/><!-- 크롬은 달력 선택하는게 나오지만 익스는 TextField처럼 나옴  -->
+	<br/>
+	<!-- month value는 "년-월" 형식의 값이입력되면 해당 날짜 정보가 입력되어 보여진다. -->
+	<input type="month" name="mon"/><br/>
+	<!-- datetime-local value는 "년-월-일 시:분:초" 형식의 값이입력되면 해당 날짜 정보가 입력되어 보여진다. -->
+	<input type="datetime-local" name="date"/><br/>
+	
+	<!-- color : value는 RGB로 넣어줌-->
+	<label>색선택</label>
+	<input type="color" name="col" value="FF0000"/><br/>
+	
+	<label>숫자</label>
+	<input type="number" name="num"/><br/>
+	
+	<!-- min="최소값" max="최대값" value="현재값"  -->
+	<label>범위</label>
+	0<input type="range" name="ran" min="0" max="100" value="12"/>100<br/>
+</div>
+</body>
+</html>

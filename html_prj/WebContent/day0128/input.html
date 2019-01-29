@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML Form Control</title>
+</head>
+<body>
+<!-- HTML Form Control : 사용자가 입력하는 값을 받기 위한 HTML 제공 객체들 -->
+<strong>입력객체</strong>
+<br/>
+<strong>&lt;input&gt;태그의 공통속성</strong><br/>
+<!-- disabled-값 수정 불가, 서버로 값 전송 안됨.
+	readonly - 값 수정 불가, 서버로 값 전송 됨.
+-->
+<!-- method: 전송방식 get(주소창에 전달)/post(http header) -->
+<form action="test.jsp" method="get">
+<fieldset><!-- 칸이 생김-->
+<legend>HTML Form Control 연습</legend> <!-- TitledBorder같은 것이 생김 -->
+<!-- <input type="text" name="test" disabled="disabled"/><br/> -->
+<label>기본 속성</label><input type="text" name="test" readonly="readonly"/><br/>
+<!-- text: 짧은 문자열데이터(ID, 이름, 주소,,,)를 입력받을 때
+	넓이 : size=글자수
+	최대입력글자수 : maxlength (size와 관련없음)
+	아무값도 입력하지 않았을 때 서버로 전송할 값 : value=
+	HTML5에서 추가된 속성: 사용자가 값을 입력하기전까지 안내 문자열을 보여줄 때 placeholder=
+-->
+<label>아이디</label>
+<input type="text" name="id" size="10" maxlength="5" placeholder="아이디"/><br/>
+
+<!-- type="password" : 비밀번호나 외부에 값을 노출시키지 말아야 할 데이터를 입력받을 때
+		한글이 입력되지 않는다.
+-->
+<label>비밀번호</label>
+<input type="password" name="id" size="10" maxlength="20" placeholder="비밀번호"/><br/>
+<!-- type="checkbox": 준비된 값 중 사용자가 여러 개를 선택하여 입력 할 때
+		value="서버로 전송할 값"
+		name="이름을 동일하게 설정하면 그룹으로 묶여진다. - 배열로 처리된다.
+		(Web은 Control에 상관없이 이름이 같으면 배열로 처리된다)
+		checked는 특정 checkbox가 선택이 된 상태로 제공할 때
+		4.0.1까지는 checked 권장, HTML5에서는 checked="checked"를 권장
+-->
+<input type="checkbox" value="사과" name="fruit">사과(가을)<br/>
+<input type="checkbox" value="배" name="fruit" checked="checked">배(가을)<br/>
+<input type="checkbox" value="딸기" name="fruit">딸기(봄)<br/>
+<input type="checkbox" value="포도" name="fruit">포도(여름)<br/>
+
+<!-- type="radio": 보기로 준비된 값 중 사용자가 한개를 선택하여 입력할 때
+	name="그룹의 이름"-->
+<input type="radio" value="남자" name="성별" checked="checked">남자<br/>
+<input type="radio" value="여자" name="성별">여자<br/>
+
+<!-- type="hidden": 사용자에게 값을 노출시키지 않고 서버로 값을 전달할 때
+	hidden은 JavaScript랑 많이 쓰임 -->
+<input type="hidden" name="addr" value="서울시 강남구  역삼동"/><br/>
+
+<!-- type="image" 이미지를 제공할 때, 사용자가 클릭하면 서버로 전송하게 된다. 
+	submit의 기능(<form> 태그 안에 모든 HTML Form Control들이 가진 값을 서버로 전송하는 일)을 가지고 있다.
+	값을 가지고 있다 보니 유효성 검증을 해야 함.-->
+<input type="image" src="../common/images/sist_logo.jpg"/><br/>
+<img src="../common/images/sist_logo.jpg"/><br/>
+
+<!-- type="file" 파일전송할 때 : JavaScript에서 값변경을 할 수 없는 HTML Form Control-->
+<input type="file" name="update"/><br/>
+
+<!-- 버튼 류 : 사용자가 클릭하여 동작 할 수 있는 HTML From Control
+	type="submit" : HTML Form Control의 값을 서버로 전송하는 기능. (브라우저마다 정해진 라벨이 존재)
+		<form>태그의 하위 태그로 존재해야만 동작하게 된다.
+	type="reset" : HTML Form Control의 값을 초기화 하는 기능 (브라우저마다 정해진 라벨이 존재)
+	type="Button" : 버튼 모양 (주로 JavaScript에서 유효성 검증을 해야 하는 경우). 라벨이 없음.
+-->
+<input type="submit" value="전송"/><br/>
+<input type="reset" value="초기화"/><br/>
+<input type="button" value="버튼"/><br/>
+</fieldset>
+<!-- <select>:정해진 값 중 하나만 선택하여 전송할 때.
+	name="식별하기 위한 이름"
+	size="보여줄 옵션의 갯수"
+	<option value="서버로 전송할 값" selected="selected"/>
+	HTML 4.0.1: selected, HTML5 권장은 selected="selected"
+-->
+<label>지역선택</label> <br/>
+<select name="loc" >
+	<option selected="selected">----지역선택----</option>
+	<option value="서울">서울</option>
+	<option value="경기도">경기도</option>
+	<option value="인천">인천</option>
+	<option value="경상도">경상도</option>
+	<option value="충청도">충청도</option>
+	<option value="전라도">전라도</option>
+	<option value="강원도">강원도</option>
+	<option value="충청도">충청도</option>
+	<option value="제주">제주</option>
+</select>
+<br/>
+<select size="5">
+	<option>SKT</option>
+	<option>KT</option>
+	<option>LGT</option>
+</select><br/>
+<!-- <textarea> : 여러 행을 입력할 때(많은 양의 문자열을 입력할 때)
+	rows="보여줄 행수"
+	cols="한줄에 쓸 글자수"
+-->
+<textarea rows="5" cols="30" name="ta">쓰고싶은 말/</textarea>
+
+</form>
+</body>
+</html>

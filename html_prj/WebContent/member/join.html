@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+</head>
+<body>
+<form action="test.jsp" method="get">
+<table border="1" cellspacing="0">
+<tr>
+	<td colspan="2" align="center">회원 가입 </td>
+</tr>
+<tr>
+	<td width="150">아이디</td>
+	<td width="500"> <input type="text" name="id" size="10" maxlength="5" placeholder="아이디"/>
+	<input type="button" value="중복확인"/> </td>
+</tr>
+<tr>
+	<td width="150">비밀번호</td>
+	<td width="500"> <input type="password" name="pw" size="10" maxlength="5" placeholder="비밀번호"/></td>
+</tr>
+<tr>
+	<td width="150">비밀번호확인</td>
+	<td width="500"> <input type="password" name="pw" size="10" maxlength="5" placeholder="비밀번호"/></td>
+</tr>
+<tr>
+	<td width="150">이름</td>
+	<td width="500"> <input type="text" name="name" size="10" maxlength="5"/></td>
+</tr>
+<tr>
+	<td width="150">주민번호</td>
+	<td width="500"> <input type="text" name="ssn" size="10" maxlength="6"/>
+	-
+	<input type="password" name="ssn" size="10" maxlength="7"/>
+	</td>
+</tr>
+<tr>
+	<td width="150">성별</td>
+	<td width="500"> <input type="radio" value="남자" name="성별">남자
+	<input type="radio" value="여자" name="성별">여자
+	</td>
+</tr>
+<tr>
+	<td width="150">생년월일</td>
+	<td width="500">
+	<select name="year" >
+	<option value="2019" selected="selected">2019</option>
+	<option value="2018">2018</option>
+	<option value="2017">2017</option>
+	</select>년
+	
+	<select name="month" >
+	<option value="1" selected="selected">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	</select>월
+	
+	<select name="day" >
+	<option value="1" selected="selected">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+	<option value="13">13</option>
+	<option value="14">14</option>
+	<option value="15">15</option>
+	<option value="16">16</option>
+	<option value="17">17</option>
+	<option value="18">18</option>
+	<option value="19">19</option>
+	<option value="20">20</option>
+	<option value="21">21</option>
+	<option value="22">22</option>
+	<option value="23">23</option>
+	<option value="24">24</option>
+	<option value="25">25</option>
+	<option value="26">26</option>
+	<option value="27">27</option>
+	<option value="28">28</option>
+	<option value="29">29</option>
+	<option value="30">30</option>
+	<option value="31">31</option>
+	</select>일
+	</td>
+</tr>
+<tr>
+	<td width="150">나이</td>
+	<td width="500"> <input type="text" name="age" size="10" maxlength="3"/></td>
+</tr>
+<tr>
+	<td width="150">관심언어</td>
+	<td> <input type="checkbox" value="Java" name="InLang">Java
+	<input type="checkbox" value="C/C++" name="InLang">C/C++
+	<input type="checkbox" value="Python" name="InLang">Python
+	<input type="checkbox" value="VB" name="InLang">VB<br/>
+	<input type="checkbox" value="JSP" name="InLang">JSP
+	<input type="checkbox" value="Servlet" name="InLang">Servlet
+	<input type="checkbox" value="ASP" name="InLang">ASP
+	<input type="checkbox" value="php" name="InLang">php	
+</tr>
+<tr>
+	<td width="150">결혼여부</td>
+	<td width="500"> <input type="radio" value="미혼" name="결혼" checked="checked">미혼
+	<input type="radio" value="기혼" name="결혼">기혼
+	</td>
+</tr>
+<tr>
+	<td width="150">결혼기념일</td>
+	<td width="500"> <input type="text" name="marryday" size="10" maxlength="4"/>년
+	<input type="text" name="marryday" size="5" maxlength="2"/>월
+	<input type="text" name="marryday" size="5" maxlength="2"/>일
+	</td>
+</tr>
+<tr>
+	<td width="150">우편번호</td>
+	<td width="500"> <input type="text" name="addr" size="5" readonly="readonly"/>
+	-
+	<input type="password" name="addr" size="5" readonly="readonly"/>
+	<input type="button" value="우편번호 검색"/> 
+	</td>
+</tr>
+<tr>
+	<td width="150">주소</td>
+	<td> <input type="text" name="addr" size="30" readonly="readonly"/></td>
+</tr>
+<tr>
+	<td width="150">상세주소</td>
+	<td> <input type="text" name="addr" size="30"/></td>
+</tr>
+<tr>
+	<td width="150">가입인사</td>
+	<td><textarea rows="5" cols="30" name="ta">가입인사</textarea></td>
+</tr>
+<tr>
+	<td colspan="2" align="center">
+	<input type="submit" value="가입"/> 
+	<input type="reset" value="초기화"/> 
+	</td>
+</table>
+</form>
+</body>
+</html>

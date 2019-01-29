@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>margin, padding 여백 설정</title>
+<style type="text/css">
+div { border:1px solid #333; width:400px}
+/* margin으로 여백을 설정하면 전체 크기는 변경되지 않는다.  */
+/* 바깥쪽의 모든(왼, 위, 오, 아래) 여백을 설정*/
+.margin_a{ margin: 20px}
+/* 특정 위치의 바깥쪽 여백을 설정 */
+.margin_b{margin-left:30px; margin-top:40px; margin-right:50px; margin-bottom: 10px;}
+/* padding으로 여백을 설정하면 전체 크기는 변경된다. */
+.margin_c{padding:20px}
+/* 특정 위치에 안쪽 여백 설정 */
+.margin_d{padding-left:30px; padding-right:50px; padding-top:30px; padding-bottom:40px;}
+input{margin-left:10px; 
+	 padding-left:5px; padding-top:5px; padding-right:3px; padding-bottom:5px;}
+table{margin-left:10px; margin-top:10px;}
+.margin_e{padding-left:4px; padding-right:7px; padding-top:5px; padding-bottom:10px;}
+</style>
+</head>
+<body>
+<div class="margin_a">점심은 닭도리탕 아니겠습니까?</div>
+<div class="margin_b">점심은 닭도리탕 아니겠습니까?</div>
+<div class="margin_c">점심은 닭도리탕 아니겠습니까?</div>
+<div class="margin_d">점심은 닭도리탕 아니겠습니까?</div>
+<label>이름</label><input type="text"/><br/>
+<!-- table의 바깥쪽 여백을 10px, 위 여백을 10px로 설정하고
+	첫행의 김정운 td와 두번째행의 공선의 td의 안쪽여백
+	 왼:4, 오: 7px, 위 : 5px, 아래:10px로 설정
+	-->
+<table border="1">
+	<tr>
+		<td>김정윤</td>
+		<td class="margin_e">김정운</td>
+		<td>이재찬</td>
+	</tr>
+	<tr>
+		<td class="margin_e">공선의</td>
+		<td>김건하</td>
+		<td>이재현</td>
+	</tr>
+</table>
+</body>
+</html>
