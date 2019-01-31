@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>넓이, 높이, 바닥색, 테두리 선</title>
+<style type="text/css">
+	div{background-color:#CCE1C3}
+	/* 넓이가 설정되면 web brower의 크기가 변경되더라도 안의 데이터가 움직이지 않는다. */
+	.width{width: 500px}
+	.height{height:40px}
+	.background{background-color:#F3E3C2}
+	/* 선의 종류 : 실선(solid) 점선(dotted) 긴점선(dashed) 이중선(선의 두께가 3px부터 double)*/
+	.border{margin-top:10px; border:3px double#333}
+	
+	input{background-color:#4E82B4; width:120px; height:40px}
+	
+	#left{border-left:2px solid #333}
+	#right{border-right:2px solid #333}
+	#top{border-top:2px solid #333}
+	#bottom{border-bottom:2px solid #333; margin-bottom:20px}
+	
+	/* table의 셀간 간격을 조절: border-spacing:셀간 간격px */
+	table{border:0px; border-spacing:0; margin-bottom:20px}
+	th{border-top:2px solid #3C4790; border-bottom:1px solid #3C4790; height:40px;}
+	td{border:1px ; border-bottom:1px solid #EEEEEE; text-align:center;}
+	tr:hover{background-color:#EEEEEE}
+	.num{width:40px } /* 클래스는 두개를 줄 수 없음. 한개만 가능 */
+	.name{width:120px}
+	.favorite{width:300px}
+	
+	/* bbs th */
+	/* line-height은 설정한 font-size로 행의 높이가 결정 되는데 설정한 행의 높이에 *한 값이
+	새로운 행의 높이가 됨 */
+	body{font-size:14px; line-height:1.5}
+	
+	.numm{width:50px;}
+	.title{width:700px}
+	.writer{width:150px}
+	.date{width:80px}
+	.rec{width:80px}
+	#d-title{padding-left:5px; text-align:left;}
+
+</style>
+</head>
+<body>
+<!-- width가 정해져있으면 브라우저의 사이즈가 정해져있어도 안의 데이터가 움직이지 않는다. -->
+<div class="width"> 넓이 </div> 
+<div class="height"> 높이 </div>
+<div class="background"> 바닥색 </div>
+<div class="border"> 테두리선 </div>
+<input type="text"/><br/>
+<div id="left">왼쪽선</div>
+<div id="right">오른선</div>
+<div id="top">윗선</div>
+<div id="bottom">아랫선</div>
+
+<table>
+<tr>
+	<th class="num">번호</th>	<th class="name">이름</th>	<th class="favorite">좋아하는 것</th>
+</tr>
+<tr>
+	<td>1</td>	<td>공선의</td>	<td>돈</td>
+</tr>
+<tr>
+	<td>2</td>	<td>이재현</td>	<td>게임</td>
+</tr>
+<tr>
+	<td>3</td>	<td>김정윤</td>	<td>철권</td>
+</tr>
+</table>
+
+<table>
+<tr>
+	<th class="numm">번호</th> <th class="title">제목</th> <th class="wirter">글쓴이</th> <th class="date">날짜</th>
+	<th class="count">조회</th> <th class="rec">추천</th>
+</tr>
+<tr>
+	<td>설문</td> <td id="d-title">동생그룹 중 가장 성공할 것 같은 그룹은?</td>  <td>운영자</td> <td>19/01/29</td> <td>-</td> <td>-</td>
+</tr>			
+<tr>
+	<td id="nummm">15043</td> <td  id="d-title">내가 정돌하는것들ㅋㅋ [378]</td>  <td>PGD-727</td> <td>01/30</td> <td>4343</td> <td>105</td>
+</tr>			
+<tr>
+	<td id="nummm">15042</td> <td  id="d-title">드디어 그래픽카드를 새로 사버렸군? ㅋㅋㅋ 기분이 엄청 째져버리는데ㅋㅋ? [1190/1]</td>  <td>키프나</td> <td>01/30</td> <td>56460</td> <td>1965</td>
+</tr>
+<tr>
+	<td id="nummm">15041</td> <td  id="d-title">사과씨로 ,사과 나무 만들어봅시당 외 다수 [436]</td>  <td>ㅇㅇ</td> <td>01/29</td> <td>26644</td> <td>579</td>
+</tr>
+
+</table>
+
+
+</body>
+</html>

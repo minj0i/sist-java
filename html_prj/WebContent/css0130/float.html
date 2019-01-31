@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	#wrap{width:600px; height:700px; margin:0px auto}
+	#header{background-color: #DCE4EF; height:100px;}
+	#kim{ border:1px solid #333; background-color: #53BEFF; width:298px; float:left; height:498px}
+	 /* border를 주면 전체 길이와 높이가 추가됨. 원래는 붙지만 줄이 바뀌게 됨 */
+	#choi{border:1px solid #333; background-color: #98BF8D; width:298px; float:right; height:498px }
+	/* clear:both;를 안쓰면 같은 줄 오른쪽에 붙음 / 안쓰면 위쪽 디자인 float이 내려오게 됨*/
+	/* clear:both를 사용하면 바로 위의 float속성이 아래로 내려오는 것을 막을 수 있다. */
+	#footer{clear:both; background-color:#5A79AA; height:100px; float:left; width:600px;}
+</style>
+</head>
+<body>
+<!--
+	작성자: owner
+	작성일: 2019. 1. 30.
+	내용: 
+-->
+<div id="wrap">
+	<div id="header">header</div>
+		<div id="kim">김정윤</div>
+		<div id="choi">최지우</div>
+	<div id="footer">footer</div>
+</div>
+
+</body>
+</html>
