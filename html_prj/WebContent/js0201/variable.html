@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>변수의 사용</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+/* wrap에 background-color를 넣고 header, container, footer에도 background-color를 넣어 가려지는지 확인 */
+#wrap{margin:0px auto; width:800px; height:860px;}
+/* wrap안쪽 디자인들은 wrap안에 들어있기 때문에 width안줘도 자동으로 800이 됨 */
+#header{width:800px; height:140px; background: #FFFFFF url(http://localhost:8080/html_prj/common/images/header_bg.png) repeat-x;
+		position:relative;}
+#headerTitle{ font-family: HY견고딕, 고딕; font-size:35px; font-weight:bold; text-align:center;
+			position:absolute; top:40px; left:290px;}
+#container{width:800px; height:600px;}
+#footer{width:800px; height:120px;}
+#footerTitle{float:right; font-size:15px; padding-top:20px; padding-right:20px;}
+</style>
+<script type="text/javascript">
+//지역선언
+//1.변수의 선언
+var name;
+//2.값 할당 : 데이터형이 결정됨
+name="김정윤";
+//3.값 사용
+alert("이름 "+ name +"님 새해 복 많이 받으세요");
+//2. 값 할당 : 데이터형이 결정됨
+name=31;
+//3.값 사용
+alert( name +"세");
+
+//전역변수
+//1.선언과 함께 값 할당을 한다.
+age=31;
+//2. 값 할당
+age=31.2;
+//값 사용
+alert("나이 "+age+"세");
+
+function test(){
+	//지역
+	var addr="경상북도 대구광역시 ";
+	//전역
+	addr1="서울시 강남구 역삼동";
+}
+test();
+
+//alert("지역: "+addr); //지역변수는 함수 외부에서 사용할 수 없다.
+alert("전역: "+addr1);//전역변수는 함수 외부에서 사용할 수 있다.
+
+</script>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="headerTitle">SIST Class4 </div>
+	</div>
+	
+	<div id="container">
+	</div>
+	
+	<div id="footer">
+		<div id="footerTitle"> copyright&copy; all right reserved class4 </div>
+	</div>
+</div>
+</body>
+</html>

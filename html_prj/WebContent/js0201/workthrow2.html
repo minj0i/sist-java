@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>workthrow2</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+/* wrap에 background-color를 넣고 header, container, footer에도 background-color를 넣어 가려지는지 확인 */
+#wrap{margin:0px auto; width:800px; height:860px;}
+/* wrap안쪽 디자인들은 wrap안에 들어있기 때문에 width안줘도 자동으로 800이 됨 */
+#header{width:800px; height:140px; background: #404040; position:relative;}
+#headerTitle{font-family: 나눔고딕, 맑은 고딕; color:white; font-size:35px; font-weight:bold; text-align:center;
+			position:absolute; top:40px; left:200px;}
+#container{width:800px; height:900px; position:relative;}
+table{margin:0px auto;}
+td{font-family: 나눔고딕; padding-left:5px; padding-right:5px;}
+hr{width:798px; height:2px; position:absolute; top:2px;}
+#tab1{width:600px; text-align:left;}
+#tab2{width:200px; text-align:left;}
+#p18{color:#FF3399;}
+#tableTitle{border:2px solid #333; position:absolute; top: 80px;}
+#tabletitle{width:800px; font-size:20px; font-weight:bold; text-align:left;}
+#tableContent{font-family: 나눔고딕; position:absolute; top: 150px; cellpadding:5px; }
+#contentTitle{text-align:center; background:#FF3399; color:white; font-weight:bold;}
+#pink{position:absolute; top:800px; padding-left:50px;  }
+#pinktext{text-align:center; color:#FF3399; font-weight:bold; font-size:15px;}
+#footer{width:800px; height:120px; background: #404040;}
+#footerTitle{float:right; font-size:15px; padding-top:20px; padding-right:80px;
+			font-family: 나눔고딕, 맑은 고딕; color:white; font-weight:bold; text-align:right;}
+#footerContent{font-size:14px; padding-top:60px; padding-right:80px;
+			font-family: 나눔고딕, 맑은 고딕; color:white; font-weight:bold; text-align:right;}
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+	<hr id="hr" color="#FF3399"/>
+		<div id="headerTitle">쇼핑몰 웹사이트 개발 견적서 </div>
+	</div>
+	<div id="container">
+	<table id="headTable">
+		<tr>
+		<td id="tab1"> 수신 : 김정윤고객님<br/>발신: ((주)프로젝트)<br/>발신일: 2019.01.03</td>
+		<td id="tab2"> 제작견적 의뢰일: 2019. 01. 03<br/>제작완료 요청일:협의</td> 
+		</tr>
+	</table>
+	
+	<table id="tableTitle">
+	<tr>
+		<td id="tabletitle" height="40px">견적 제안가: 백팔십만원(
+		<span id="p18">\1,800,000</span> 부가가치세 별도)
+		</td>
+	</tr>
+	</table>
+	
+	<table id="tableContent" border="1px"; bordercolor="#333"; cellspacing="0px"; >
+	<tr>
+		<th width="80px" id="contentTitle" height="30px">구분</th>
+		<th width="280px" id="contentTitle">세부항목</th>
+		<th width="300px" id="contentTitle">내용</th>
+		<th width="200px" id="contentTitle">금 액</th>
+	</tr>
+	<tr>
+		<td rowspan=4; align="center" height="120px">Project 제작 기획</td>
+		<td height="30px" >컨설팅/기획</td>
+		<td>사이트맵 작성 및 사이트 기획</td>
+		<td align="right" height="30px">0 </td>
+	</tr>
+	<tr>
+		<td height="30px">Scripting</td>
+		<td>기획안 작성</td>
+		<td align="right";>0 </td>
+	</tr>
+	<tr>
+		<td height="30px">StoryBoard</td>
+		<td>사이트 구조 편집, 인터렉티브 연구</td>
+		<td align="right";>0 </td>
+	</tr>
+	<tr>
+		<td bgcolor="#EAEAEA" height="30px">&lt;소계&gt;</td>
+		<td bgcolor="#EAEAEA"></td>
+		<td bgcolor="#EAEAEA" align="right";><strong>0 </strong></td>
+	</tr>
+		<tr>
+		<td rowspan=6; align="center" height="200px">Design</td>
+		<td height="50px" >2D GRAPHIC</td>
+		<td>사이트를 구성한 일반 이미지 가공</td>
+		<td align="right" height="30px">200,000 </td>
+	</tr>
+	<tr>
+		<td height="30px">LAY OUT DESIGN</td>
+		<td>UseInterface 연구 및 적용</td>
+		<td align="right">200,000 </td>
+	</tr>
+	<tr>
+		<td height="30px">TYPOGRAPHIC</td>
+		<td>타이포의 웹이미지 작업</td>
+		<td align="right">300,000 </td>
+	</tr>
+	<tr>
+		<td height="30px">Editorial DESIGN</td>
+		<td>데이터 정리 및 편집</td>
+		<td align="right">200,000 </td>
+	</tr>
+	<tr>
+		<td height="30px">FILE PRESSING/CONVERTING</td>
+		<td>전체 웹코딩</td>
+		<td align="right">200,000 </td>
+	</tr>
+	<tr>
+		<td bgcolor="#EAEAEA" height="30px">&lt;소계&gt;</td>
+		<td bgcolor="#EAEAEA"></td>
+		<td bgcolor="#EAEAEA" align="right"><strong>1,100,000 </strong></td>
+	</tr>
+	<tr>
+		<td rowspan=4; align="center" height="120px">프로그램</td>
+		<td height="30px" >프로그램 &시스템 개발</td>
+		<td>웹프로그램 개발</td>
+		<td align="right" height="30px">300,000 </td>
+	</tr>
+	<tr>
+		<td height="30px">쇼핑몰 폼 개발</td>
+		<td>결제를 제외한 기타 쇼핑몰 기능 개발</td>
+		<td align="right">400,000 </td>
+	</tr>
+	<tr>
+		<td height="30px">Test & Debuging etc</td>
+		<td>테스트 및 버그 수정</td>
+		<td align="right">0 </td>
+	</tr>
+	<tr>
+		<td bgcolor="#EAEAEA" height="30px">&lt;소계&gt;</td>
+		<td bgcolor="#EAEAEA"></td>
+		<td bgcolor="#EAEAEA" align="right"><strong>700,000 </strong></td>
+	</tr>
+	<tr>
+		<td height="30px"></td>
+		<td align="center"><strong>합   계</strong></td>
+		<td></td>
+		<td align="right"><strong>1,800,000</strong> </td>
+	</tr>
+	<tr>
+		<td id="contentTitle" height="30px">견적금액</td>
+		<td></td>
+		<td align="right"><strong>부가가치세 포함 견적가</strong></td>
+		<td bgcolor="#FF3399" align="right"><strong><font color="white">1,980,000</font></strong></td>
+	</table>
+	
+	<table id="pink">
+	<tr>
+		<td id="pinktext" align="center">
+		※쇼핑몰은 제작 옵션에 따른 견적이 상이하게 차이 날 수 있습니다. 미팅 후 정확한 상세 견적이 가능합니다. ※
+		</td>
+	</tr>
+	</table>
+	</div>
+	
+	<div id="footer">
+		<div id="footerTitle"> 사이트 제작. 담당자: 정윤 대리<br/>	</div>
+		<div id="footerContent">TEL:02-542-7109   FAX:02-109-7050   
+		http://www.make.co.kr   109@project.net</div>
+	</div>
+</div>
+</body>
+</html>
