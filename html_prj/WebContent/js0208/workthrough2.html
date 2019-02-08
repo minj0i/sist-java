@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+//1. 이차원 배열
+var arr=new Array();
+
+//2. 이차원배열
+arr[0]=new Array();
+arr[1]=new Array();
+arr[2]=new Array();
+
+//3. 값 할당
+arr[0][0]="이봉현";
+arr[0][1]="김정운";
+arr[0][2]="이재찬";
+arr[0][3]="김민정";
+arr[0][4]="박은영";
+arr[0][5]="정택성";
+arr[0][6]="백인재";
+
+arr[1][0]="박영민";
+arr[1][1]="김정윤";
+arr[1][2]="최지우";
+arr[1][3]="노진경";
+arr[1][4]="김희철";
+arr[1][5]="박소영";
+arr[1][6]="이지수";
+
+arr[2][0]="오영근";
+arr[2][1]="이재현";
+arr[2][2]="공선의";
+arr[2][3]="박정미";
+arr[2][4]="최혜원";
+arr[2][5]="김건하";
+
+var name=prompt("이름입력", "홍길동");
+
+document.write("입력:"+name+"<br/>");
+for(var i=0; i<3; i++){
+	for(var j=0; j<arr[i].length; j++){
+		if(name==arr[i][j]){
+			var jo=i+1;
+		}
+	}
+}
+document.write("조: "+jo+"조 <br/>");
+document.write("구성원: &nbsp;")
+document.write("<select>");
+for(var k=0; k<arr[jo-1].length; k++){
+document.write("<option>"+arr[jo-1][k]+"</option>");
+}//end for
+document.write("</select>")
+</script>
+</head>
+<body>
+
+</body>
+</html>

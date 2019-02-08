@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>operator</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	strong{font-size:25px}
+</style>
+<script type="text/javascript">
+	//한 줄 주석
+	/*
+	여러줄 주석
+	*/
+	/*
+	1. 단항 : 연산에 필요한 항이 한개인 연산자(unary).
+		~(tilde): 1의 보수 연산 (0->1, 1->0)
+		!(not): true -> false, false-> true
+		+:형식적 제공
+		-:부호바꿈연산자, 2의 보수 연산자
+		++: 증가 연산
+		--: 감소 연산
+		
+		-전위 연산
+		연산자 대상체
+		-후위 연산
+		대상체 연산자
+	*/
+	var num1=2;
+	var num2=-2;
+	var flag1 = true;
+	var flag2 = false;
+		//window는 최상위 객체로 생략하여 사용할 수 있다.
+	document.write("<ul>");
+	document.write("<li>할당된 값 : "+num1+ "</li>");
+	document.write("<li><strong>단항연산자</strong></li>")
+	
+	//~양수 : 부호가 변경되고 1 증가
+	document.write("<li>~"+num1+"="+(~num1)+"</li>");//-3
+	//~음수 : 부호가 변경되고 1 감소
+	document.write("<li>~"+num2+"="+(~num2)+"</li>");//1
+	//<div>와 <li>를 주로 사용해서 줄을 바꿈
+	
+	document.write("<li>!"+flag1+"="+(!flag1)+"</li>");//false
+	document.write("<li>!"+flag2+"="+(!flag2)+"</li>");//true
+	
+	//+
+	document.write("<li>+"+num1+"="+(+num1)+"</li>");//-2
+	document.write("<li>+"+num2+"="+(+num2)+"</li>");//2
+	
+	//-
+	document.write("<li>-"+num1+"="+(-num1)+"</li>");//2
+	document.write("<li>-"+num2+"="+(-num2)+"</li>");//-2
+	
+	//++증가
+	num1++; //후위
+	++num1; //전위
+	document.write("<li>전위연산 후 "+num1+"</li>");//4
+	//--: 대상체의 값을 1씩 감소
+	num1--;//후위
+	--num1;//전위
+	document.write("<li>후위연산 후 "+num1+"</li>");//2
+	//대입 연산자와 함께 사용되거나, 함수의 인수값으로 넣어줄 때에는 전위와 후위가
+	//다른 값을 할당한다.
+	//전위: 내것 먼저(증가, 감소연산을 먼저 수행하고)
+	result=++num1;
+	document.write("<li>전위연산 후 result="+result+",num1="+num1+"</li>");//3 3
+
+	//후위: 남의 것 먼저
+	result=0;
+	result=num1++;
+	document.write("<li>후위연산 후 result="+result+",num1="+num1+"</li>");//3 4
+	
+	//산술 연산 : +, -, *, /, %
+	document.write("<li><strong>산술연산</strong></li>");
+	document.write("<li>"+num1 % 2+"</li>");// 2/2 나머지 0
+	
+	//쉬프트 연산: <<, >>, >>>
+	//<<: 비트를 왼쪽으로 밀고 밀어서 빈칸을 항상 0으로 채운다.
+	//>>: 비트를 오른쪽으로 밀고 밀어서 빈칸을 최상위 부호비트로 (양수:0, 음수:1) 채운다.
+	//>>>: 비트를 오른쪽으로 밀고 밀어서 빈칸을 항상 0으로 채운다.
+	document.write("<li><strong>쉬프트 연산</strong></li>");
+	//0100: 4 <<2  = 0001 0000 : 16
+	document.write("<li>"+num1+"<<2 ="+(num1<<2)+"</li>"); //16
+	//0100: 4 >>2 = 0001: 1
+	document.write("<li>"+num1+">>2 ="+(num1>>2)+"</li>"); //1
+	//0100 >>>1 = 0010 : 2
+	document.write("<li>"+num1+">>>1="+(num1>>>1)+"</li>"); //2
+	
+	
+	//관계 연산: >, <, >=, <=, ==, ===, !=, !==
+	num1="2";
+	num2=2;
+	document.write("<li><strong>관계연산</strong></li>");
+	//==: 데이터형이 달라도 값이 같다면 true
+	document.write("<li>"+num1+"=="+num2+":"+(num1==num2)+"</li>");// true
+	//===: 값과 데이형이 모두 같아야 true
+	document.write("<li>"+num1+"==="+num2+":"+(num1===num2)+"</li>");//false
+	//!=: 값이 다르면 true
+	document.write("<li>"+num1+"!="+num2+":"+(num1!=num2)+"</li>");// true
+	//!==: 값과 데이형이 모두 다른지
+	document.write("<li>"+num1+"!=="+num2+":"+(num1!==num2)+"</li>");//false
+	
+	//논리
+	document.write("<li><strong>일반 논리 연산</strong></li>");
+	//일반 논리: &&(전항과 후항이 모두 참일 때 참 반환)
+	//		 : ||(전항과 후항이 모두 거짓 일 때 거짓 반환)
+	document.write("<li>"+flag1+"&&"+flag1+"="+(flag1&&flag1)+"</li>");
+	document.write("<li>"+flag1+"&&"+flag2+"="+(flag1&&flag2)+"</li>");
+	//전항이 거짓이면 후항을 연산하지 않는다.
+	document.write("<li>"+flag2+"&&"+flag1+"="+(flag2&&flag1)+"</li>");
+	document.write("<li>"+flag2+"&&"+flag2+"="+(flag2&&flag2)+"</li>");
+
+	//전항이 참이면 후항을 연산하지 않는다.
+	document.write("<li>"+flag1+"||"+flag1+"="+(flag1||flag1)+"</li>");
+	document.write("<li>"+flag1+"||"+flag2+"="+(flag1||flag2)+"</li>");
+	
+	document.write("<li>"+flag2+"||"+flag1+"="+(flag2||flag1)+"</li>");
+	document.write("<li>"+flag2+"||"+flag2+"="+(flag2||flag2)+"</li>");
+	
+	//비트 논리
+	//&: 상위비트와 하위비트 모두 1인경우 1내림
+	//|: 상위비트와 하위비트 모두 0인경우 0내림
+	//^: 상위비트와 하위비트 둘 중 한개만 1인경우 1내림
+	num1=21;
+	num2=18;
+	document.write("<li><strong>비트 논리 연산</strong></li>");
+	document.write("<li>"+num1+"&"+num2+"="+(num1&num2)+"</li>");
+	document.write("<li>"+num1+"|"+num2+"="+(num1|num2)+"</li>");
+	document.write("<li>"+num1+"^"+num2+"="+(num1^num2)+"</li>");
+	/*
+		16 8 4 2 1
+num1	1    0 1 0 1
+num2	1    0  0 1 0
+
+& : 1 0 0 0 0 : 16
+| : 1 0 1 1 1 : 23
+^:  0 0 1 1 1 : 7
+*/
+	
+	//삼항연산 : 연산식? 항1: 항2
+	document.write("<li><strong>삼항 연산</strong></li>");	
+	document.write("<li>"+num1+"은"+(num1 % 2==0? "짝수":"홀수")+"</li>");
+	
+	//대입연산: 변수의 값을 바꿈
+	//=, +=, -=, *=, /=, %=, <<=, >>=, >>>=, &=, |=,^=
+	document.write("<li><strong>대입연산</strong></li>");
+	
+	num1=3; //순수대입
+	//산술대입
+	num1+=2;//num1=num1+2;
+	document.write("<li>"+num1+"</li>");
+	num1-=1;//num1=num1-1;
+	document.write("<li>"+num1+"</li>");
+	num1*=2;//num1=num1*2;
+	document.write("<li>"+num1+"</li>");
+	num1/=3;//num1=num1/3; (자바는 정수/정수 하면 무조건 정수. 스크립트는 정수더라도 실수가 나오게 됨)
+	document.write("<li>"+num1+"</li>");
+	
+	num1=2;
+	num1 <<=4; // num1=num1<<4; //16 // 0000 0010 <<4 = 0010 0000 :32
+	num1 >>=2; //num1=num1<<4; //0010 0000 >>2 = 0000 1000 : 8
+	num1 >>>=1; //num1 = num1>>>1; //0000 0100 : 4
+	
+	num1 &=15; //num1 = num1 & 15; // 0000 0100 & 0000 1111 = 0000 0100 : 4
+	document.write("<li>"+num1+"<li>");
+	num1 |= 15; //num1 = num1 | 15;// 0000 0100 | 0000 1111 = 0000 1111 : 15
+	document.write("<li>"+num1+"<li>");
+	num1 ^=15; //num1 = num1 ^ 15;// 0000 1111 ^ 0000 1111 = 0000 0000 : 0
+	document.write("<li>"+num1+"<li>");
+	
+	document.write("</ul>");
+	
+	num1=7;
+	num2=2.7;
+	flag1=true;
+	var msg = "오늘은 목요일입니다. ^o^b";
+	var msg1 = '내일은 금요일 입니다.';
+
+	alert(num1+"의 데이터형"+typeof(num1));
+	alert(num2+"의 데이터형"+typeof(num2));
+	alert(flag1+"의 데이터형"+typeof(flag1));
+	alert(msg+"의 데이터형"+typeof(msg));
+	alert(msg1+"의 데이터형"+typeof(msg1));
+	
+	//무기명 함수
+	window.onload=function(){
+		var obj=document.getElementById("id");
+		alert(obj+"의 데이터형"+typeof(obj));
+	}//function
+	
+	//msg2라는 변수가 없는 상태 (선언하지 않고 사용) : undefined
+	alert("변수를 선언하지 않고 데이터형"+typeof(msg2));
+	//수가 아닌 값을 연산하면 NaN
+	alert("msg1/2"+(msg1/2));
+	
+</script>
+</head>
+<body>
+<input type="text" id="id"/>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+#forTable{border-spacing:0px;}
+#sum{color: red; text-shadow:3px 3px 10px #333; border:1px solid; border-color:#red;}
+td:hover{font-size:10px; background-color:#AF3200}
+</style>
+<script type="text/javascript">
+
+document.write("<table border='1' id='forTable'>");
+document.write("<tr>");
+	for(var i=1; i<10; i++){
+		document.write("<th width='40px'>"+i+"</th>");
+	}
+document.write("</tr>");
+document.write("<tr>");
+for(var i=1; i<10; i++){
+	document.write("<td align='center' width='40px'>"+i+"</td>");
+}
+document.write("</tr>");
+document.write("</table>");
+
+
+	//1~31의 <option>을 가진 <select>를 생성
+	document.write("<div>");
+	document.write("<select>");
+	for(var i=1; i<32; i++){
+		document.write("<option>"+i+"</option>");
+	}//end for
+	document.write("</select>")
+	document.write("</div>");
+	
+	//1~100까지의 합을 div 출력
+	var sum=0;
+	for(var i=1; i<100; i++){
+		sum+=i
+	}//end for
+	document.write("<div id='sum'>");
+	document.write("<strong>"+sum+"</strong>");
+	document.write("</div>");
+	
+	//2~9단 옆으로
+document.write("<table border='1'>");
+	for(var i=1; i<10; i++){
+			document.write("<tr>");
+		for(var j=2; j<10; j++){
+			document.write("<td width='80px'>"+j+"*"+i+"="+i* j+"</td>");
+		}
+			document.write("</tr>");
+	}//end for
+document.write("</table>");
+	
+	
+	//sist로고찍기
+	for(var i=1; i<5; i++){
+		for(var j=1; j<=i; j++){
+			document.write("<img src='../common/images/sist_logo.jpg'>");
+		}
+		document.write("<br/>")
+	}//end for
+	
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+table{border:1px solid:#333; box-shadow:10px 10px 0px #333;}
+#picture{width:100px}
+</style>
+<script type = "text/javascript">
+var lang=prompt("언어입력 (java, HTML, JavaScript, CSS)", "java");
+
+document.write("입력된"+lang+"를(을) 만드신 분의 정보");
+
+if (lang=="java"){
+	src="../common/images/james.png";
+	name="제임스 고슬링";
+	var birth="1955";
+	var age=2018-birth+1;
+}else if (lang=="HTML"){
+	src="../common/images/berners.png";
+	name="팀 버너즈 리";
+	var birth="1955";
+	var age=2018-birth+1;
+}else if (lang=="JavaScript"){
+	src="../common/images/brendan.jpg";
+	name="브렌단에이크";
+	var birth="1961";
+	var age=2018-birth+1;
+}else if (lang=="CSS"){
+	src="../common/images/hakon.jpg";
+	name="하콤 비움 리";
+	var birth="1965";
+	var age=2018-birth+1;
+}
+
+document.write("<table border='1' cellspacing='0'>");
+document.write("<tr> <td rowspan='3'><img src='"+src+"'></td><td width='50px'>"+"이름"+"</td><td>"+name+"</td></tr>");
+document.write("<tr><td>태어난해</td><td>"+birth+"</td></tr>");
+document.write("<tr><td>나이</td><td>"+age+"</td></tr>");
+document.write("</table>");
+</script>
+
+</head>
+<body>
+</body>
+</html>

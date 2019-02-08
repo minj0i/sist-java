@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+//배열 생성
+//1. 생성) var 배열명=new Array(); //자바였으면 var[]라고 썼을 것
+	var arr=new Array();
+	console.log("방의 갯수: "+arr.length);
+//2. 값 할당 : 값을 넣으면 방의 수가 증가 - 가변 길이 형
+arr[0]=2;
+arr[1]=2.8;
+arr[2]="오늘은 금요일";
+arr[3]=true;
+console.log("방의 갯수: "+arr.length);
+
+//3. 값 사용
+document.write(arr[2]);
+//4. 모든 방의 값 출력
+document.write("<ul>");
+for(var i=0; i<arr.length; i++){
+	document.write("<li>"+i+"번째 방 :"+arr[i]+"</li>");	
+}
+document.write("</ul>");
+
+/////////////////////배열의 초기화
+//1. 초기화: var 배열명=[값,,,,];
+var nameArr=["공선의", "이재현", "최지우", "김정윤", "박영민"];
+nameArr[5]="김건하";
+document.write("방의 갯수: "+nameArr.length+"<br/>");
+
+//배열의 값을 <input type="text">의 값으로 출력
+//<input type="text">에 값이 들어가려면 'value'라는 속성을 사용하여야 함
+for(var i=1; i<nameArr.length; i++){
+	document.write("이름: ");
+//홀따옴표, 쌍따옴표(\")로 감싸도 괜찮고...
+	document.write("<input type=\"text\" value=\""+nameArr[i]+"님\"><br/>");
+}//end for
+
+//배열을 생성하여 구구단 2단의 결과값을 처음 방부터 추가한 후
+//체크 박스를 생성하여 출력
+var gugudanArr= new Array();
+		for(var h=1; h<10; h++){
+			gugudanArr[h]=2*h;
+			document.write("<input type=\"checkbox\" value='"+gugudanArr[h]+"'>"+gugudanArr[h]+"<br/>"); //"'>"+2+"*"+h+"="+gugudanArr[h]+
+		}//end for
+		
+var temp=["대추", "호두", "밤", "감", "배", "사과"];
+//temp[temp.length]="바나나";
+//가장 마지막 방에 값을 추가하는 함수 : push
+temp.push("바나나");
+temp.push("망고스틴");
+//가장 마지막 방의 값을 꺼내는 함수(방의 수가 줄어든다.); pop
+temp.pop();
+//특정 인덱스 사이의 값을 삭제: splice(시작인덱스, 끝 인덱스)
+temp.splice(0,3);
+
+	for(var i=0; i<temp.length; i++){
+		document.write(temp[i]+"<br/>");
+	}//end for
+
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

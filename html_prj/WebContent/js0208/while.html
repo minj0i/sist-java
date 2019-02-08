@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	
+	//while : 최소 0번부터, 최대 조건까지 반복
+	var i=1; //초기값
+	while(i<7){
+		document.write("<h"+i+">오늘은 금요일 ^o^b</h"+i+">");
+		i++; //증가/감소식
+	}//end while
+	
+	//do~while : 최소 1번부터, 최대 조건까지 반복
+	var j=0;//초기값
+	do{
+		//5점에 체크된 상태로 라디오 버튼을 제공
+		if(j==5){
+		 document.write("<input type='radio' name='radiobutton' checked='checked' value='"+j+"'>"+j+"점&nbsp;")//반복 수행 문장	
+		}else{
+		document.write("<input type='radio' name='radiobutton' value='"+j+"'>"+j+"점&nbsp;")//반복 수행 문장
+		}
+		j++;//증가, 감소식
+	}while(j<11);//조건식
+	
+	
+</script>
+</head>
+<body>
+</body>
+</html>

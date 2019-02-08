@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+#bloodTable{border-spacing:0px}
+td, th{border:1px solid #333; text-align:center;}
+#btTitle{width:80px}
+#bsTitle{width:300px}
+</style>
+<script type="text/javascript">
+
+var bloodType=prompt("당신의 혈액형을 입력!!!!");
+
+	switch(bloodType.toUpperCase()){
+	case "A" : output=" 세심하고 치밀하다."; break;
+	case "B" : output=" 털털하다. 내 것이 아니면 관심없음."; break;
+	case "AB" : output=" 복잡함. 합리적임"; break;
+	case "O" : output=" 질긴 생명력, 리더쉽 좋음";break;
+	default : output="사람의 혈액형이 아닙니다.";
+	}//end switch
+
+	document.write("<table border='1' id='bloodTable'>");
+	document.write("<tr>");
+	document.write("<th id='btTtitle'>혈액형</th>");
+	document.write("<th id='bsTitle'>특징</th>");
+	document.write("</tr>");
+	document.write("<tr>");
+	document.write("<td>"+bloodType+"</td><td>"+output+"</td>");
+	document.write("</tr>");
+	
+	document.write("</table>");
+</script>
+</head>
+<body>
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+div{width:500px; height:400px; border:1px solid#333;}
+
+</style>
+<script type = "text/javascript">
+	var direction=prompt("방향 up, down, left, right 입력","up");
+	var msg=prompt("메세지 입력", "띄울 내용");
+
+document.write("<div>");
+if(direction=="up"||direction=="down"||direction=="left"||direction=="right"){
+	if(direction=="up"){document.write("<marquee style='height:400px' direction="+direction+" scrollamount="+2
+			+">∧ <br/>"+msg+"<br/></marquee>");
+	}else if(direction=="down"){document.write("<marquee style='height:400px' direction="+direction+" scrollamount="+2
+			+">∨ <br/>"+msg+"<br/></marquee>");
+	}else if(direction=="left"){document.write("<marquee style='height:400px' direction="+direction+" scrollamount="+2 
+			+">&lt;"+msg+"<br/></marquee>");
+	}else if(direction=="right"){document.write("<marquee style='height:400px' direction="+direction+" scrollamount="+2
+			+">&gt;"+msg+"<br/></marquee>");
+	}//end if
+}else{
+	document.write("해당 방향은 존재하지 않습니다 <br/>");
+}//end if
+document.write("</div>");	
+</script>
+</head>
+<body>
+
+</body>
+</html>

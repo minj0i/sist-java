@@ -41,3 +41,9 @@ html_prj/WebContent/META-INF
 html_prj/WebContent/WEB-INF
 
 Servers/*
+
+#project2 무시할 파일들
+project2/.settings
+project2/bin
+project2/.classpath
+project2/.project
