@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>구구단</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+function getValue(){
+	var number=document.getElementById("dan").value;//ID속성으로 값을 가져오고
+	var divNode=document.getElementById("output");
+	var output="";
+	
+	if(number>=2 && number<=9){
+	output+="<table border='1' id='gugudanTable'>";
+		for(var i=1; i<10; i++){
+			output+="<tr>";
+			output+="<td align='center width='50px' onclick='popup("+number+","+i+")'>"+number+"*"+i+"</td>";
+			output+="</tr>";
+		}//end for
+		output+="</table>";
+		
+	}else{
+		output="구구단은 2~9단 사이입니다.<br/>";
+		output+="<marquee> <img src='"+"../common/images/img2.jpg'"+"></marquee>";
+	}
+		//3. 출력
+		divNode.innerHTML=output;
+}//getValue
+
+function popup(number, i){
+	alert(number*i+"입니다");
+}
+
+
+</script>
+</head>
+<body>
+	<div>
+		<label>구구단</label>
+		<input type="text" id="dan"/>
+		<input type="button" value="입력" onclick="getValue()"/>
+	</div>
+	<div id="output"></div>
+</body>
+</html>

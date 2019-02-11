@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		//////////////////////무기명함수 이벤트 처리///////////////////////////////
+		// var btn=window.document.getElementById("btn").onclick=function(){ 
+		window.document.getElementById("btn").onclick=function(){
+			//이미지 태그를 얻기
+			var img=document.getElementById("img");
+			//이미지태그의 src속성의 값을 변경한다.
+			img.src="../common/images/img2.jpg";
+		}//function
+	
+	
+	document.getElementById("div").onmouseover=function(){
+		//이미지 태그를 얻기
+		var img=document.getElementById("img");
+		//이미지태그의 src속성의 값을 변경한다.
+		img.src="../common/images/img2.jpg";
+	}//function
+	
+	document.getElementById("div").onmouseout=function(){
+		//이미지 태그를 얻기
+		var img=document.getElementById("img");
+		//이미지태그의 src속성의 값을 변경한다.
+		img.src="../common/images/img.png";
+	}//function
+		
+		//////////////////////무기명함수 이벤트 처리///////////////////////////////
+		//////////////////////addEventListener함수 이벤트 처리///////////////////////////////
+	document.getElementById("btn1").addEventListener("click", chgImg);
+	document.getElementById("name").addEventListener("click", setName);
+	document.getElementById("addr").addEventListener("click", setAddr);
+		//////////////////////addEventListener함수 이벤트 처리///////////////////////////////
+		}//onload=function
+		
+	function setName(){
+			document.getElementById("div1").innerHTML="<strong>공선의</strong>";	
+		}//setName
+		
+	function setAddr(){
+			document.getElementById("div1").innerHTML="<marquee>서울시 양천구 목동</marquee>";	
+		}//setAddr
+		
+	function chgImg(){
+			document.getElementById("img").src="../common/images/img1_1.png";
+		}//end chgImg
+		
+
+</script>
+</head>
+<body>
+	<input type="button" value="무기명 함수 클릭" class="btn" id="btn"/>
+	<input type="button" value="addEventListener클릭" class="btn" id="btn1"/>
+	<div id="div" style="height:400px">
+		<img src="../common/images/img.png" id="img"/>
+	</div>
+	<input type="button" value="이름" class="btn" id="name"/>
+	<input type="button" value="주소" class="btn" id="addr"/>
+	<div id="div1" style="width:400px; height:150px; border:1px solid #333"></div>
+</body>
+</html>

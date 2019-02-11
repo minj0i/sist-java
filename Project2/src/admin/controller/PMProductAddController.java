@@ -25,11 +25,11 @@ public class PMProductAddController extends WindowAdapter implements ActionListe
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource()==pmpav.getJbImage()) {
-			setImg();
+		if(ae.getSource()==pmpav.getjbImg()) {
+//			setImg();
 		}//end if
 		if(ae.getSource()==pmpav.getJbAdd()) {
-			addLunch();
+//			addProduct();
 		}//end if
 		
 		if(ae.getSource()==pmpav.getJbEnd()) {

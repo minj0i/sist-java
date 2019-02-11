@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>function</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type = "text/javascript">
+	//함수 정의 호출 : function 함수명(매개변수,,,){   }
+	//매개변수 없는 함수
+	function test1(){
+		alert("test1 호출");
+	}//test1
+	
+	//호출: 함수명();
+	test1();
+	
+	//매개변수 있는 함수 : 매개변수는 전역변수 형태
+	function test2(name, age){
+		alert("입력이름 :"+name+", 나이:"+age);
+	}//test2
+	
+	//호출:
+	test2("김정윤", "30");
+	
+	//반환값 있는 함수: 함수의 가장 마지막 줄에 return
+	function test3(){
+		var msg="오늘은 월요일 입니다.";
+		return msg;
+	}//test3
+	
+	//반환 값이 있는 함수는 호출시 결과값을 받는다.
+	//return을 모두 정의하지는 않지만 모든 함수에는 return값이 들어있다.
+	var returnValue=test3();
+	alert(returnValue);
+</script>
+</head>
+<body>
+</body>
+</html>

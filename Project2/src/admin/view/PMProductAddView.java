@@ -16,23 +16,23 @@ import admin.controller.PMProductController;
 @SuppressWarnings("serial")
 public class PMProductAddView extends JDialog {
 
-	private JLabel jlProductImg;
+	private JLabel jlImg;
 	private JTextField jtfMenuName, jtfPrice;
 	private JComboBox<String> jcbPrdCategory;
 	private DefaultComboBoxModel<String> dcCategory;
-	private JButton jbImage, jbAdd, jbEnd;
+	private JButton jbImg, jbAdd, jbEnd;
 	
 	public PMProductAddView(PMProductView pmpv, PMProductController pmpc) {
 //		super(pmpv, "상품 정보 추가", true);
 		
 		ImageIcon iiProduct = new ImageIcon("C:/dev/workspace/lunch_prj/src/kr/co/sist/lunch/admin/img/no_img.jpg");
-		jlProductImg = new JLabel(iiProduct);
+		jlImg = new JLabel(iiProduct);
 		jtfMenuName = new JTextField();
 		jtfPrice = new JTextField();
 		
 		jcbPrdCategory = new JComboBox<String>();
 		
-		jbImage = new JButton("이미지 선택");
+		jbImg = new JButton("이미지 선택");
 		jbAdd = new JButton("추가");
 		jbEnd = new JButton("창 닫기");
 		
@@ -43,8 +43,8 @@ public class PMProductAddView extends JDialog {
 		
 		//배치
 		jlDetailTitle.setBounds(10,25,250,30);
-		jlProductImg.setBounds(10,60,244,220);
-		jbImage.setBounds(80, 290, 120, 25);
+		jlImg.setBounds(10,60,244,220);
+		jbImg.setBounds(80, 290, 120, 25);
 		
 		JLabel jlProductName  = new JLabel("상품명");
 		JLabel jlCategory  = new JLabel("카테고리");
@@ -62,8 +62,8 @@ public class PMProductAddView extends JDialog {
 		jbEnd.setBounds(410,300,80,30);
 		
 		add(jlDetailTitle);
-		add(jlProductImg);
-		add(jbImage);
+		add(jlImg);
+		add(jbImg);
 		add(jlProductName);
 		add(jlCategory);
 		add(jlPrice);
@@ -76,7 +76,7 @@ public class PMProductAddView extends JDialog {
 		//이벤트 등록
 		PMProductAddController pmpac = new PMProductAddController(this, pmpc);
 		addWindowListener(pmpac);
-		jbImage.addActionListener(pmpac);
+		jbImg.addActionListener(pmpac);
 		jbAdd.addActionListener(pmpac);
 		jbEnd.addActionListener(pmpac);
 		
@@ -85,8 +85,8 @@ public class PMProductAddView extends JDialog {
 		setResizable(false);
 	}
 
-	public JLabel getJlProductImg() {
-		return jlProductImg;
+	public JLabel getjlImg() {
+		return jlImg;
 	}
 
 	public JTextField getJtfMenuName() {
@@ -105,8 +105,8 @@ public class PMProductAddView extends JDialog {
 		return dcCategory;
 	}
 
-	public JButton getJbImage() {
-		return jbImage;
+	public JButton getjbImg() {
+		return jbImg;
 	}
 
 	public JButton getJbAdd() {
