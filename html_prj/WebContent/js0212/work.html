@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v190130.css" />
+<style type="text/css">
+#diceWrap {	border: 1px solid #333; width: 500px; height: 400px;
+	box-shadow: 10px 10px 10px #333; margin-left: 100px; margin-top: 10px}
+#inputHeader {height: 150px;}
+#score {height: 30px;	text-align:center;}
+#diceView { width: 500px;	text-align: center; margin-top:50px;}
+h2 {text-align: center;}
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		setDice();
+	}//fuction
+	
+	function setDice() {
+		var obj = document.frm;
+		var num1 = parseInt(Math.random() * 6) + 1;
+		var num2 = parseInt(Math.random() * 6) + 1;
+		obj.dice1.src = "images/dice_" + num1 + ".png";
+		obj.dice2.src = "images/dice_" + num2 + ".png";
+	}//setDice
+	
+	var cnt=0;
+	var sum=0;
+	var sum1=0;
+	var sum2=0;
+	
+	
+	
+	function throwDice() {
+		var obj=document.frm;
+		var checkPlayer=obj.turn[1].checked; //사용자2의 차례
+		
+		if(cnt==0){
+			if(checkPlayer){ //사용자2가 선택되었다면
+					alert("사용자1부터 플레이해야 합니다.");
+					obj.turn[0].checked=true;
+				}else{ //사용자1을 선택하게하고 주사위 던지기
+					setDice();
+					cnt++;
+					obj.turn[1].checked=true;
+				}
+		}else if(cnt==1 || cnt==3 || cnt==5){
+			if(obj.turn[0].checked){
+				alert("사용자2의 차례입니다.");
+				obj.turn[1].checked=true;
+			}else{
+				setDice();
+				cnt++;
+				obj.turn[0].checked=true;
+			}
+		}else if(cnt==2 || cnt==4 ){
+			if(obj.turn[1].checked){
+				alert("사용자1의 차례입니다.");
+				obj.turn[0].checked=true;
+			}else{
+				setDice();
+				cnt++;
+				obj.turn[1].checked=true;
+			}
+		}else if(cnt==6){
+			alert("게임 종료");
+		}
+	}//throwDice
+	
+	
+	function setPlayer(){
+		var obj = document.frm;
+		var player1Name=document.getElementById("p1Name");
+		var player2Name=document.getElementById("p2Name");
+		if((obj.player1.value=="")||(obj.player2.value=="")){
+			alert("사용자 이름 입력");			
+		}else{
+			player1Name.innerHTML=obj.player1.value;
+			player2Name.innerHTML=obj.player2.value;
+		}//end else
+			obj.turn[0].checked=true;
+	}//setPlayer
+	
+	function reset(){
+		
+	}//reset
+	
+</script>
+</head>
+<body>
+	<div id="diceWrap">
+		<form name="frm">
+			<div id="inputHeader">
+				<h2>주사위 게임</h2>
+				<div>
+					<label>사용자1</label> <input type="text" name="player1" 	class="inputBox">
+					<label>사용자2</label> <input type="text" name="player2" class="inputBox">
+					<input type="button" value="참여설정" class="btn" onclick="setPlayer()"/>
+				</div>
+				<div style="text-align: center">
+					<input type="radio" name="turn"><span id="p1Name"></span>
+					<input type="radio" name="turn"><span id="p2Name"></span><br/>
+					<input type="button" value="던지기" class="btn" onclick="throwDice()" />
+				</div>
+			</div>
+			<div id="score">
+				판정: <span id="result"></span><br/>
+				<input type="button" value="초기화" class="btn" onclick="reset()"/>
+			</div>
+			<div id="diceView">
+				<img src="images/dice_1.png" name="dice1"/>
+				<img src="images/dice_1.png" name="dice2"/>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

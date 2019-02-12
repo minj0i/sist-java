@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	fieldset {border:1px solid #333; width:400px; margin-top:10px}
+	img{width:100px}
+</style>
+<script type="text/javascript">
+function uniqueVal(){
+	var obj=document.frm;
+	//text값 설정
+	obj.name.value="정택성";//text값 설정
+	obj.age.value=27;//password설정
+	obj.addr.value="서울시 구로구 구로동" //hidden값 설정
+	obj.img.src="../common/images/img1_1.png";//img 변경
+	//HTML5에서 제공하는 Form Contorl
+	obj.date.value="1993-07-29";//date변경 년-월-일의 형태만 적용됨
+	obj.range.value=80;
+}
+
+function setChecked(){
+	//checked상태 변경
+	var obj=document.frm;
+	//radio의 상태 변경
+	obj.gender[1].checked=true;
+	//checkedbox의 상태 변경
+	obj.hobby[0].checked=true;
+	obj.hobby[3].checked=true;
+}//setChecked
+
+function setSelected(){
+	//selected상태변경
+	var obj=document.frm;
+	obj.tel[1].selected=true;
+}//setSelected
+
+function allChecked(){
+	var obj=document.frm1;
+	for(var i=0; i<obj.mail.length; i++){
+		/* if(obj.flag.checked){
+			obj.mail[i].checked=true;
+		}else{
+			obj.mail[i].checked=false;
+		} */
+		obj.mail[i].checked=obj.flag.checked;
+	}
+}//allSelected
+
+</script>
+</head>
+<body>
+<div>
+	<h2>JavaScript의 값을 HTML Form Control에 설정</h2>
+	<form name="frm">
+	<fieldset>
+		<legend>이름이 유일한 Form Control</legend>
+		<label>이름</label>
+		<input type="text" name="name" class="inputBox"/><br/>
+		<label>나이</label>
+		<input type="password" name="age" class="inputBox"/><br/>
+		<label>주소</label>
+		<input type="hidden" name="addr"/><br/>
+		<label>이미지</label>
+		<img src="../common/images/img2.jpg" name="img"/><br/>
+		<label>날짜</label>
+		<input type="date" name="date"/><br/>
+		<label>범위</label>
+		0<input type="range" name="range" min="0" max="100"/>100<br/>
+		<input type="button" value="값설정" onclick="uniqueVal()" class="btn"/>
+	</fieldset>
+	<fieldset>
+		<legend>checked 속성변경</legend>
+		<label>성별</label>
+		<input type="radio" name="gender" value="남자">남자
+		<input type="radio" name="gender" value="여자">여자<br/>
+		<label>취미</label>
+		<input type="checkbox" name="hobby" value="게임">게임
+		<input type="checkbox" name="hobby" value="등산">등산
+		<input type="checkbox" name="hobby" value="낚시">낚시
+		<input type="checkbox" name="hobby" value="독서">독서
+		<input type="checkbox" name="hobby" value="음악감상">음악감상<br/>
+		<input type="button" value="checked설정" class="btn" onclick="setChecked()">
+	</fieldset>
+	<fieldset>
+		<legend>selected 상태변경</legend>
+		<label>국번 선택</label>
+		<select name="tel">
+			<option>---국번 선택---</option>
+			<option value="010">010</option>
+			<option value="011">011</option>
+			<option value="016">016</option>
+			<option value="017">017</option>
+			<option value="018">018</option>
+			<option value="019">019</option>
+		</select>
+		<br/>
+		<input type="button" value="selected설정" class="btn" onclick="setSelected()">
+	</fieldset>
+	</form>
+</div>
+<div>
+	<form name="frm1"><!--위랑 form 이름이 같으면 배열로 처리하게 됨. frm[0], frm[1]로  -->
+	<table>
+	<thead>
+	<tr>
+		<th><input type="checkbox" name="flag" onclick="allChecked()"/></th>
+		<th width="350">제목</th>
+		<th width="80">작성자</th>
+		<th width="80">수신일</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td><input type="checkbox" name="mail"/></td>
+		<td>안녕하세요? 저번에 바다에서 또 뵈었던...바다이야기</td>
+		<td>김실장</td>
+		<td>2019-02-12</td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="mail"/></td>
+		<td>안녕하세요? 저번에 바다에서 뵈었던...바다이야기</td>
+		<td>김실장</td>
+		<td>2019-02-10</td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="mail"/></td>
+		<td>대박승률...야마토</td>
+		<td>이실장</td>
+		<td>2019-02-09</td>
+	</tr>
+	<tr>
+		<td><input type="checkbox" name="mail"/></td>
+		<td>[업무협조] 김정윤 담당자님 안녕하세요? 저번에 바다에서...</td>
+		<td>이실장</td>
+		<td>2019-02-08</td>
+	</tr>
+	</tbody>
+	</table>
+	</form>
+</div>
+</body>
+</html>

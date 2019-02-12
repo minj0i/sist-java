@@ -22,6 +22,8 @@ public class PMProductView extends JPanel{
 	private JTable jtMenu;
 	private JPanel jplPrd;
 	
+	public static String adminId;
+	
 	public PMProductView() {
 	
 	//Å×ÀÌºí
@@ -109,6 +111,10 @@ public class PMProductView extends JPanel{
 
 	public DefaultComboBoxModel<String> getDcCategory() {
 		return dcCategory;
+	}
+	
+	public static String getAdminId() {
+		return adminId;
 	}
 
 	public JTextField getJtfPrdName() {

@@ -3,14 +3,15 @@ package admin.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import admin.model.PMProductDAO;
+import admin.view.PMProductAddView;
 import admin.view.PMProductView;
 import admin.vo.PMProductVO;
 
@@ -18,8 +19,7 @@ public class PMProductController extends MouseAdapter implements ActionListener{
 
 	private PMProductView pmpv;
 	private PMProductDAO pmp_dao;
-	
-	
+		
 	public PMProductController(PMProductView pmpv) {
 		this.pmpv=pmpv;
 		pmp_dao = PMProductDAO.getInstance();
@@ -28,7 +28,7 @@ public class PMProductController extends MouseAdapter implements ActionListener{
 	}//PMProductController
 
 	/**
-	 * JTable에 DB에서 조회한 도시락 정보를 보여준다.
+	 * JTable에 DB에서 조회한 상품 정보를 보여준다.
 	 */
 	public void setProduct() {
 		DefaultTableModel dtmPrd = pmpv.getDtmPrd();
@@ -60,7 +60,7 @@ public class PMProductController extends MouseAdapter implements ActionListener{
 				dtmPrd.addRow(rowData);
 			} // end for
 
-			if (listproduct.isEmpty()) {// 입력된 도시락이 없을 때
+			if (listproduct.isEmpty()) {// 입력된 상품이 없을 때
 				JOptionPane.showMessageDialog(pmpv, "입력된 제품이 없습니다.");
 			} // end if
 
@@ -68,12 +68,49 @@ public class PMProductController extends MouseAdapter implements ActionListener{
 			JOptionPane.showMessageDialog(pmpv, "DB에서 데이터를 받아오는 중 문제 발생");
 			e.printStackTrace();
 		} // end catch
-	}// setLunch
-	
+	}// setProduct
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource() == pmpv.getJbtAddPrd()) { // 도시락 추가 버튼
+			new PMProductAddView(pmpv, this);
+		} // end if
 		
+		if(ae.getSource()==pmpv.getJbtSchPrd()) {//조회 버튼
+			
+		}
+		if(ae.getSource()==pmpv.getJbtRstPrd()) {//초기화 버튼
+			
+		}
+	}//actionPerformed
+	
+	@Override
+	public void mouseClicked(MouseEvent me) {
+//		if (me.getSource() == lmv.getJtb()) {
+//			if (lmv.getJtb().getSelectedIndex() == 1) {// 두번째 탭(주문)에서 이벤트 발생
+//				// 주문현황을 계속 조회하여 실시간으로 실시간으로 DB를 조회하여 갱신
+//				if (threadOrdering == null) { // 이걸쓰지않으면 계속해서 객체가 만들어짐
+//					threadOrdering = new Thread(this);
+//					threadOrdering.start();
+//				} // end if
+//					// 현재까지의 주문사항을 조회 (쓰레드로 돌려야 함)
+//				searchOrder();
+//			} // end if
+//		} // end if
 	}
-
-}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	
+	
+}//class
