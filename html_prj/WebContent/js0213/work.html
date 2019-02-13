@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+</style>
+
+<script type="text/javascript">
+function lowerCase(){
+	var obj=document.frm;
+	var divNode=document.getElementById("resultDiv");
+	var result="";
+	var inputText = obj.text.value;
+	var low= new Array();
+	low=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+	
+	if(inputText==""){
+		result+="입력값이 없습니다";	
+	}
+	
+	for(var i=0; i<inputText.length; i++){
+		for(var j=0; j<low.length; j++){
+			if(inputText.charAt(i)==low[j]){
+				result+=inputText.charAt(i);
+			}
+		}//end for
+	}//end for
+	
+	divNode.innerHTML=result;
+}
+
+function upperCase(){
+	var obj=document.frm;
+	var divNode=document.getElementById("resultDiv");
+	var result="";
+	var inputText = obj.text.value;
+	var upper= new Array();
+	upper=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+	
+	if(inputText==""){
+		result+="입력값이 없습니다";	
+	}
+	
+	for(var i=0; i<inputText.length; i++){
+		for(var j=0; j<upper.length; j++){
+			if(inputText.charAt(i)==upper[j]){
+				result+=inputText.charAt(i);
+			}
+		}//end for
+	}//end for
+	
+	divNode.innerHTML=result;
+}
+
+function numberCase(){
+	var obj=document.frm;
+	var divNode=document.getElementById("resultDiv");
+	var result="";
+	var inputText = obj.text.value;
+	var number= new Array();
+	number=['0','1','2','3','4','5','6','7','8','9'];
+	
+	if(inputText==""){
+		result+="입력값이 없습니다";	
+	}
+	
+	for(var i=0; i<inputText.length; i++){
+		for(var j=0; j<number.length; j++){
+			if(inputText.charAt(i)==number[j]){
+				result+=inputText.charAt(i);
+			}
+		}//end for
+	}//end for
+	
+	divNode.innerHTML=result;
+}
+
+function viewCase(flag){
+	var divNode=document.getElementById("resultDiv");
+	var result="";
+	var data=document.frm.text.value;
+
+	if(flag=="lc"){//소문자
+		result+="소문자: "+data.replace(/[A-Z0-9]/g,"");
+	}
+	if(flag=="uc"){//대문자
+		result+="대문자: "+data.replace(/[a-z0-9]/g,"");
+	}
+	if(flag=="nc"){//숫자
+		result+="숫자: "+data.replace(/[A-Za-z]/g,"");
+	}
+	
+	divNode.innerHTML=result;
+}
+
+
+</script>
+</head>
+<body>
+
+<form name="frm">
+	<input type="text" class="inputBox" name="text" id="text">
+	<input type="button" class="btn" value="소문자" onclick="lowerCase()" />
+	<input type="button" class="btn" value="대문자" onclick="upperCase()"/>
+	<input type="button" class="btn" value="숫자" onclick="numberCase()"/>
+	<input type="button" class="btn" value="강사님방법(소)" onclick="viewCase('lc')"/>
+	<input type="button" class="btn" value="강사님방법(대)" onclick="viewCase('uc')"/>
+	<input type="button" class="btn" value="강사님방법(숫)" onclick="viewCase('nc')"/>
+<div id="resultDiv"></div>
+</form>
+
+</body>
+</html>
