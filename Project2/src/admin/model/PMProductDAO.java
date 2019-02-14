@@ -13,10 +13,6 @@ import admin.view.PMProductView;
 import admin.vo.PMProductAddVO;
 import admin.vo.PMProductDetailVO;
 import admin.vo.PMProductVO;
-import kr.co.sist.lunch.admin.view.LunchMainView;
-import kr.co.sist.lunch.admin.vo.LunchAddVO;
-import kr.co.sist.lunch.admin.vo.LunchDetailVO;
-import kr.co.sist.lunch.admin.vo.LunchUpdateVO;
 
 public class PMProductDAO {
 
@@ -144,6 +140,8 @@ public class PMProductDAO {
 		return pmpdvo;
 	}// selectDetailPrd
 
+	
+	/////////////////////////////////2월 14일 할일////
 	/**
 	 * 상품 정보를 추가하는 일
 	 * 
@@ -185,7 +183,6 @@ public class PMProductDAO {
 
 	}// insertLunch
 
-	/////////////////////////////////2월 13일 할일////
 	public boolean deleteLunch(String code) throws SQLException {
 		boolean flag = false;
 		Connection con = null;
