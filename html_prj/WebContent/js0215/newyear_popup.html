@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	#popupWrap{width:460px; height:550px; margin:0px auto}
+	#popupContainer{width:460px; height:520px}
+	#popupFooter{width:460px; height:30px}
+</style>
+<script type="text/javascript">
+	function closeWin(){
+		//팝업창 닫기: popup인 경우는 그냥 닫히고 window인 경우는 confirm dialog로 닫기여부를 묻는다.
+		self.close();
+	}
+</script>
+</head>
+<body>
+<div id="popupWrap">
+<div id="popupContainer">
+	<img src="images/newyear_2019.jpg"/>
+</div>
+<div id="popupFooter">
+	<input type="checkbox" name="closeFlag"/> 오늘하루 이창을 열지 않음.
+	<!--winClose()써줘도 되지만 이동할 페이지가 없을 땐 #void넣고 function넣어줘도 됨  -->
+	<a href="#void" onclick="closeWin()">닫기</a> 
+</div>
+</div>
+</body>
+</html>

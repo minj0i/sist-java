@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	function pageMove(sel){
+		//alert(sel.value);
+		if(sel.selectedIndex !=0){//선택한 옵션이 처음 옵션이 아닐 때
+			if(confirm(sel.value+"사이트로 이동하시겠습니까?")){
+				//location.href="http://"+sel.value; //GET방식으로 이동 - 뒤로가기 가능
+				location.replace("http://"+sel.value); //GET방식으로 이동 - 뒤로가기 불가능
+				//<<그냥 링크타고 들어갈땐 href 로그인 하고 뒤로갈때는 replace
+				
+			}//end if
+		}//end if
+	}//pageMove
+	
+	function office(off_name,url){
+		if(confirm(off_name+"사이트로 이동하시겠습니까?")){
+			location.href=url;
+		}//end if
+	}//office
+
+</script>
+</head>
+<body>
+	<!-- this: 이벤트를 발생시킨 특정 HTML Form Control태그 자신 -->
+	<!-- <input type="text" onkeyup="alert(this.value)"/>
+	<input type="button" value="클릭" onclick="alert(this.value)"/>
+	<input type="radio" value="선택" onclick="alert(this.value)"/>선택<br/>-->
+	 <select onchange="pageMove(this)">
+		<option>---자주가는 사이트---</option><!-- 크롬은 옵션사이 값이 출력..?? -->
+		<option value="daum.net">다음</option>
+		<option value="naver.com">네이버</option>
+		<option value="google.com">구글</option>
+		<option value="drive.google.com">구글드라이버</option>
+		<option value="rgo4.com">알고사</option>
+		<option value="nate.com">네이트</option>
+	</select>
+	
+	<div>
+	<!-- 이미지를 자르지 않고 특정 좌표에 링크를 설정할 경우 사용하는 tag -->
+		<map id="seoulMap" name="seoulMap">
+<!-- 			<area shape="rect" coords="295,265,332,280" title="강남구청" alt="강남구청" target="new새창" href="http://www.gangnam.go.kr/main.do">
+			<area shape="rect" coords="145,235,190,250" title="영등포구청" alt="영등포구청" href="http://www.ydp.go.kr/main/main.do">
+			<area shape="rect" coords="325,77,360,95" title="노원구청" alt="노원구청" href="http://www.nowon.kr/">
+			<area shape="rect" coords="85,270,117,288" title="구로구청" alt="구로구청" href="http://www.guro.go.kr/www/NR_index.do">
+ -->
+			<area shape="rect" coords="295,265,332,280" title="강남구청" alt="강남구청" onclick="office('강남구청','http://www.gangnam.go.kr/main.do')">
+		<!-- href="office('강남구청','http://www.gangnam.go.kr/main.do')"은 HTML영역이라 가지 않는다.office는 다른영역이라 불리지 않음!(그래서404) on~자바스크립트영역이라 부를수 있었던것 -->
+			<area shape="rect" coords="145,235,190,250" title="영등포구청" alt="영등포구청" href="javascript:office('영등포구청','http://www.ydp.go.kr/main/main.do')">
+		<!-- 속성값의 영역변경 : HTML영역에서 javascript영역으로 변경할 때에는 javascript: 을 붙여준다 =>onxxx를 쓴것과 동일하게 됨/요즘엔 잘쓰지 않는다...-->
+			<area shape="rect" coords="325,77,360,95" title="노원구청" alt="노원구청" href="javascript:office('노원구청','http://www.nowon.kr/')">
+			<area shape="rect" coords="85,270,117,288" title="구로구청" alt="구로구청" href="javascript:office('구로구청','http://www.guro.go.kr/www/NR_index.do')">
+		</map>
+		
+		<img src="images/map.gif" usemap="#seoulMap"/>
+	</div>
+
+</body>
+</html>

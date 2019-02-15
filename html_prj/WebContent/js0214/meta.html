@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- meta: HTML내 charset설정, head태그 사이에서만 사용 -->
+<meta charset="UTF-8">
+<!-- 검색엔진에 사이트의 설명을 제공하는 경우  -->
+<meta name="discription" content="국비지원 무료교육,java,,,">
+<!-- 일정시간 이후 페이지를 이동해야하는 경우 
+	<meta http-equiv="refresh" content="초;url"/>
+-->
+<meta http-equiv="refresh" content="5;http://sist.co.kr">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		pageMove();
+	}//function
+
+	var cnt=0;
+	function pageMove(){
+		cnt++;
+		if(cnt==5){
+			location.href="http://sist.co.kr";
+		}//end if
+		setTimeout(pageMove(),1000);
+		/* 이렇게 이동하는것보다 meta tag를 이용하는게 낫다! */
+	}//pageMove
+	
+</script>
+</head>
+<body>
+	접속하신 http://test.com은 2019년 2월 15일 부터 http://sist.co.kr로 도메인이 변경됩니다.<br/>
+	5초후에 사이트를 이동합니다.<br/>
+	바로 이동하실려면 <a href="http://sist.co.kr">여기</a>를 눌러주세요.
+
+</body>
+</html>
