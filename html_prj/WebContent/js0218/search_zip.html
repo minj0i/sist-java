@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>우편번호 검색</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	#wrap{width:408px; height:419px; margin:0px auto;
+			background: #FFFFFF url(images/zip_background.png) no-repeat;}
+	#zipForm{text-align:center; padding-top:50px;}
+	#zipcodeContent{margin:10px;}
+	table{border-spacing: 0px}
+	td, th{border:1px solid #333; text-align:center}
+	#zipTd{width:80px;}
+	#addrTd{width:310px;}
+</style>
+<script type="text/javascript">
+	var zipcodeContent=document.zipcodeCotent;
+
+	function sendZip(zipcode, addr){
+		var openObj = opener.window.document.joinFrm;
+		openObj.zipcode1.value=zipcode.split("-")[0];
+		openObj.zipcode2.value=zipcode.split("-")[1];
+		openObj.addr1.value=addr;
+		
+		openObj.addr2.focus();
+		self.close();
+	}//sendZip
+</script>
+</head>
+<body>
+<div id="wrap">
+<div id="zipForm">
+	<form name="zipFrm">
+	<label>동 이름</label>
+	<input type="text" name="dong" class="inputBox">
+	<input type="button" value="조회" class="btn">
+	</form>
+</div>
+<div id="zipcodeContent">
+	<table>
+	<thead>
+	<tr>
+		<th id="zipTd">우편번호</th>
+		<th id="addrTd">주소</th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="javascript:sendZip('111-111','서울시 강남구 역삼동')">111-111</a></td>
+			<td><a href="javascript:sendZip('111-111','서울시 강남구 역삼동')">서울시 강남구 역삼동</a></td>
+		</tr>
+		<tr>
+			<td><a href="javascript:sendZip('112-112','서울시 동대문구 동대문동')">112-112</a></td>
+			<td><a href="javascript:sendZip('112-112','서울시 동대문구 동대문동')">서울시 동대문구 동대문동</a></td>
+		</tr>
+		<tr>
+			<td><a href="javascript:sendZip('333-333','경기도 의왕시 의왕동')">333-333</a></td>
+			<td><a href="javascript:sendZip('333-333','경기도 의왕시 의왕동')">경기도 의왕시 의왕동</a></td>
+		</tr>
+		
+		
+	</tbody>
+	</table>
+</div>
+</div>
+</body>
+</html>
