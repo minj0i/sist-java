@@ -91,11 +91,134 @@
 	
 	//입력한 주민번호의 유효성 검증
 	function chkSsn(){
-		
+		//주민번호의 끝자리가 7자리인지
+		var obj=document.joinFrm;
+		if(obj.ssn2.value.length==7){
+			
+			//주민번호 첫번째 자리가 숫자로 구성되어있는지?
+			if(obj.ssn1.value.replace(/[0-9]/g,"")!=""){
+				alert("주민번호 첫번째 자리는 숫자로만 구성됩니다.");
+				obj.ssn1.value="";
+				obj.ssn1.focus();
+				return;
+			}//end if
+			
+			//주민번호 두번째 자리가 숫자로 구성되어있는지?
+			if(obj.ssn2.value.replace(/[0-9]/g,"")!=""){
+				alert("주민번호 두번째 자리는 숫자로만 구성됩니다.");
+				obj.ssn2.value="";
+				obj.ssn2.focus();
+				return;
+			}//end if
+			
+			var ssn=obj.ssn1.value+obj.ssn2.value;
+			
+			var flagNum=[2,3,4,5,6,7,8,9,2,3,4,5];
+			
+			var temp=0;
+			//주민번호의 각 자리에 2,3,4,5,6,7,8,9,2,3,4,5를 곱한 값의 결과를 모두 더해서
+			//변수에 할당
+			for(var i=0; i<flagNum.length; i++){
+				temp+=ssn.charAt(i)*flagNum[i];
+			}//end for
+			//위에서 계산된 값을 11로 나눈 나머지를 11에서 빼고 그 결과를 10으로 나눈 나머지를 구한다.
+			temp=(11-(temp%11))%10;
+			//위에서 계산된 결과가 주민번호의 가장 마지막 자리와 일치한다면 유효, 그렇지 않다면 무효
+			if(temp==ssn.charAt(12)){
+				//성별 체크
+				var genderFlag=ssn.charAt(6);
+				if(genderFlag%2==0){
+					obj.gender[1].checked=true;
+				}else{
+					obj.gender[0].checked=true;
+				}//end else
+
+				var ssn_year=parseInt(ssn.substring(0,2));
+				var ssn_month=parseInt(ssn.substring(2,4));
+				var ssn_day=parseInt(ssn.substring(4,6));//01->1
+				
+				//생년월일
+				if(genderFlag<=2){//1900
+					ssn_year=1900+ssn_year;
+				}else if(genderFlag <=4){//2000
+					ssn_year=2000+ssn_year;
+				}//end if
+			
+				//생년월일 체크
+				var b_flag=false;
+				for(var i=0; i<obj.b_year.length; i++){
+					if(obj.b_year[i].value==ssn_year){
+						obj.b_year[i].selected=true;
+						b_flag=true;
+						break;
+					}//end if
+				}//end for
+				
+				if(!b_flag){//준비된 생년이 없을 때
+					//옵션을 생성하여 추가하고
+					obj.b_year.options[obj.b_year.length]=new Option(ssn_year,ssn_year);
+					//추가된 옵션을 선택해준다.
+					obj.b_year[obj.b_year.length-1].selected=true;
+				}//end if
+				
+				obj.b_month[ssn_month-1].selected=true;
+				obj.b_day[ssn_day-1].selected=true;
+				
+				//나이
+				var date=new Date();
+				obj.age.value=date.getFullYear()-ssn_year+1;
+			
+			}else{
+				alert("잘못된 주민번호 입니다.")
+			}//end else
+		}//end if
 	}//chkSsn
 		
 	//필수 입력값 체크
 	function nullCheck(){
+		var obj=document.joinFrm;
+		
+		if(obj.id.value==""){
+			alert("아이디는 필수입력!!");
+			return;
+		}//end if
+		if(obj.pass1.value==""){
+			alert("비밀번호는 필수입력!!");
+			obj.pass1.focus();
+			return;
+		}//end if
+		if(obj.pass2.value==""){
+			alert("비밀번호 확인은 필수입력!!");
+			obj.pass2.focus();
+			return;
+		}//end if
+		if(obj.name.value==""){
+			alert("이름은 필수 입력!!");
+			obj.name.focus();
+			return;
+		}//end if
+		if(obj.ssn1.value==""){
+			alert("주민번호 첫번째 자리는 필수 입력!!");
+			obj.ssn1.focus();
+			return;
+		}//end if
+		if(obj.ssn2.value==""){
+			alert("주민번호 두번째 자리는 필수 입력!!");
+			obj.ssn2.focus();
+			return;
+		}//end if
+		if(obj.zipcode1.value==""||obj.zipcode2.value==""||obj.addr1.value==""){
+			alert("주소를 검색해주세요!!");
+			return;
+		}//end if
+		if(obj.addr2.value==""){
+			alert("상세주소는 필수 입력!!");
+			obj.addr2.focus();
+			return;
+		}//end if
+		
+		//입력값이 모두 입력되었으므로 서버로 전송 ->post로 바꿔야 한다.
+		obj.submit();
 		
 	}//nullCheck
 		
@@ -224,7 +347,7 @@
 			
 			<tr>
 				<td><span class="span">*</span>이름</td>
-				<td><input type="text" class="inputBox" style="width:120px"></td>
+				<td><input type="text" class="inputBox" name="name" id="name" style="width:120px"></td>
 			</tr>
 			
 			<tr>
