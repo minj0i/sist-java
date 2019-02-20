@@ -9,9 +9,13 @@
     },
     "cordovajs": {
       
+    },
+    "browser-extension": {
+      
     }
   },
   "libs": [
-    "browser"
+    "browser",
+    "jquery"
   ]
 }
