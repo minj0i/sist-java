@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<!--CDN을 사용하여 jQuery를 다운로드 받아 사용-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var cnt=0;
+		
+		$(".btn").click(function(){
+			//HTML Form Control의 값을 얻을 때에는 .val()
+			var name=$("[name='name']").val();
+			var output="<marquee scrollamount='5'>"+name+"</marquee>";
+			cnt++;
+			
+			for(var i=0; i<cnt; i++){
+			$("#html").html(output);//html함수를 사용하면 태그가 반영되어 그려진다.
+			$("#text").text(output);//text함수를 사용하면 태그가 반영되어 그려지지 않는다. //그냥 문자 그대로 써짐
+			output+="<marquee scrollamount='5'>"+name+"</marquee>";
+			}	
+		});//click
+		
+		//강사님버전
+		$(".btn").click(function(){
+			//HTML Form Control의 값을 얻을 때에는 .val()
+			var name=$("[name='name']").val();
+			var output=$("#html").html()+"<marquee scrollamount='5'>"+name+"</marquee>";
+			
+			$("#html").html(output);//html함수를 사용하면 태그가 반영되어 그려진다.
+			$("#text").text(output);//text함수를 사용하면 태그가 반영되어 그려지지 않는다. //그냥 문자 그대로 써짐
+		});//click
+			
+		$("#sel").change(function(){
+			//var selValue=$("#sel").val();
+			//alert(selValue);를 해도 되고
+			//this:이벤트를 발생시킨 HTML Form Control객체 자신
+			var selValue=$(this).val(); 
+			alert(selValue);
+			
+			if(selValue!="none"){
+				if(selValue=="html"){
+				//html()로 얻으면 태그 자체가 모두  얻어진다.
+				//alert($("#html").html());
+				//alert($("#html").text());
+					$("#output").html("html로 얻기: "+ $("#html").html());
+				}else{
+				//text()로 얻으면 태그자체가 얻어지지않고 문자열만 얻어진다.
+					$("#output").html("text로 얻기: "+ $("#html").text());
+					
+				}//end if
+			}//end if
+
+		});//change
+	
+	});//ready
+</script>
+</head>
+<body>
+<div id="inputFrm">
+	<label>이름</label>
+	<input type="text" name="name" class="inputBox"/>
+	<input type="button" value="입력" class="btn"/>
+</div>
+<div id="html"></div>
+<div id="text"></div>
+
+<select id="sel">
+<option value="none">---선택---</option>
+<option value="html">--html얻기--</option>
+<option value="text">--text얻기--</option>
+</select>
+<div id="output"></div>
+</body>
+</html>
