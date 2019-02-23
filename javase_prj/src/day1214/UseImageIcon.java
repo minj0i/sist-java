@@ -1,4 +1,4 @@
-package day1214;
+ package day1214;
 
 import java.awt.GridLayout;
 
