@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("btnDup").addEventListener("click", popupCenter);
+	document.getElementById("btnSendDup").addEventListener("click", popupCenterSend);
+}//onload
+
+function popupCenter(){
+	//자식창을 띄운 상태에서 자식창이 전달하는 값 받기
+	window.open("child.html","idDup","width=502,height=303, top="+(window.screenY+100)+
+			",left="+(window.screenX+200));
+}//popupCenter
+
+function popupCenterSend(){
+	//자식창을 띄울 때 부모창에 있는 값을 전달하여 띄우기
+	//1.자식창을 변수에 저장
+	var subWin = window.open("child.html","idDup","width=502,height=303, top="+(window.screenY+100)+
+			",left="+(window.screenX+200));
+	//2.부모창의 값을 자식창으로 전달
+	var id=document.pFrm.pId.value;
+	//3.자식창으로 값 전달
+	subWin.window.document.cFrm.id.value=id;
+}//popupCenter
+
+
+</script>
+</head>
+<body>
+<form name="pFrm">
+<label>아이디</label>
+<input type="text" name="id" id="id" readonly="readonly" class="inputBox"/>
+<input type="button" value="중복확인" class="btn" id="btnDup"/>
+<input type="text" name="pId" id="pId" class="inputBox"/>
+<input type="button" value="중복확인" class="btn" id="btnSendDup"/>
+</form>
+</body>
+</html>

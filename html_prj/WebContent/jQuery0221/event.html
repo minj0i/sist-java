@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<!--CDN을 사용하여 jQuery를 다운로드 받아 사용-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function() {
+		alert("버튼이 클릭되었습니다");
+	});
+	$("#f_in").focusin(function() {
+		alert("커서가 들어왔어요.");
+	});
+	$("#f_out").focusout(function() {
+		alert("커서가 나갔어요.");
+	});
+	/* 어떤 키든 키가 눌렸을 때 
+	 $("#keydown").keydown(function() {
+			alert("키가 눌렸어요.");
+	}) */
+	//이벤트 발생 함수는 매개변수를 정의하면 event객체가 값으로 들어온다.
+	$("#keydown").keydown(function(evt){
+		//alert("특정 키가 눌림."+window.event.which);
+		if(evt.which==13){
+			alert("특정 키가 눌림."+evt.which);
+		}//end if
+	});
+	$("#keyup").keyup(function() {
+		alert("키가 올라왔어요.");
+	});
+	$("#chg").change(function() {
+		alert("다른 옵션이 선택 될 때");
+	});
+	$("#m_in").mouseover(function() {
+		alert("마우스 포인터가 들어왔을 때");
+	});
+	$("#m_out").mouseout(function() {
+		alert("마우스 포인터가 나갔을 때");
+	});
+/* 	 $("#m_move").mousemove(function() {
+		alert("마우스 포인터가 움직일 때");
+	}); */
+	$("#m_move").mousemove(function(evt) {
+		$("#output").html("마우스포인터 x좌표: "+evt.pageX+"/ y좌표: "+evt.pageY);
+	});
+	
+	
+});//ready
+
+</script>
+</head>
+<body>
+<strong> 이벤트 발생과 처리 </strong>
+<input type="button" value="클릭" id="btn"/><br/>
+<input type="text" value="커서가 들어 올 때" id="f_in"/><br/>
+<input type="text" value="커서가 나갈때" id="f_out"/><br/>
+<input type="text" value="키가 눌릴때" id="keydown"/><br/>
+<input type="text" value="키가 올라올때" id="keyup"/><br/>
+<select id="chg">
+	<option>DBMS- Oracle</option>
+	<option>JAVA SE</option>
+	<option>HTML</option>
+	<option>JavaScript</option>
+	<option>CSS</option>
+</select>
+<br/>
+<strong>포인터가 들어왔을 때</strong>
+<img src="../common/images/img.png" id="m_in" width="100"/><br/>
+<strong>포인터가 나갔을 때</strong>
+<img src="../common/images/img.png" id="m_out" width="100"/><br/>
+<strong>포인터가 움직일 때</strong>
+<img src="../common/images/img.png" id="m_move" width="100"/><br/>
+<div id="output"></div>
+</body>
+</html>

@@ -22,6 +22,8 @@ public class PMProductView extends JPanel{
 	private JTable jtMenu;
 	private JPanel jplPrd;
 	
+	public static String adminId;
+	
 	public PMProductView() {
 	
 	//테이블
@@ -52,7 +54,7 @@ public class PMProductView extends JPanel{
 	//테이블의 높이
 	jtMenu.setRowHeight(110);
 	
-	JLabel jlProduct = new JLabel("상품 조회");
+	JLabel jlProduct = new JLabel("<상품 조회>");
 	JLabel jlCategory = new JLabel("카테고리");
 	JLabel jlPrdName = new JLabel("상품명");
 	
@@ -67,8 +69,6 @@ public class PMProductView extends JPanel{
 	
 	JScrollPane jspPrd = new JScrollPane(jtMenu);
 	
-//	jplPrd = new JPanel();
-//	jplPrd.setLayout(new BorderLayout());
 	
 	JPanel jplPrdNorth = new JPanel();
 	jplPrdNorth.add(jlProduct);
@@ -76,9 +76,10 @@ public class PMProductView extends JPanel{
 	jplPrdNorth.add(jcbPrdCategory);
 	jplPrdNorth.add(jlPrdName);
 	jplPrdNorth.add(jtfPrdName);
+	jplPrdNorth.add(jbtAddPrd);
+	jplPrdNorth.add(jbtSchPrd);
+	jplPrdNorth.add(jbtRstPrd);
 	
-//	jplPrd.add("North", jplPrdNorth);
-//	jplPrd.add("Center", jspPrd);
 	setLayout(new BorderLayout());
 	add("North", jplPrdNorth);
 	add("Center", jspPrd);
@@ -90,6 +91,9 @@ public class PMProductView extends JPanel{
 	jtMenu.addMouseListener(pmpc);
 	jcbPrdCategory.addActionListener(pmpc);
 	jtfPrdName.addActionListener(pmpc);
+	jbtAddPrd.addActionListener(pmpc);
+	jbtRstPrd.addActionListener(pmpc);
+	jbtSchPrd.addActionListener(pmpc);
 	
 	setVisible(true);
 	}//PMProductView
@@ -107,6 +111,10 @@ public class PMProductView extends JPanel{
 
 	public DefaultComboBoxModel<String> getDcCategory() {
 		return dcCategory;
+	}
+	
+	public static String getAdminId() {
+		return adminId;
 	}
 
 	public JTextField getJtfPrdName() {

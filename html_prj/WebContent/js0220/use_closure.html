@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>매개변수 있는/없는 함수</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	#output{width:500px; height:300px; border:1px solid #dfdfdf}
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		document.getElementById("btn1").addEventListener("click", useNonParam);
+		document.getElementById("btn2").addEventListener("click", useParam);
+	}//function
+	
+	//매개변수 있는 무기명 함수
+	function useParam(){
+		
+		var name=document.getElementById("name").value;
+		var addr=document.getElementById("addr").value;
+		var age=document.getElementById("age").value;
+		
+		var personData=function(i_name, i_addr, i_age){
+	/* 	};
+		val(name,addr,age);*/	
+			function getName(){
+				return i_name+"님";
+			}//getName 매개변수 받은거 바로 써주기
+			function getAddr(){
+				return "거주지: "+i_addr;
+			}//getAddr
+			
+			function birth(){
+				var date = new Date();
+				return date.getFullYear()-i_age+1;
+			}//birth
+			//closure
+			//똑같이 밖에서 부를 수가 없음
+			return{getName:getName, addr:getAddr, bir:birth}
+		}(name, addr, age);
+		
+		alert(personData.getName()); 
+	document.getElementById("output").innerHTML="이름: "+personData.getName()+", 주소 : "+personData.addr()+", 태어난해: " +personData.bir();
+	}//useParam
+	
+	//매개변수없는 무기명함수
+	function useNonParam(){
+		
+		var val=function(){
+			var name="김정윤";
+			function getAddr(){
+				return "서울시 강남구 역삼동";
+			}//getAddr
+		//}(); //val()이라고 안하고 그냥 ()만 넣어줘도 됨=함수를 만들면서 부를거야
+	
+		//위를 JAVA의 문법으로 쓴다고 친다면 변수명.변수명
+		//alert(val.name); //밖에서 변수를 가져다 쓸 수 없음 -> 자바로 치면 private
+
+		//무기명함수안 변수는 외부에서 사용할 수 없다.
+		
+		//closure: 함수 내의 변수나, 함수를 외부에서 사용 할 수 있도록 접근 권한을 변경해주는 함수
+		//{외부명:내부명}
+			return{na:name, addr:getAddr} //함수는 괄호 붙이지 않음!
+		}();
+
+		var divNode=document.getElementById("output");
+		divNode.innerHTML="이름: "+val.na+", 주소: "+val.addr();
+		//에러
+		//alert(val.na);
+		//alert(val.addr()); 
+	}//useNonParam
+	
+</script>
+</head>
+<body>
+<div id="output"></div>
+<div>
+	이름:<input type="text" name="name" id="name"><br/>
+	주소:<input type="text" name="addr" id="addr"><br/>
+	나이:<input type="text" name="age" id="age"><br/>
+<input type="button" value="매개변수 없는 무기명 함수" id="btn1" class="btn"/>
+</div>
+<input type="button" value="매개변수 있는 무기명 함수" id="btn2" class="btn"/>
+</body>
+</html>

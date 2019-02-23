@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	window.onload=function(){
+		document.getElementById("class1").addEventListener("click", useClass1);
+		document.getElementById("class2").addEventListener("click", useClass2);
+		document.getElementById("class3").addEventListener("click", useInheritance);
+	}//function
+	
+	function useClass1(){
+		//기본생성자를 사용하는 클래스
+		//1.선언
+		function DataVO(){ //클래스명임과 동시에 생성자명
+			var name;
+			
+			function setName(i_name){
+				name=i_name;
+			}//setName
+			function getName(){
+				return name;
+			}//getName
+		return{setName:setName, getName:getName};
+		}//closure
+		
+		//함수와 다르게 객체를 생성하여 사용
+		var vo = new DataVO();
+		vo.setName("김희철");
+		alert(vo.getName());
+		
+	}//useClass1
+	
+	
+	function useClass2(){
+		//매개변수 있는 생성자를 사용하는 클래스
+		//1. 선언
+		function DataVO(i_name){
+			var name=i_name;
+			
+			function setName(i_name){
+				name=i_name;
+			}//setName
+			
+			function getName(){
+				return name;
+			}//getName
+			
+			//closure
+			return{setName:setName, getName:getName};
+		}//class
+		
+		//2. 객체 생성
+		var data = new DataVO("김정윤");
+		var data1 = new DataVO("김정운");
+		
+		alert(data.getName());
+		
+		data1.setName("백인재");
+		alert(data1.getName());
+		
+	}//useClass2
+	
+	function useInheritance(){
+		//1.부모 클래스 생성
+		function Parent(){
+			var name;
+			function printName(){//상속관계에서 클래스에 변수를 사용할 때에는 this.을 붙여서 객체에 생성된 변수임을 명시하여 사용한다.
+				alert("부모 함수: "+this.name); //(자바로 치면 인스턴스 변수) 클래스에 있는 변수를 쓸 때는 this를 넣어서 
+			}//printName
+			return{name:name, printName:printName};
+		}//Parent
+		
+		//2.자식 클래스 생성
+		function Child(){}
+		//3. 상속 처리
+		Child.prototype=new Parent();
+		//4.자식클래스에 변수, 함수 등록
+		//변수 등록
+		Child.prototype.age;
+		//prototype에 정의된 변수는 closure가 없어도 사용 할 수 있음
+		//함수는 무기명함수의 형태로만 등록된다.
+		Child.prototype.printAge=function(){
+			alert(this.age+"살");//등록된 변수는 클래스안으로 등록되므로 this를 사용하여 접근
+		}//printAge
+		Child.prototype.birthYear=function(age){
+			var date=new Date();
+			alert(date.getFullYear()-age+1+"년생");//등록된 변수는 클래스안으로 등록되므로 this를 사용하여 접근
+		}//birthYear
+		
+		//5. 사용
+		var c_obj=new Child();
+		c_obj.name="김정윤";
+		c_obj.printName();
+		
+		//등록된 변수의 사용
+		c_obj.age=20;
+		c_obj.printAge();
+		c_obj.birthYear(32);
+		$
+		
+	}//useInheritance
+	
+</script>
+</head>
+<body>
+<input type="button" value="클래스1" id="class1" class="btn"/>
+<input type="button" value="클래스2" id="class2" class="btn"/>
+<input type="button" value="상속" id="class3" class="btn"/>
+</body>
+</html>

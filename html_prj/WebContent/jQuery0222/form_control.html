@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	#wrap{width:1000px; height:600px; margin:0px auto}
+	#getValue{width:498px; height:598px; border:1px solid #333; float:left}
+	#setValue{width:498px; height:598px; border:1px solid #333; float:right}
+</style>
+<!--CDN을 사용하여 jQuery를 다운로드 받아 사용-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//이름이 유일한 HTML Form Control 얻기
+		$("#btn").click(function(){
+			var output="<ul>";
+			//text 값 얻기
+			output+="<li>text: "+$("#text").val()+"</li>";
+			//password
+			output+="<li>password: "+$("#pass").val()+"</li>";
+			//hidden
+			output+="<li>hidden: "+$("#hid").val()+"</li>";
+			//checkbox : value가 없으면 on이 나옴
+			output+="<li>checkbox: "+$("#flag").val()+"</li>";
+			//date
+			output+="<li>date: "+$("#date").val()+"</li>";
+			//select
+			output+="<li>select: "+$("#loc").val()+"</li>";
+			//file : 경로는 가상의 경로명이 나온다.
+			output+="<li>file: "+$("#file").val()+"</li>";
+			//textarea:
+			output+="<li>ta: "+$("#ta").val()+"</li>";
+			
+			$("#value").html(output);	
+			
+			if(confirm("전송하시겠습니까?")){ //404
+				$("#frm").submit(); //jQuery에서 제공하는 부분
+			}//end if
+		});//btn clcik
+		
+		//이름이 유일한 HTML Form Control 얻기
+		$("#btnSet").click(function(){
+			//text값 설정
+			$("#text1").val("김정윤");
+			//password값 설정
+			$("#pass1").val("123456");
+			//hidden값 설정
+			$("#hid1").val("히든태그의 값");
+			//date값 설정
+			$("#date1").val("2019-05-15");
+			//file값 설정 : file은 값 설정이 되지 않는다.
+			//$("#file1").val("c:/dev/env.bat");
+			//textarea의 값 설정
+			var msg="널 향한 설레임은\n 오늘부터 우리는\n 꿈꾸며 기도하는 오늘부터 우리는"
+			$("#ta1").val(msg);
+			
+		});//btnSet
+		
+	});//ready
+</script>
+</head>
+<body>
+<div id="wrap">
+<div id="getValue">
+<strong>값 얻기</strong>
+<form name="frm" id="frm" action="text.jsp"> <!-- jsp에서는 name이 중요하고 jQuery에서는 id가 중요함 -->
+<label>text</label>
+	<input type="text" name="text" class="inputBox" value="오늘부터 우리는" id="text"/>
+	<br/>
+<label>password</label>
+	<input type="password" name="password" class="inputBox" value="여자친구" id="pass"/>
+	<br/>
+<label>hidden</label>
+	<input type="hidden" name="hid" value="2019-02-22" id="hid"/>
+	<br/>
+<label>checkbox</label><!-- value가 없는 checkbox는 선택되면 "on"이 넘어간다. -->
+	<input type="checkbox" name="flag" id="flag"/>로그인 유지
+	<br/>
+<label>날짜 선택</label><!-- HTML5에서 지원되는 Control  -->
+	<input type="date" name="date" id="date"/>
+	<br/>
+<label>지역 선택</label><!-- HTML5에서 지원되는 Control  -->
+	<select name="loc" id="loc">
+		<option value="서울">서울</option>
+		<option value="경기">경기</option>
+		<option value="강원">강원</option>
+		<option value="충청">충청</option>
+	</select>
+	<br/>
+<label>파일 선택</label>
+	<input type="file" name="file" id="file" class="inputBox"/>
+	<br/>
+<label>ta</label>
+	<textarea class="inputBox" name="ta" id="ta" style="width:300px; height:100px">소원,은하,엄지,유주,신비,예린</textarea>
+	<br/>
+<input type="button" value="값얻기" class="btn" id="btn"/>
+<input type="reset" value="초기화" class="btn" id="rst"/>
+</form>
+
+<div id="value"></div>
+</div>
+
+<div id="setValue">
+<strong>값 설정</strong>
+<form name="frm1" id="frm1">
+<label>text</label>
+	<input type="text" name="text1" class="inputBox" id="text1"/>
+	<br/>
+<label>password</label>
+	<input type="password" name="password1" class="inputBox" id="pass1"/>
+	<br/>
+<label>hidden</label>
+	<input type="hidden" name="hid1" id="hid1"/>
+	<br/>
+<label>날짜 선택</label><!-- HTML5에서 지원되는 Control  -->
+	<input type="date" name="date1" id="date1"/>
+	<br/>
+<label>파일 선택</label>
+	<input type="file" name="file1" id="file1" class="inputBox"/>
+	<br/>
+<label>ta</label>
+	<textarea class="inputBox" name="ta1" id="ta1" style="width:300px; height:100px"></textarea>
+	<br/>
+<input type="button" value="값얻기" class="btn" id="btnSet"/>
+<input type="reset" value="초기화" class="btn"/>
+</form>
+</div>
+</div>
+</body>
+</html>

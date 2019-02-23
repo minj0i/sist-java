@@ -1,22 +1,22 @@
 package admin.vo;
 
 public class PMProductAddVO {
-	private String menuCode, menuName, img;
+	private String menuName, img, category;
 	private int price;
 	
-	public PMProductAddVO(String menuCode, String menuName, String img, int price) {
-		this.menuCode = menuCode;
+	public PMProductAddVO( String menuName, String img, String category, int price) {
 		this.menuName = menuName;
 		this.img = img;
+		this.category=category;
 		this.price = price;
-	}
-
-	public String getMenuCode() {
-		return menuCode;
 	}
 
 	public String getMenuName() {
 		return menuName;
+	}
+	
+	public String getCategory() {
+		return category;
 	}
 
 	public String getImg() {

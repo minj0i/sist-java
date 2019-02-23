@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	//배열(name 속성이 같다면 배열)로 된 값 얻기
+	window.onload=function(){
+		document.getElementById("radio").addEventListener("click",processRadio);
+		document.getElementById("check").addEventListener("click",processCheckbox);
+		document.getElementById("select").addEventListener("click",processSelect);
+	}//function
+	
+	function processRadio(){
+		var obj=document.frm;
+		//alert(obj.gender[0].value+" / "+obj.gender[1].value);
+		//alert(obj.gender[0].checked+" / "+obj.gender[1].checked);
+		
+		if(!(obj.gender[0].checked || obj.gender[1].checked)){
+			alert("성별을 선택해주세요.!!");
+			return;
+		}//end if
+		
+		var checkedGender="";
+		
+		for(var i=0; i<obj.gender.length; i++){
+			if(obj.gender[i].checked){
+				checkedGender=obj.gender[i].value;
+			}//end if
+		}//end for
+		
+		document.getElementById("output").innerHTML="선택성별 : "+checkedGender;
+
+		
+	}//processRadio
+	
+	function processCheckbox(){
+		//선택된 체크박스 값 얻기
+		var obj=document.frm;
+		
+		var output="<ul>";
+		var flag=false;
+		
+		for(var i=0; i<obj.games.length; i++){
+			if(obj.games[i].checked){//선택박스가 선택되었다면
+				flag=true;
+				output+="<li>"+obj.games[i].value+"</li>"; //선택된 체크박스의 값을 얻는다.
+			}//end if
+		}//ened for
+		if(!flag){
+			output+="<li>선택하신 게임이 없습니다.</li>";
+		}
+		output+="</ul>";
+		
+		document.getElementById("output").innerHTML=output;
+		
+		}//processCheckbox
+
+		function processSelect(){
+			//select값얻기
+			var obj = document.frm;
+			//가장 간단
+			//alert(obj.job.value);
+			
+			//선택된 인덱스 번째 값을 얻기
+			//alert(obj.job.selectedIndex);//방의 번째 숫자가 나옴
+			alert(obj.job[obj.job.selectedIndex].value);
+			
+			//for를 사용하는 방법
+			//var output="";
+			//for (var i=0; i<obj.job.length; i++){
+				//if(obj.job[i].selected){
+				//	output=obj.job[i].value;
+				//}
+			//}//end for
+			//document.getElementById("output").innerHTML="선택한 직업 : "+output;
+			
+		}//processSelect
+		
+	</script>
+</head>
+<body>
+	<form name="frm">
+	<div>
+		<label>성별</label>
+		<input type="radio" name="gender" value="M"/>남자
+		<input type="radio" name="gender" value="F"/>여자<br/>
+	</div>
+	<div>
+		<label>게임</label>
+		<input type="checkbox" name="games" value="철권"/>철권
+		<input type="checkbox" name="games" value="아스팔트"/>아스팔트
+		<input type="checkbox" name="games" value="GTA"/>GTA<br/>
+		<input type="checkbox" name="games" value="하스스톤"/>하스스톤
+		<input type="checkbox" name="games" value="리니지"/>리니지
+		<input type="checkbox" name="games" value="마인크래프트"/>마인크래프트<br/>
+	</div>
+	<div>
+		<label>관심 직업 선택</label>
+		<select name="job">
+			<option value="none">---직업선택---</option>
+			<option value="쓰앵님">쓰앵님</option>
+			<option value="Front개발자">Front개발자</option>
+			<option value="BackEnd개발자">BackEnd개발자</option>
+			<option value="운영">운영</option>
+			<option value="유지보수개발자">유지보수개발자</option>
+		</select>
+	</div>
+	<div>
+		<input type="button" value="라디오값얻기" id="radio" class="btn"/> 
+		<input type="button" value="체크박스값얻기" id="check" class="btn"/> 
+		<input type="button" value="셀렉트값얻기" id="select" class="btn"/> 
+	</div>
+	<div id="output"></div>
+	</form>
+</body>
+</html>

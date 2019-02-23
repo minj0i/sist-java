@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	function regexp(){
+		var data="abcㄱdef123가나다ABC!~@zzs햏";
+		
+		
+		var output="원본 : "+data+"</br>";
+		
+		output+="가장 처음 등장하는 문자 하나 삭제 <strong>"+data.replace(/a/,"")+"</strong><br/>";
+		
+		output+="특정 소문자 삭제<strong>"+data.replace(/a/g,"")+"</strong><br/>";
+		
+		output+="특정 대소문자 삭제<strong>"+data.replace(/a/ig,"")+"</strong><br/>";
+		
+		output+="모든 소문자 삭제<strong>"+data.replace(/[a-z]/g, "")+"</strong><br/>";
+		
+		output+="모든 숫자 삭제<strong>"+data.replace(/[0-9]/g, "")+"</strong><br/>";
+		output+="모든 한글 삭제<strong>"+data.replace(/[ㄱ-힣]/g, "")+"</strong><br/>";
+		
+		document.getElementById("output").innerHTML=output;
+	}//regexp
+	
+	function chk(){
+		var obj=document.frm;
+		
+		var txt1 = obj.txt1.value;
+		if(txt1.replace(/[a-zA-Z]/g,"")!=""){
+			alert("영문자만 입력 가능");			
+		}//end if
+		
+		var txt2 = obj.txt2.value;
+		//숫자만 입력가능
+		if(txt2.replace(/[0-9]/g,"")!=""){
+			alert("숫자만 입력 가능");
+		}
+		
+		var txt3 = obj.txt3.value;
+		//특수문자만 입력가능
+		if(txt3.replace(/[a-z0-9ㄱ-힣]/ig,"")==""){
+			alert("특수문자만 입력 가능");
+		}
+	}//chk
+</script>
+</head>
+<body>
+	<input type="button" value="클릭" class="btn" onclick="regexp()"/>
+	<form name="frm">
+	<label>대문자와 소문자만 입력가능</label>
+	<input type="text" name="txt1" class="inputBox"/><br/>
+	
+	<label>숫자만 입력 가능</label>
+	<input type="text" name="txt2" class="inputBox"/><br/>
+	
+	<label>특수문자만 입력 가능</label>
+	<input type="text" name="txt3" class="inputBox"/><br/>
+	<input type="button" value="클릭" class="btn" onclick="chk()"/>
+	</form>
+	
+<div id="output"></div>
+</body>
+</html>
