@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Effect</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+	#imgOutput{display:none;}
+	#idWarn{font-size:14px; font-weight:bold; color:#FF0000}
+	#txt{cursor: pointer;}
+</style>
+<!--CDN을 사용하여 jQuery를 다운로드 받아 사용-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#show").click(function(){
+		$("#imgOutput").show();
+	});//click
+	$("#hide").click(function(){
+		$("#imgOutput").hide();
+	});//click
+	$("#toggle").click(function(){
+		$("#imgOutput").toggle();
+	});//click
+	$("#fadeIn").click(function(){
+		//$("#imgOutput").fadeIn(1000);
+		$("#imgOutput").fadeIn(1000, function(){
+			//보여지는 것이 완료되었을 때 처리할 코드
+			alert("이미지 처리 완료");
+		});
+	});//click
+	$("#fadeOut").click(function(){
+	//	$("#imgOutput").fadeOut(3000);
+		$("#imgOutput").fadeOut(3000, function(){
+			alert("이미지 숨김 완료");
+		});
+	});//click
+	
+	/////////////////HTML Form Control의 값이 입력되지 않았을 때///////////////////
+	$("#btnJoin").click(function(){
+		var id=$("#id").val();
+		
+		if(id==""){
+			//1. idWarn 글자를 넣어서 보여준다.
+			$("#idWarn").html("아이디는 필수 입력");
+			//fadeIn과 Out을 여러번 chain형태로 넣어주면 깜빡깜빡 거리게 됨
+/* 			$("#idWarn").fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000)
+			.fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000)
+			.fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(500).fadeIn(500).fadeOut(500).fadeIn(500); */
+/* 			for(var i=0; i<5; i++){
+				$("#idWarn").fadeIn(1000).fadeOut(1000);
+			}//end for
+			fadeIn(1000); */
+			var temp=[1000,1000,1000,5000,500];
+			$.each(temp,function(i, val){
+				$("#idWarn").fadeIn(val).fadeOut(val);
+			});//end for
+			return;
+		}//end if
+		alert("가입페이지로 이동"); //$("폼태그 id").submit();
+	});//btnJoin
+	
+	$("#txt").click(function(){
+		var txt=$("#txt").text();
+		if(txt=="보이기"){
+			$("#txt").text("숨기기");
+			$("#imgOutput").slideDown();
+		}else{//숨기기
+			$("#txt").text("보이기");
+			$("#imgOutput").slideUp();
+		}//end else
+	});
+});//ready
+</script>
+</head>
+<body>
+<div>
+	<input type="button" value="보이기" class="btn" id="show"/>
+	<input type="button" value="숨기기" class="btn" id="hide"/>
+	<input type="button" value="보이기/숨기기" class="btn" id="toggle"/>
+	<input type="button" value="서서히 보이기" class="btn" id="fadeIn"/>
+	<input type="button" value="서서히 숨기기" class="btn" id="fadeOut"/>
+</div>
+<div>
+	<label>아이디</label>
+	<input type="text" name="id" class="inputBox" id="id" autofocus="autofocus"/>
+	<input type="button" value="중복확인" class="btn" id="btn"/>
+	<span id="idWarn"></span><br/>
+	
+	<input type="button" value="가입" class="btn" id="btnJoin"/><br/>
+	
+</div>
+<div>
+<span id="txt">보이기</span>
+</div>
+<div id="imgOutput">
+	<img src="../common/images/dayoon.jpg">
+</div>
+</body>
+</html>
