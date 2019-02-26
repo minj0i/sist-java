@@ -25,6 +25,8 @@ public class Hello extends HttpServlet {
 		out.println("<body>");
 		out.println("<strong>안녕 Servlet</strong><br/>");
 		out.println("난 김정윤이라고해<br/>");
+		out.println("요청"+request+"<br/>");
+		out.println("응답"+response+"<br/>");
 		out.println("2019년 02월 25일입니다.<br/>");
 		
 		out.println("</body>");
