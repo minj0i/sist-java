@@ -177,4 +177,76 @@
     <servlet-name>remove_cookie</servlet-name>
     <url-pattern>/remove_cookie</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>popup_body</servlet-name>
+    <servlet-class>day0305.PopupBody</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>popup_body</servlet-name>
+    <url-pattern>/popup_cookie.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>popup_close</display-name>
+    <servlet-name>popup_close</servlet-name>
+    <servlet-class>day0305.PopupClose</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>popup_close</servlet-name>
+    <url-pattern>/popup_close.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>use_init_param</display-name>
+    <servlet-name>use_init_param</servlet-name>
+    <servlet-class>day0305.UseInitParameter</servlet-class>
+    <init-param>
+      <param-name>name</param-name>
+      <param-value>김정윤</param-value>
+    </init-param>
+    <init-param>
+      <param-name>addr</param-name>
+      <param-value>서울시 강남구 역삼동</param-value>
+    </init-param>
+    <init-param>
+      <param-name>birth</param-name>
+      <param-value>1989</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>use_init_param</servlet-name>
+    <url-pattern>/use_init_param</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>use_dd_param</display-name>
+    <servlet-name>use_dd_param</servlet-name>
+    <servlet-class>day0305.UseDDParam</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>use_dd_param</servlet-name>
+    <url-pattern>/use_dd_param</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>name</param-name>
+    <param-value>이재찬</param-value>
+  </context-param>
+  <context-param>
+    <param-name>addr</param-name>
+    <param-value>인천시 소래포구</param-value>
+  </context-param>
+  <context-param>
+    <param-name>birth</param-name>
+    <param-value>1992</param-value>
+  </context-param>
+  <servlet>
+    <description></description>
+    <display-name>use_context_param</display-name>
+    <servlet-name>use_context_param</servlet-name>
+    <servlet-class>day0305.UseContextParameter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>use_context_param</servlet-name>
+    <url-pattern>/use_context_param</url-pattern>
+  </servlet-mapping>
 </web-app>
