@@ -129,7 +129,7 @@ public class FileServer extends Thread{
 		
 	}//fileSend
 	
-//	public static void main(String[] args) {
-//		new FileServer().start(); //인스턴스 +실행
-//	}//main
+	public static void main(String[] args) {
+		new FileServer().start(); //인스턴스 +실행
+	}//main
 }//class

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>디자인</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main_v190130.css"/>
+<style type="text/css">
+/* wrap에 background-color를 넣고 header, container, footer에도 background-color를 넣어 가려지는지 확인 */
+#wrap{margin:0px auto; width:800px; height:860px;}
+/* wrap안쪽 디자인들은 wrap안에 들어있기 때문에 width안줘도 자동으로 800이 됨 */
+#header{width:800px; height:140px; background: #FFFFFF url(http://localhost:8080/jsp_prj/common/images/header_bg.png) repeat-x;
+		position:relative;}
+#headerTitle{ font-family: HY견고딕, 고딕; font-size:35px; font-weight:bold; text-align:center;
+			position:absolute; top:40px; left:290px;}
+#container{width:800px; min-height:600px;}
+#footer{width:800px; height:120px;}
+#footerTitle{float:right; font-size:15px; padding-top:20px; padding-right:20px;}
+</style>
+<!-- jQuery의 CDN 설정 jQuery다운로드에서 구글CDN 2.x 복사-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#btnGet").click(function(){
+			//HTML Form Control의 유효성 검증 후
+			$("#getFrm").submit();
+		});//btnGet click
+		$("#btnPost").click(function(){
+			//HTML Form Control의 유효성 검증 후
+			$("#postFrm").submit();
+		});//btnGet click
+		
+	});//ready
+
+</script>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="headerTitle">SIST Class4 </div>
+	</div>
+	
+	<div id="container">
+	<div id="getDiv">
+		<h2>이름이 유일한 HTML Form Control 값 전송 GET</h2>
+		<form method="get" action="parameter.jsp" id="getFrm">
+		<table>
+			<tr>
+				<td><label>이름</label></td>
+				<td><input type="text" name="name" class="inputBox"></td>
+			</tr>
+			<tr>
+				<td><label>나이</label></td>
+				<td><input type="password" name="age" class="inputBox"></td>
+			</tr>
+			<tr>
+				<td><label>메일링여부</label></td>
+				<!-- checkbox가 하나라면 배열로 처리되지 않는다.  -->
+				<td><input type="checkbox" name="mailing">수신</td>
+			</tr>
+			<tr>
+				<td><label>성별</label></td>
+				<td><input type="radio" name="gender">남자
+				<input type="radio" name="gender" checked="checked">여자</td>
+			</tr>
+			<tr>
+				<td><label>숨김값</label></td>
+				<td><input type="hidden" name="addr" value="서울시 강남구 역삼동 한독빌딩"></td>
+			</tr>
+			<tr>
+				<td><label>사용메일</label></td>
+				<td>
+				<select name="eamil" class="inputBox">
+				<option value="gmail.com">--지메일--</option>
+				<option value="naver.com">--네이버메일--</option>
+				<option value="daum.net">--다음메일--</option>
+				<option value="korea.com">--코리아메일--</option>
+				<option value="hotmail.com">--핫메일--</option>
+				</select></td>
+			</tr>
+			<tr>
+			<td><label>가입인사</label></td>
+			<td><textarea style="width:300px; height:100px" name="greeting"></textarea></td>
+			</tr>
+			<tr>
+				<td><label>취미</label></td>
+				<td>
+				<input type="checkbox" name="hobby" value="야구"/>야구<br/>
+				<input type="checkbox" name="hobby" value="댄스"/>댄스<br/>
+				<input type="checkbox" name="hobby" value="축구"/>축구<br/>
+				<input type="checkbox" name="hobby" value="쇼핑"/>쇼핑<br/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="전송" class="btn" id="btnGet"/>
+				</td>
+			</tr>
+		</table>
+		
+		</form>
+	</div>
+	
+	<div id="postDiv">
+		<h2>이름이 유일한 HTML Form Control 값 전송 POST</h2>
+		<form method="post" action="parameter.jsp" id="postFrm">
+		<table>
+			<tr>
+				<td><label>이름</label></td>
+				<td><input type="text" name="name" class="inputBox"></td>
+			</tr>
+			<tr>
+				<td><label>나이</label></td>
+				<td><input type="password" name="age" class="inputBox"></td>
+			</tr>
+			<tr>
+				<td><label>메일링여부</label></td>
+				<!-- checkbox가 하나라면 배열로 처리되지 않는다.  -->
+				<td><input type="checkbox" name="mailing">수신</td>
+			</tr>
+			<tr>
+				<td><label>성별</label></td>
+				<td><input type="radio" name="gender">남자
+				<input type="radio" name="gender" checked="checked">여자</td>
+			</tr>
+			<tr>
+				<td><label>숨김값</label></td>
+				<td><input type="hidden" name="addr" value="서울시 강남구 역삼동 한독빌딩"></td>
+			</tr>
+			<tr>
+				<td><label>사용메일</label></td>
+				<td>
+				<select name="eamil" class="inputBox">
+				<option value="gmail.com">--지메일--</option>
+				<option value="naver.com">--네이버메일--</option>
+				<option value="daum.net">--다음메일--</option>
+				<option value="korea.com">--코리아메일--</option>
+				<option value="hotmail.com">--핫메일--</option>
+				</select></td>
+			</tr>
+			<tr>
+			<td><label>가입인사</label></td>
+			<td><textarea style="width:300px; height:100px" name="greeting"></textarea></td>
+			</tr>
+			<tr>
+				<td><label>취미</label></td>
+				<td>
+				<input type="checkbox" name="hobby" value="야구"/>야구<br/>
+				<input type="checkbox" name="hobby" value="댄스"/>댄스<br/>
+				<input type="checkbox" name="hobby" value="축구"/>축구<br/>
+				<input type="checkbox" name="hobby" value="쇼핑"/>쇼핑<br/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="전송" class="btn" id="btnPost"/>
+				</td>
+			</tr>
+		</table>
+		
+		</form>
+	</div>
+	
+	</div>
+	
+	<div id="footer">
+		<div id="footerTitle"> copyright&copy; all right reserved class4 </div>
+	</div>
+</div>
+</body>
+</html>
