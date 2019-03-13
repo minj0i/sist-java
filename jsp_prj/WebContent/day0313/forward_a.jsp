@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info = "외부 JSP Page 지시자"%>
+    info="ip나 localhost를 구분하여 다른 언어를 보여주는 일"
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,20 +26,46 @@
 	<div id="header">
 		<div id="headerTitle">SIST Class4 </div>
 	</div>
-	
 	<div id="container">
-	<div>
-	<% String name="노진경"; %>
-	<strong>외부JSP</strong>
-	<!-- 변수나 method의 공유가 되지 않는다. : 각각의 class로 생성되고 JVM에서
-		각각의 instance가 생성되므로 다른 instance내의 변수는 사용할 수 없다.   -->
-	<jsp:include page="include_action_b.jsp"></jsp:include>
-	<strong>외부JSP</strong>
-	<%= name %><br/>
-<%-- 	삽입된 JSP의 변수 : <%= msg %> --%>
-	</div>
-	</div>
+	<%
+	//접속자의 ip를 얻는다.
+	String ipAddr=request.getRemoteAddr(); 
+	String nameLabel="name"; 
+	String ageLabel="age";
+	String addrLabel="address"; 
+	String btnLabel="submit";
 	
+	if("0:0:0:0:0:0:0:1".equals(ipAddr)){//localhost
+		nameLabel="이름";
+		ageLabel="나이";
+		addrLabel="주소";
+		btnLabel="전송";
+	}//end if
+	%>
+	<form action="forward_b.jsp" method="get">
+	<table>
+	<tr>
+	<td><label><%= nameLabel%></label></td>
+	<td><input type="text" name="name" class="inputBox"></td>
+	</tr>
+	<tr>
+	<td><label><%= ageLabel%></label></td>
+	<td><input type="text" name="age" class="inputBox"></td>
+	</tr>
+	<tr>
+	<td><label><%= addrLabel%></label></td>
+	<td><input type="text" name="address" class="inputBox"></td>
+	</tr>
+	<tr>
+	<td colspan="2" align="center"><input type="submit" value="<%= btnLabel%>" class="btn"></td>
+	</tr>
+	</table>
+	</form>
+	<a href="http://localhost:8080/jsp_prj/day0313/forward_a.jsp">한국어</a>|
+	<a href="http://211.63.89.149:8080/jsp_prj/day0313/forward_a.jsp">English</a>
+	
+	
+	</div>
 	<div id="footer">
 		<div id="footerTitle"> copyright&copy; all right reserved class4 </div>
 	</div>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    info = "외부 JSP Page 지시자"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,18 +26,37 @@
 	</div>
 	
 	<div id="container">
-	<div>
-	<% String name="노진경"; %>
-	<strong>외부JSP</strong>
-	<!-- 변수나 method의 공유가 되지 않는다. : 각각의 class로 생성되고 JVM에서
-		각각의 instance가 생성되므로 다른 instance내의 변수는 사용할 수 없다.   -->
-	<jsp:include page="include_action_b.jsp"></jsp:include>
-	<strong>외부JSP</strong>
-	<%= name %><br/>
-<%-- 	삽입된 JSP의 변수 : <%= msg %> --%>
+	<%
+		//HTML Form Control에서 입력된 값
+		String name=request.getParameter("name");
+		String age=request.getParameter("age");
+		String addr=request.getParameter("address");
+		//<jsp:param으로 생성된 값
+		String lang=request.getParameter("lang");
+		String date=request.getParameter("date");
+	%>
+	<strong>안녕하세요? 한국어 페이지 입니다.</strong>
+	<strong>입력하신 값은 아래와 같습니다.</strong>
+	<ul>
+		<li>이름: <strong><%= name %></strong></li>
+		<li>나이: <strong><%= age %></strong></li>
+		<li>주소: <strong><%= addr %></strong></li>
+		<li>사용언어: <strong><%= lang %></strong></li>
+		<li>접속시간: <strong><%= date %></strong></li>
+		<li>지역선택:
+			<select>
+				<% String[] loc=(String[])request.getAttribute("loc");
+					for(int i=0; i<loc.length; i++){
+				%>
+				<option value="<%=loc[i] %>"><%=loc[i] %></option>
+				<%
+					}//end for
+				%>
+			</select>
+		</li>
+	</ul>
+	<a href="forward_a.jsp">입력폼으로 이동</a>
 	</div>
-	</div>
-	
 	<div id="footer">
 		<div id="footerTitle"> copyright&copy; all right reserved class4 </div>
 	</div>
