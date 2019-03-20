@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>test_forward</display-name>
+    <servlet-name>test_forward</servlet-name>
+    <servlet-class>day0314.TestForward</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test_forward</servlet-name>
+    <url-pattern>/test_forward</url-pattern>
+  </servlet-mapping>
 </web-app>
