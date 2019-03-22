@@ -1,7 +1,14 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="kr.co.sist.diary.vo.MonthVO"%>
+<%@page import="kr.co.sist.diary.dao.DiaryDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +27,12 @@
 #footer{width:800px; height:120px;}
 #footerTitle{float:right; font-size:15px; padding-top:20px; padding-right:20px;}
 /* 달력 설정  */
-#diaryTab{margin:0px auto; border-spacing:0px; border:1px solid #cecece}
-.sunTitle{width:100px; height:25px; border:1px solid #CECECE; font-weight:bold; color:#FFFFFF; background-color:#b71540 ;}
-.weekTitle{width:100px; height:25px; border:1px solid #CECECE}
-.satTitle{width:100px; height:25px; border:1px solid #CECECE; font-weight:bold; color:#FFFFFF; background-color:#6a89cc ;}
+#diaryTab{margin:0px auto; border-spacing:0px; border:1px solid #CECECE}
+#diaryContent{position:relative;}
+#diaryJob{position:absolute; top:30px; left:160px; }
+.sunTitle{text-align:center; width:100px; height:25px; border:1px solid #CECECE; font-weight:bold; color:#FFFFFF; background-color:#b71540 ;}
+.weekTitle{text-align:center; width:100px; height:25px; border:1px solid #CECECE}
+.satTitle{text-align:center; width:100px; height:25px; border:1px solid #CECECE; font-weight:bold; color:#FFFFFF; background-color:#6a89cc ;}
 #diaryTitle{text-align:center; margin-bottom:10px; margin-top:20px;}
 #diaryToday{width:100px; font-family:고딕체; font-size:28px; font-weight:bold; vertical-align:bottom;}
 .diaryTd{width:100px; height:60px; border:1px solid #CECECE; text-align:right; vertical-align: top; font-size:14px; font-weight:bold;}
@@ -32,14 +41,46 @@
 .sunColor{font-weight:bold; font-size:15px; color:#b71540;}
 .weekColor{color:#222222;}
 .satColor{font-size:15px; color:#141744;}
+
+#writeFrm{background-color:#FFFFFF; border:1px solid #5C5C5C;
+		box-shadow: 5px 5px 5px #444444;
+		padding:10px}
+#readFrm{background-color:#FBFBFB; border:1px solid #0F143C;
+		box-shadow: 5px 5px 5px #1C2E6B;
+		padding:10px}
+		
 /* 달력 설정  끝*/
 </style>
+<!-- summernote 관련 library 시작 -->
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="../common/summernote/bootstrap.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="../common/summernote/bootstrap.js"></script> 
+
+<!-- include summernote css/js -->
+<link href="../common/summernote/summernote-lite.css" rel="stylesheet">
+<script src="../common/summernote/summernote-lite.min.js"></script>
+<script src="../common/summernote/lang/summernote-ko-KR.js"></script>
+<script type="text/javascript">
+/* $(document).ready(function() { */
+$(function() {
+	$('#summernote').summernote({
+       placeholder: '이벤트를 작성해 주세요',
+       tabsize: 2,
+       height: 150,
+       width: 390,
+       lang: 'ko-KR'
+    });
+});//ready
+
+</script>
+<!-- summernote 관련 library 끝 -->
+<!-- Tooltip 시작 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="../common/js/jquery-ui.js"></script>
   <script>
-  $( function() {
-    $( document ).tooltip({
+  $(function() {
+    $(document).tooltip1({
       position: {
         my: "center bottom-20",
         at: "center top",
@@ -55,14 +96,14 @@
     });
   } );
   </script>
-  <style>
+   <style>
   .ui-tooltip, .arrow:after {
-    background: black;
+    background: white;
     border: 2px solid white;
   }
   .ui-tooltip {
     padding: 10px 20px;
-    color: white;
+    color: black;
     border-radius: 20px;
     font: bold 14px "Helvetica Neue", Sans-Serif;
     text-transform: uppercase;
@@ -101,6 +142,7 @@
     top: auto;
   }
   </style>
+  
 <script type="text/javascript">
 	function moveMonth(month, year){
 		/* location.href="diary.jsp?param_year="+year+"&param_month="+month; */
@@ -112,14 +154,106 @@
 		$("[name='param_year']").val(year);
 		$("[name='param_month']").val(month);
 		$("[name='diaryFrm']").submit();
-		
 	}//moveMonth
+</script>
+
+<script type="text/javascript">
+
+$(function(){
+	$("#btnCloseFrm").click(function(){
+		//location.href="diary.jsp?param_year=${param.param_year}&param_month=${param.param_month}";
+		moveMonth("${param.param_month}","${param.param_year}");
+	});//click
+	$("#btnWriteFrm").click(function(){
+		//location.href="diary.jsp?param_year=${param.param_year}&param_month=${param.param_month}";
+		moveMonth("${param.param_month}","${param.param_year}");
+	});//click
+	
+	//글작성 처리	
+	$("#btnWrite").click(function(){
+		if($("#subject").val()==""){
+			alert("이벤트 제목은 필수입력!!!!");
+			$("#subject").focus();
+			return;
+		}//end if
+		if($("#summernote").val()==""){
+			alert("이벤트 내용은 필수입력!!!!");
+			$("#summernote").focus();
+			return;
+		}//end if
+		if($("#writer").val()==""){
+			alert("작성자는 필수입력!!!!");
+			$("#writer").focus();
+			return;
+		}//end if
+		if($("#pass").val()==""){
+			alert("비밀번호는 필수입력!!!!");
+			$("#pass").focus();
+			return;
+		}//end if
+		$("[name='writeFrm']").submit();
+		});//click
+		
+		$("#btnUpdate").click(function(){
+			if($("#summernote").val()==""){
+				alert("이벤트 내용은 필수입력!!!!");
+				$("#summernote").focus();
+				return;
+			}//end if
+			if($("#pass").val()==""){
+				alert("비밀번호는 필수입력!!!!");
+				$("#pass").focus();
+				return;
+			}//end if
+			
+			$("[name='pageFlag']").val("update_process");
+			$("[name='readFrm']").submit();
+			
+		});//click
+		$("#btnRemove").click(function(){
+			if($("#pass").val()==""){
+				alert("비밀번호는 필수입력!!!!");
+				$("#pass").focus();
+				return;
+			}//end if
+			
+			$("[name='pageFlag']").val("delete_process");
+			$("[name='readFrm']").submit();
+		});//click
+});//ready
+
+function writeEvt(year, month, day, pageFlag, evtCnt){
+	if(evtCnt>4){
+			alert("하루에 5건까지만 작성 가능합니다");
+			return;
+	}//end if
+
+	$("[name='param_year']").val(year);
+	$("[name='param_month']").val(month);
+	$("[name='param_day']").val(day);
+	$("[name='pageFlag']").val(pageFlag);
+	$("[name='diaryFrm']").submit();
+}//writeEvt
+
+function readEvt(num, year, month, day){
+	$("[name='param_year']").val(year);
+	$("[name='param_month']").val(month);
+	$("[name='param_day']").val(day);
+	$("[name='pageFlag']").val("read_form");
+	$("[name='num']").val(num);
+	$("[name='diaryFrm']").submit();
+	
+}//read Evt
+
 </script>
 </head>
 <body>
 <div id="wrap">
 	<div id="header">
 		<div id="headerTitle">SIST Class4 </div>
+		<div style="padding-top: 100px">
+		<c:import url="../common/jsp/main_menu.jsp"/>
+		</div>
 	</div>
 	
 	<div id="container">
@@ -140,6 +274,8 @@
 		//사람 : 1 2 3 4 5
 		//자바 : 0 1 2 3 4
 		String param_month=request.getParameter("param_month");
+		cal.set(Calendar.DAY_OF_MONTH,1);//요청했을 때 해당 달에 없는 날이 존재한다면
+		//다음달 1일로 넘어가버리므로 무조건 1일로 세팅한다
 		if(param_month!=null &&  !"".equals(param_month)){//파라메터 월이 존재하면 현재 캘린더 객체의 월을 변경
 			cal.set(Calendar.MONTH, Integer.parseInt(param_month)-1);
 		}//end if
@@ -158,16 +294,18 @@
 		if(todate.toString().equals(nowDate.toString())){//주소가 같은지를 물어보는 equals
 			toDayFlag = true;			
 		}//end if
-		log(todate+"/"+nowDate+"/"+toDayFlag);
+		//log(todate+"/"+nowDate+"/"+toDayFlag);
 		pageContext.setAttribute("nowYear", nowYear);
 		pageContext.setAttribute("nowMonth", nowMonth);
 		pageContext.setAttribute("nowDay", nowDay);
 	%>
 	
 	<form action="diary.jsp" name="diaryFrm" method="post">
-	<input type="hidden" name="param_month"/>
-	<input type="hidden" name="param_year"/>
-	<input type="hidden" name="param_day"/>
+		<input type="hidden" name="num"/>
+		<input type="hidden" name="param_month"/>
+		<input type="hidden" name="param_year"/>
+		<input type="hidden" name="param_day"/>
+		<input type="hidden" name="pageFlag"/>
 	</form>
 		
 	<div id="diaryTitle">
@@ -190,10 +328,17 @@
 		<th class="satTitle">토</th>
 	</tr>
 	<tr>
-	<!-- <td class="diaryTd">1</td> -->
-		<%
+	<%
 		String dayClass="";//요일별 색
 		String todayClass="";//오늘이거나 평일의 Td색
+		//요청되는 년, 월의 모든 이벤트를 조회
+		DiaryDAO d_dao=DiaryDAO.getInstance();
+		try{
+		MonthVO[][] monthEvtData= d_dao.selectMonthEvent(String.valueOf(nowYear), String.valueOf(nowMonth));
+		MonthVO[] dayEvt=null;//해당 일에 글이 존재한다면 저장할 배열
+		
+		String tempSubject="";//20자 이상인 제목을 잘라 ...을 붙이기 위해
+		int evtCnt=0; //이벤트 건수를 제한하기 위해 
 		
 		//매월마다 끝나는 날짜가 다르기 때문에 무한 루프를 사용한다.
 		for(int tempDay=1; tempDay<33; tempDay++){
@@ -251,8 +396,33 @@
 			}//end if
 			%>
 			<td class="<%= todayClass %>">
-			<div><a href="#void"><span class="<%= dayClass%>">
-				<%= tempDay %></span></a></div>
+			<%
+				dayEvt=monthEvtData[tempDay-1];
+				evtCnt=0;
+				if(dayEvt!=null){
+					//해당 일자의 이벤트 건수를 저장
+					evtCnt=dayEvt.length;
+				}//end if
+			%>
+			<div>
+			<a href="#void" onclick="writeEvt(${nowYear},${nowMonth},<%=tempDay%>,'write_form',<%= evtCnt %>)"><span class="<%= dayClass%>">
+				<%= tempDay %></span></a>
+				</div>
+				<div>
+				<%if(dayEvt!=null){ 
+					for(int i=0; i<dayEvt.length; i++){
+					tempSubject=dayEvt[i].getSubject();
+					if(tempSubject.length()>21){
+						tempSubject=tempSubject.substring(0,20)+"...";
+					}
+				%> 
+				<a href="#void" onclick="readEvt(<%= dayEvt[i].getNum()
+				%>, ${nowYear},${nowMonth},<%=tempDay%>)"><img src="images/evtflag.png" title="<%=tempSubject%>"/></a>
+				<% 
+					}//end for
+				}//end if
+				%>
+				</div>
 			</td>
 			<%
 			//토요일이면 줄 변경
@@ -261,11 +431,29 @@
 				out.println("</tr><tr>");
 			}//end switch
 		}//end for
+	}catch(SQLException se){
+		se.printStackTrace();
 		%>
-	</tr>
+		<tr>
+			<td colspan="7" style="text-align:cetner; height:400px">
+			<img src="images/construction.jpg" title="뎨둉T_T"/>
+			</td>
+		</tr>
+		<% 
+	}//end catch
+		%>
 	</table>
+	
+	<div id="diaryJob">
+		<c:if test="${not empty param.pageFlag }">
+			<c:import url="${ param.pageFlag }.jsp"/>
+		</c:if>
 	</div>
+	
 	</div>
+	
+	</div>
+	
 	</div>
 	
 	<div id="footer">
