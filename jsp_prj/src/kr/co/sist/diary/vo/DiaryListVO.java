@@ -45,6 +45,10 @@ public class DiaryListVO {
 	public String getW_date() {
 		return w_date;
 	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	
 	
 }//class

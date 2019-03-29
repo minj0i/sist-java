@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE root SYSTEM "hello.dtd">
+<root>
+	<msg>안녕 XML</msg>
+	<msg>오늘은 화요일</msg>
+	<!--DTD에 선언되지 않은 태그는 사용할 수 없다. <msg1></msg1> -->
+	<msg/><!--Element사이에 값이 없다면 /로 하나의 태그만 작성할 수 있다. HTML, ActionTag와도 같음 -->
+	<!-- <msg>닫힘노드가 없으므로 에러</msg> -->
+	<!-- <hello>대소문자를 가린다.</Hello> -->
+</root>
+<!--최상위 부모노드는 반드시 하나만 존재해야 한다. <root> 
+</root> -->

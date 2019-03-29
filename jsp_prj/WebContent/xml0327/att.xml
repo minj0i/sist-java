@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persons>
+	<person>
+		<name lastName="김">정윤</name>
+		<address city="강남구" zipcode="12345">신사동</address>
+	</person>
+	<person>
+		<name lastName="김">희철</name>
+		<address city="관악구" zipcode="22345">신사동</address>
+	</person>
+	<person>
+		<name lastName="노">진경</name>
+		<address city="강서구" zipcode="49149">방화동</address>
+	</person>
+	<person>
+		<name lastName="김">민정</name>
+		<address city="관악구" zipcode="87211">청림동</address>
+	</person>
+	<person>
+		<name lastName="정">택성</name>
+		<address city="구로구" zipcode="99999">개봉동</address>
+	</person>
+</persons>

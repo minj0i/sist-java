@@ -1,3 +1,4 @@
+<%@page import="java.io.IOException"%>
 <%@page import="kr.co.sist.diary.vo.DiaryDetailVO"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="kr.co.sist.diary.dao.DiaryDAO"%>
@@ -81,6 +82,10 @@
 </table>
 </form>
 <%
+	}catch(IOException ioe){
+%>
+	글의 내용을 읽어들이는 도중에 문제가 발생하였습니다. 잠시 후 다시 시도해주세용.
+<% 
 	}catch(SQLException se){
 		se.printStackTrace();
 	%>

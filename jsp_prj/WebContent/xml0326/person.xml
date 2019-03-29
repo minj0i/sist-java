@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE depts SYSTEM "person.dtd">
+<persons>
+	<person>
+		<name>
+			<firstName>정윤</firstName>
+			<lastName>김</lastName>
+		</name>
+			<ssn>880101-*******</ssn>
+			<address>서울시 강남구 역삼동</address>
+	</person>
+	<person>
+		<name>
+			<firstName>진경</firstName>
+			<lastName>노</lastName>
+		</name>
+			<ssn>890101-*******</ssn>
+			<address>서울시 강서구 까치산</address>
+	</person>
+	<person>
+	<!-- well formed 문서는 작성규칙만 지켜서 만들면 된다.
+		형제노드와 다른 노드의 순서를 가지거나 더 추가해도 된다.
+	 -->
+	 <!-- valid문서는 작성규칙과 DTD에 정의된 규칙을 모두 지켜서 만들어야 한다. -->
+		<name>
+			<firstName>재찬</firstName>
+			<!-- <middleName>코잘잘</middleName> -->
+			<lastName>이</lastName>
+		</name>
+			<ssn>900101-*******</ssn>
+			<address>인천광역시 소래포구</address>
+	</person>
+
+</persons>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE depts SYSTEM "jdom_car.dtd">
+<cars>
+  <car car_type="승용">
+    <model>아반테</model>
+    <company>현대</company>
+    <owner>김정윤</owner>
+    <cc>1600</cc>
+  </car>
+  <car car_type="스포츠카">
+    <model>솔리드프로</model>
+    <company>넥슨</company>
+    <owner>김희철</owner>
+    <cc>3000</cc>
+  </car>
+  <car car_type="스포츠카">
+    <model>연카</model>
+    <company>넥슨</company>
+    <owner>공선의</owner>
+    <cc>800</cc>
+  </car>
+  <car car_type="SUV">
+    <model>소렌토</model>
+    <company>기아</company>
+    <owner>이재찬</owner>
+    <cc>4800</cc>
+  </car>
+  <car car_type="트럭">
+    <model>MAN트럭</model>
+    <company>MAN</company>
+    <owner>노진경</owner>
+    <cc>10000</cc>
+  </car>
+  
+  <!--속성을 정의하지 않으면 Error  -->
+  <!-- <car>
+    <model>MAN트럭</model>
+    <company>MAN</company>
+    <owner>노진경</owner>
+    <cc>10000</cc>
+  </car> -->
+  
+</cars>

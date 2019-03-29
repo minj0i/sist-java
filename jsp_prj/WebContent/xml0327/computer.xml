@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE computer SYSTEM "computer.dtd">
+<computers>
+	<computer>
+		<cpu brand="인텔">i5, 3.3GHz</cpu>
+		<mb brand="기가바이트">GM001</mb>
+		<ram>16Gbyte</ram>
+		<ps>7team</ps>
+		<hdd brand="WD">WD 1Byte</hdd>
+		<!--hdd 혹은 sdd 중 하나만 넣어야 됨 <sdd></sdd> -->
+		<odd>LG DVD</odd>
+		<vga brand="NVIDIA">GTX-2080</vga>		
+	</computer>
+</computers>
