@@ -21,8 +21,25 @@
 <script type="text/javascript">
 	$(function(){
 		$("#reqXml").click(function(){
-			//xml을 직접 요청 (공공데이터가 XML을 응답하는 경우)
-			
+			//xml을 직접 요청 (공공데이터가 XML을 요청하여 응답 받는것과 동일)
+			//파라메터를 사용하지 않는다. data:를 사용하지 않는다.
+			$.ajax({
+				url:"../xml0326/dept.xml",
+				type:"get",
+				dataType:"xml",
+				error:function(xhr){
+					alert(xhr.status+" / "+xhr.statusText);
+				},
+				success:function(xml){
+					//반복해야 할 노드를 찾고
+					var deptNodes=$(xml).find("dept");
+					//찾은 노드를 반복 시킨다.
+					$.each(deptNodes,function(idx, deptNode){
+						//반복중인 노드의 값 얻기
+						alert($(deptNode).find("loc").text());
+					});
+				}//success
+			});//ajax
 		});//click
 	});//ready
 </script>
