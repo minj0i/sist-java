@@ -41,9 +41,8 @@ h2 {text-align: center;}
           obj.turn1.checked = false;
           obj.turn2.checked = false;
           
-          obj.dice1.src =  "../common/images/dice/dice_1.png";
-          obj.dice2.src =  "../common/images/dice/dice_1.png";
-          
+          obj.dice1.src =  "images/dice_1.png";
+          obj.dice2.src =  "images/dice_1.png";
           
           document.getElementById("p1Name").innerHTML =  "";
           document.getElementById("p2Name").innerHTML =  "";
@@ -103,7 +102,7 @@ h2 {text-align: center;}
                    turnFlag = false;
                    obj.turn1.checked = false;
               } else {
-                   alert(plyaer2+"의 차례입니다.");
+                   alert(player2+"의 차례입니다.");
                    obj.turn1.checked = false;
                    return;
               }
@@ -131,8 +130,8 @@ h2 {text-align: center;}
           var num1 = parseInt(Math.random()*6)+1;
           var num2 = parseInt(Math.random()*6)+1;
           
-          obj.dice1.src =  "../common/images/dice/dice_"+num1+".png";
-          obj.dice2.src =  "../common/images/dice/dice_"+num2+".png";
+          obj.dice1.src =  "images/dice_"+num1+".png";
+          obj.dice2.src =  "images/dice_"+num2+".png";
           
           return num1+num2;
      }
@@ -184,8 +183,8 @@ h2 {text-align: center;}
                    <input type="button" value="초기화"  id="reset"/>
               </div>
               <div id="diceView">
-                   <img  src="../common/images/dice/dice_1.png" name="dice1"/>
-                   <img  src="../common/images/dice/dice_1.png" name="dice2"/>
+                   <img  src="images/dice_1.png" name="dice1"/>
+                   <img  src="images/dice_1.png" name="dice2"/>
               </div>
           </form>
 </div>
