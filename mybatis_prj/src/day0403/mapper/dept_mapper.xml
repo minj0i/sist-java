@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- Query문을 정의
+  	namespace : XML내에서 중복된 id를 사용할 수 있도록 구분하는 것(패키지와 비슷한 용도) 주고싶은대로 주면 됨
+   -->
+<mapper namespace="kr.co.sist">
+  <select id="selectAllDept" resultType="day0403.DeptDomain">
+    select deptno, dname, loc from cp_dept
+  </select>
+  
+  <insert id="insertCpDept" parameterType="day0403.DeptVO">
+  	insert into cp_dept(deptno, dname, loc) 
+  		values(#{deptno}, #{dname}, #{loc})
+  </insert>
+  
+  <update id="updateCpDept" parameterType="day0403.DeptVO">
+  	UPDATE CP_DEPT
+  	set dname=#{dname}, loc=#{loc}
+  	where deptno=#{deptno}
+  </update>
+  
+  <!-- parameterType에 Java형 그대로 넣을 수 있다. -->
+  <delete id="deleteCpDept" parameterType="int">
+	delete from cp_dept
+	where deptno=#{deptno}
+   </delete>
+</mapper>

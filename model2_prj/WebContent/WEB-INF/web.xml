@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>model2_prj</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name></web-resource-name>
+      <url-pattern>*.jsp</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name></role-name>
+    </auth-constraint>
+  </security-constraint>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/common/error/err_403.html</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/common/error/err_403.html</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/common/error/err_403.html</location>
+  </error-page>
+  <servlet>
+    <description></description>
+    <display-name>MainController</display-name>
+    <servlet-name>MainController</servlet-name>
+    <servlet-class>day0401.MainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainController</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>

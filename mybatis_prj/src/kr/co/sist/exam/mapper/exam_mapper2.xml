@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.exam2">
+<!-- Diary List에 대한 Mapper 설정  -->
+<resultMap type="kr.co.sist.exam.domain.DiaryList" id="dlResult">
+	<result column="num" property="num"/>
+	<result column="subject" property="subject"/>
+	<result column="writer" property="writer"/>
+	<result column="evt_date" property="evt_date"/>
+	<result column="w_date" property="w_date"/>
+</resultMap>
+
+<!-- union에서 사용되는 resultMap  -->
+<resultMap type="kr.co.sist.exam.domain.Union" id="unionResult">
+	<result column="empno" property="empno"/>
+	<result column="ename" property="ename"/>
+	<result column="job" property="job"/>
+	<result column="sal" property="sal"/>
+	<result column="hiredate" property="hiredate"/>
+	<result column="deptno" property="deptno"/>
+	<result column="retired" property="retired"/>
+</resultMap>
+
+<!-- Join resultMap -->
+<resultMap type="kr.co.sist.exam.domain.EmpJoin" id="empResult">
+	<result column="empno" property="empno"/>
+	<result column="ename" property="ename"/>
+	<result column="sal" property="sal"/>
+	<result column="hiredate" property="hiredate"/>
+	<result column="deptno" property="deptno"/>
+	<result column="dname" property="dname"/>
+	<result column="loc" property="loc"/>
+</resultMap>
+
+<select id="diaryCnt" resultType="int">
+select count(*) cnt from diary
+</select>
+
+  <!-- subquery 조회 
+  	diary 테이블에서 가장 마지막글에서부터 시작번호와 끝번호 사이의 글을 조회
+  -->
+<select id="subquery" resultMap="dlResult" parameterType="kr.co.sist.exam.vo.DiaryListParamVO">
+select r_num, num, subject, writer, e_year||'-'||e_month||'-'||e_day evt_date, 
+		to_char(w_date,'yyyy-mm-dd HH24:mi') w_date
+from(select num, subject, writer, e_year, e_month, e_day, w_date,
+	row_number()over(order by w_date desc) r_num
+	from diary
+	)
+where r_num between #{startNum} and #{endNum}
+</select>
+
+  <!-- union 조회 : 퇴사한 사원과 재직중인 사원을 구분하여 조회-->
+  <select id="union" resultMap="unionResult">
+  select empno, ename, job, sal, to_char(hiredate,'yyyy-mm-dd') hiredate, deptno, retired  
+  from union_test
+  where retired='N'
+  union all
+  select empno, ename, job, sal, to_char(hiredate,'yyyy-mm-dd') hiredate, deptno, retired  
+  from union_test
+  where retired='Y'  
+  </select>
+  
+  <!-- join 조회 : 매니저번호를 입력받아 매니저가 관리하는 사원들의
+  		사원번호, 사원명, 연봉, 입사일, 부서번호, 부서명, 위치 조회-->
+  <select id="join" resultMap="empResult" parameterType="Integer">
+select e.empno, e.ename, e.sal, e.hiredate, d.deptno, d.dname, d.loc
+from emp e, dept d
+where e.deptno=d.deptno and e.mgr=#{ mgr }  
+  </select>
+  		
+  <!-- join+subquery 조회-->
+  <!-- 컬럼명 또는 테이블명이 동적일때 조회 -->
+  <!-- dynamic query: where, if, choose, foreach-->
+  <!-- procedure 호출-->
+  
+</mapper>

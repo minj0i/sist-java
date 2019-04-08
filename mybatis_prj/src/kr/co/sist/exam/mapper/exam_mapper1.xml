@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.exam1">
+<!-- Emp Domain을 resultMap으로 설정 -->
+<resultMap type="kr.co.sist.exam.domain.Emp" id="empResult">
+	<result column="EMPNO" property="empno"/>
+	<result column="ENAME" property="ename"/>
+	<result column="JOB" property="job"/>
+	<result column="SAL" property="sal"/>
+	<result column="HIREDATE" property="hiredate"/>
+	<result column="MGR" property="mgr"/>
+</resultMap>
+<!--Zipcode Domain을 컬럼과 매핑  -->
+<resultMap type="kr.co.sist.exam.domain.Zipcode" id="zipcodeResult">
+	<result column="zipcode" property="zipcode"/>
+	<result column="sido" property="sido"/>
+	<result column="gugun" property="gugun"/>
+	<result column="dong" property="dong"/>
+	<result column="bunji" property="bunji"/>
+</resultMap>
+
+
+<!-- 중복쿼리를 저장하고 싶을 때 sql 을 사용 -->
+<sql id="empDup">
+ 	select empno, ename, job, sal, mgr, to_char(hiredate, 'yyyy-mm-dd q') hiredate
+ 	from emp
+</sql>
+
+  <!-- 컬럼하나에 레코드 하나 조회  -->
+  <!-- MyBatis에서는 Java의 데이터형(기본형, 참조형)을 그대로 사용할 수 있다. 
+  		String data=SqlSession.selectOne("singleColumn");
+  -->
+  <select id="singleColumn" resultType="String">
+  	SELECT DNAME
+  	FROM DEPT
+  	WHERE DEPTNO=10
+  </select>
+  
+  <!-- 컬럼하나에 레코드 여러개 조회 
+  	resultType="자바 데이터형(기본형, 참조형)"
+  	호출 : List<데이터형> list=SqlSession.selectList("id");
+  	기본형을 사용해도 되고, Wrapper Class를 사용할 수 있다.
+  -->
+<!--   <select id="multiRow" resultType="int"> -->
+  <select id="multiRow" resultType="Integer">
+  select deptno
+  from dept
+  </select>
+  
+  <!-- 컬럼여러개 레코드 하나 조회  
+  	<typeAlias> : Domain이나 VO를 미리 등록(iBATIS-mapper 정의, MyBatis-설정파일)
+  	해두고 짧은 이름으로 사용할 때 (여러번 사용되면 유리)
+  	
+  	조회되는 컬럼은 대소문자를 구분하지 않지만 setter method는 대소문자를 구분
+  	iBATIS에서는 컬럼명 또는 컬럼명의 setter명을 쓸 수 있다.
+  	
+  	resultType="패키지명.Domain명 사용되거나 typeAlias의 id가 사용된다."
+ -->
+ <select id="multiColumn" resultType="kr.co.sist.exam.domain.DeptInfo"> 
+<!--  <select id="multiColumn" resultType="di"> -->
+ 	select dname, loc
+ 	from dept
+ 	where deptno=10
+ </select>
+ 
+  <!-- 컬럼여러개 레코드 여러개 조회 
+  		입력되는(parameterType="") 부서번호에 따른 사원정보를 조회(resultType)
+  		
+  		입력되는 값이 단일 행 - 자바 데이터형을 사용
+  				노드안에서 사용할 때에는 #{아무말대잔치}
+  		입력되는 값이 복합 형 - VO사용
+  				노드 안에서 사용할때에는 #{getter명}, #{getter명}
+  				
+  		조회결과를 미리 매핑한 <resultMap>을 선언했다면 <select>에서
+  		resultMap속성을 사용한다.
+  -->
+  <!-- <select id="multiColumnRow" resultMap="kr.co.sist.exam.domain.Emp" parameterType="int"> 
+  	parameterType이 int이면 where에 #뒤 아무거나 넣어도 됨-->
+  <select id="multiColumnRow" resultMap="empResult" parameterType="int">
+  	<include refid="empDup"/>
+  	where deptno=#{deptno1} 
+  </select>
+  
+  <!--  조회컬럼이 여러개인 경우
+  		parameterType에 VO를 설정하고 #{getter명}, ${getter명}을 사용한다.
+  		
+  		입력되는(parameterType="") 부서번호와 따른 사원정보 조회(resultType)
+  		parameterType이 VO인 경우에는 반드시 getter를 넣어줘야 함!
+ -->
+ <select id="multiParam" parameterType="kr.co.sist.exam.vo.EmpVO" resultMap="empResult">
+ 	<include refid="empDup"/>
+  	where deptno=#{deptno} and job=#{job}
+ </select>
+  <!-- < 의 조회 
+  	사원테이블에서 입력된 연봉보다 적게 받는 사원의 empno, eanme, job, sal, mgr,
+  	hiredate을 조회하세요
+  	
+  	'<'는 직접 사용할 수 없다. &lt;
+  	<를 직접 사용하고 싶다면 CDATA Section을 사용한다.
+  	CDATA Section 사이는 노드가 아닌 단순 문자열임을 알려주는 것.
+  	<![CDATA[
+		CDATA Section
+  	]]>
+ -->
+  <select id="lessThan" resultMap="empResult" parameterType="integer">
+  <include refid="empDup"/>
+  <![CDATA[
+  	where sal < #{sal}
+  ]]>  
+  </select>
+  
+  <!-- > 의 조회 -->
+    <select id="greaterThan" resultMap="empResult" parameterType="integer">
+  <include refid="empDup"/>
+ <![CDATA[
+  	where sal > #{sal}
+  ]]> 
+  order by sal desc 
+  </select>
+  
+  <!-- like 조회 
+  	동을 입력받아 (parameterType="") 우편번호, 시도, 구군, 동, 번지를 조회
+  	(resultType="", resultMap="")
+  -->
+  <select id="like" parameterType="String" resultMap="zipcodeResult">
+  select zipcode, sido, gugun, dong, nvl(bunji,' ') bunji
+  from zipcode
+  where dong like #{dong}||'%'
+  
+  </select>
+  
+  <!-- subquery 조회 -->
+  <!-- union 조회 -->
+  <!-- join 조회 -->
+  <!-- join+subquery 조회-->
+  <!-- 컬럼명 또는 테이블명이 동적일때 조회 -->
+  <!-- dynamic query: where, if, choose, foreach-->
+  
+</mapper>
