@@ -1,15 +1,24 @@
 package kr.co.sist.exam.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.sist.exam.dao.MyBatisDAO1;
+import kr.co.sist.exam.domain.Car;
+import kr.co.sist.exam.domain.DEmp;
 import kr.co.sist.exam.domain.DiaryList;
+import kr.co.sist.exam.domain.DynamicIf;
 import kr.co.sist.exam.domain.Emp;
 import kr.co.sist.exam.domain.EmpJoin;
 import kr.co.sist.exam.domain.Union;
 import kr.co.sist.exam.domain.Zipcode;
+import kr.co.sist.exam.vo.CarVO;
+import kr.co.sist.exam.vo.CursorVO;
+import kr.co.sist.exam.vo.DeptnoVO;
 import kr.co.sist.exam.vo.DiaryListParamVO;
 import kr.co.sist.exam.vo.EmpVO;
+import kr.co.sist.exam.vo.TestProcVO;
+import kr.co.sist.exam.vo.TnameVO;
 
 public class MyBatisService1 {
 	public List<Emp> multiParam(EmpVO ev){
@@ -108,7 +117,73 @@ public class MyBatisService1 {
 		MyBatisDAO1 mb_dao=new MyBatisDAO1();
 		list=mb_dao.join(mgr);
 		return list;
-	}
+	}//join
 	
+	public List<Car> joinSubquery(){
+		List<Car> list = null;
+		
+		MyBatisDAO1 mb_dao=new MyBatisDAO1();
+		list=mb_dao.joinSubQuery();
+		
+		//카 옵션이 25자 이상이라면 24자까지 보여주고 나머지는 ...으로 처리
+		for(Car car:list) {
+			if(car.getCarOption().length()>25) {
+				car.setCarOption(car.getCarOption().substring(0, 24)+"...");
+			}//end if
+		}//end for
+		
+		return list;
+	}//joinSubquery
+	
+	public List<DEmp> dynamicTable(TnameVO tv){
+		List<DEmp> list = null;
+		
+		MyBatisDAO1 mb_dao=new MyBatisDAO1();
+		list=mb_dao.dynamicTable(tv);
+		
+		return list;
+	}//dynamicTable
+	
+	public List<DynamicIf> dynamicIf(DeptnoVO dv){
+		List<DynamicIf> list = null;
+		MyBatisDAO1 mb_dao=new MyBatisDAO1();
+		list=mb_dao.dynamicIf(dv);
+		return list;
+	}//dynamicTable
+	
+	public List<DynamicIf> dynamicChoose(DeptnoVO dv){
+		List<DynamicIf> list = null;
+		MyBatisDAO1 mb_dao=new MyBatisDAO1();
+		list=mb_dao.dynamicChoose(dv);
+		return list;
+	}//dynamicTable
+	
+	public List<Car> dynamicForeach(String[] makerArr){
+		List<Car> list = null;
+		
+		List<String> makerList=null;
+		if(makerArr!=null) {
+			makerList=new ArrayList<String>();
+			for(String temp:makerArr) {
+				makerList.add(temp);
+			}//end for
+		}//end if
+		
+		CarVO cv = new CarVO(makerList);
+		MyBatisDAO1 mb_dao=new MyBatisDAO1();
+		list=mb_dao.dynamicForEach(cv);
+		return list;
+	}//dynamicForeach
+	
+	public TestProcVO insertProcedure(TestProcVO tpvo) {
+		MyBatisDAO1 mb_dao=new MyBatisDAO1();
+		tpvo=mb_dao.insertProc(tpvo);
+		return tpvo;
+	}//insertProcedure
+	
+	public void selectProc(CursorVO c_vo) {
+		MyBatisDAO1 mb_dao=new MyBatisDAO1();
+		mb_dao.selectProc(c_vo);
+	}//selectProc
 	
 }//MyBatisSerivce

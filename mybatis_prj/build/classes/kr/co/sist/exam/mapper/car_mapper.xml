@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- Query문을 정의 
+  	ns(namespace) : XML내에서 중복된 id를 사용할 수 있도록 구분하는 것.
+  			(패키지와 비슷한 용도)
+  -->
+<mapper namespace="kr.co.sist.car">
+
+<!-- Car resultMap 설정 : setter method명이 컬럼명과 다른경우에 주의 	-->
+<resultMap type="kr.co.sist.exam.domain.CarModel" id="carModelResult">
+	<result column="car_img" property="carImg"/>
+	<result column="maker" property="maker"/>
+	<result column="model" property="model"/>
+	<result column="car_year" property="carYear"/>
+	<result column="price" property="price"/>
+	<result column="car_option" property="carOption"/>
+</resultMap>
+
+
+ <select id="selectCarCountry" resultType="String" parameterType="String">
+ 	select maker
+	from car_country
+	where country =#{country} 
+ </select>
+ 
+ <select id="selectCarMaker" resultType="String" parameterType="String">
+ 	select model
+	from car_maker
+	where maker = #{maker} 
+ </select>
+ 
+ <select id="selectCarModel" resultMap="carModelResult" parameterType="String">
+ 	select cmo.car_img, cma.maker, cmo.model, cmo.car_year, cmo.price, cmo.car_option
+	from car_maker cma, car_model cmo
+	where (cmo.model = cma.model) and cmo.model = #{ model } 
+ </select>
+
+</mapper>
