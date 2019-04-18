@@ -1,82 +1,115 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!-- smartmenu 시작 -->
-   <!-- SmartMenus core CSS (required) -->
-   <link href="http://localhost:8080/mybatis_prj/common/smartmenu/css/sm-core-css.css" rel="stylesheet" type="text/css" />
-   
-   <!-- "sm-blue" menu theme (optional, you can use your own CSS, too) -->
-   <link href="http://localhost:8080/mybatis_prj/common/smartmenu/css/sm-simple/sm-simple.css" rel="stylesheet" type="text/css" />
-   
-   <!-- jQuery -->
-   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 위에 있는 것으로 실행 할 거기 때문에-->
+	pageEncoding="UTF-8"%>
+<!-- SmartMenu 시작 -->
+<link
+	href="http://localhost:8080/spring_mvc/common/smartmenu/css/sm-core-css.css"
+	rel="stylesheet" type="text/css" />
 
-    <!-- SmartMenus jQuery plugin -->
-    <script type="text/javascript" src="http://localhost:8080/mybatis_prj/common/smartmenu/jquery.smartmenus.js"></script>
+<link
+	href="http://localhost:8080/spring_mvc/common/smartmenu/css/sm-simple/sm-simple.css"
+	rel="stylesheet" type="text/css" />
 
-    <!-- SmartMenus jQuery init -->
-    <script type="text/javascript">
-       $(function() {
-          $('#main-menu').smartmenus({
-             subMenusSubOffsetX: 1,
-             subMenusSubOffsetY: -8
-          });
-       });
-    </script>
-<!-- smartmenu 끝 -->
-   	 <nav id="main-nav">
-      <!-- Sample menu definition -->
-      <ul id="main-menu" class="sm sm-simple">
-        <li><a href="#void">홈으로</a></li>
-        <li><a href="#void">쿼리실행</a>
-          <ul>
-            <li><a href="#void">1일차</a>
-              <ul>
-                <li><a href="main.jsp?page=day0404/single_column">컬럼하나에 레코드 하나</a></li>
-                <li><a href="main.jsp?page=day0404/multi_column">컬럼여러개에 레코드 하나</a></li>
-                <li><a href="main.jsp?page=day0404/multi_row">컬럼하나에 레코드 여러개</a></li>
-              </ul>
-            </li>
-            <li><a href="#void">2일차</a>
-              <ul>
-                <li><a href="main.jsp?page=day0405/multi_column_row">컬럼 여러개 레코드 여러개</a></li>
-                <li><a href="main.jsp?page=day0405/multi_param">where의 값이 여러개</a></li>
-                <li><a href="main.jsp?page=day0405/lessthan">&lt;의 비교</a></li>
-                <li><a href="main.jsp?page=day0405/greaterthan">>의 비교</a></li>
-                <li><a href="main.jsp?page=day0405/like">like</a></li>
-              </ul>
-            </li>
-            <li><a href="#void">3일차</a>
-              <ul>
-                <li><a href="main.jsp?page=day0408/subquery">subquery</a></li>
-                <li><a href="main.jsp?page=day0408/union">union</a></li>
-                <li><a href="main.jsp?page=day0408/join">join</a></li>
-              </ul>
-            </li>
-            <li><a href="#void">4일차</a>
-              <ul>
-                <li><a href="main.jsp?page=day0409/join_subquery">joinSubQuery</a></li>
-                <li><a href="main.jsp?page=day0409/dynamic_table">테이블명이 동적일 때</a></li>
-                <li><a href="main.jsp?page=day0409/dynamic_if">dynamic if</a></li>
-              </ul>
-            </li>
-            <li><a href="#void">5일차</a>
-              <ul>
-                <li><a href="main.jsp?page=day0410/dynamic_choose">dynamic choose</a></li>
-                <li><a href="main.jsp?page=day0410/dynamic_foreach">dynamic foreach</a></li>
-                <li><a href="main.jsp?page=day0410/insert_procedure">insert procedure</a></li>
-              </ul>
-            </li>
-            <li><a href="#void">6일차</a>
-              <ul>
-                <li><a href="main.jsp?page=day0411/select_procedure">select procedure</a></li>
-              </ul>
-            </li>
-            <li><a href="#void">동기방식 차량조회</a>
-              <ul>
-                <li><a href="main.jsp?page=day0410/car">동기식 차량조회</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        </ul>
-        </nav>
+<!-- jQuery -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
+
+<!-- SmartMenus jQuery plugin -->
+<script type="text/javascript"
+	src="http://localhost:8080/spring_mvc/common/smartmenu/jquery.smartmenus.min.js"></script>
+
+<!-- SmartMenus jQuery init -->
+<script type="text/javascript">
+	$(function() {
+		$('#main-menu').smartmenus({
+			subMenusSubOffsetX : 1,
+			subMenusSubOffsetY : -8
+		}); // smartmenus
+		
+	}); // ready 
+	
+	function sendPost(){
+		// Chrome은 JavaScript에서 action을 변경하면 form의 action이
+		// 계속 유지된다.
+		document.hidFrm.action="request_post.do";
+		document.hidFrm.submit();
+	} // sendPost
+	
+	function requestAll(){
+		var method="";
+		if(confirm("GET방식으로 요청하시겠습니까?")){
+			method="GET";
+		} else {
+			alert("POST 방식으로 요청합니다.");
+			method="POST";
+		} // end else 
+		document.hidFrm.method=method;
+		document.hidFrm.action="request_all.do";
+		document.hidFrm.submit();
+	} // requestAll
+	
+	function requestString(){
+		var url="request_string.do"
+		if(confirm("문자열의 매개변수를 전송 하시겠습니까?")){
+			url+="?name=jungyun";
+		}//end if
+		location.href=url;
+	}//requestString
+	
+	function requestInt(){
+		var url="request_int.do"
+		if(confirm("정수형의 매개변수를 전송 하시겠습니까?")){
+			url+="?age=20";
+		}//end if
+		location.href=url;
+	}//requestInt
+	
+</script>
+<form action="request_post.do" name="hidFrm" id="hidFrm" method="post"></form>
+<nav id="main-nav">
+	<!-- Sample menu definition -->
+	<ul id="main-menu" class="sm sm-simple">
+		<li><a href="http://localhost:8080/spring_mvc/index.html">홈으로</a></li>
+		<li><a href="#void">Spring MVC 사용</a>
+			<ul>
+				<li><a href="#void">1일차</a>
+					<ul>
+						<li><a href="request_get.do">GET 방식 요청</a></li>
+						<li><a href="#void" onclick="sendPost()">POST 방식 요청</a></li>
+						<li><a href="#void" onclick="requestAll()">GET/POST 모두 요청</a></li>
+						<li><a href="request_form.do">HttpServletRequest로 파라메터 처리</a></li>
+						<li><a href="vo_form.do">VO로 파라메터 처리</a></li>
+					</ul>
+				</li>
+				<li><a href="#void">2일차</a>
+					<ul>
+						<li><a href="#void" onclick="requestString()">단일 데이터형 처리(문자열)</a></li>
+						<li><a href="#void" onclick="requestInt()">단일 데이터형 처리(정수형)</a></li>
+						<li><a href="view_request.do">HttpServletRequest사용 데이터 전달</a></li>
+						<li><a href="view_model.do">Model사용 데이터 전달</a></li>
+						<li><a href="view_modelandview.do">ModelAndView사용 데이터 전달</a></li>
+						<li><a href="use_redirect.do">redirect이동</a></li>
+					</ul>
+				</li>
+				<li><a href="#void">3일차</a>
+					<ul>
+						<li><a href="session/use_session.do">HttpSession 사용</a></li>
+						<li><a href="session/an_use_session.do">@SessionAttributes 사용</a></li>
+					</ul>
+				</li>
+				<li><a href="#void">4일차</a>
+					<ul>
+						<li><a href="cookie/read_cookie.do">Cookie클래스를 사용한 값 얻기</a></li>
+						<li><a href="cookie/read_an_cookie.do">@CookieValue를 사용한 값 얻기</a></li>
+						<li><a href="include/include.do">JSP Include하기</a></li>
+						<li><a href="ajax/ajax.do">Ajax</a></li>
+                 </ul>
+               </li>
+				<li><a href="#void">5일차</a>
+					<ul>
+						<li><a href="diary/list.do">일정 보기</a></li>
+                 </ul>
+               </li>
+			</ul>
+			</li>
+	</ul>
+</nav>
+<!-- SmartMenu 끝 -->
