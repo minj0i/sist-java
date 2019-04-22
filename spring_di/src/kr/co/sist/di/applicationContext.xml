@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+<!-- 의존성 주입할 객체 생성 -->
+<bean id="dao" class="kr.co.sist.dao.DAOOracleImpl"/>
+<!-- <bean id="mysql_dao" class="kr.co.sist.dao.DAOMySqlImpl"/> -->
+<!-- 의존성 주입받을 객체 생성 -->
+<bean id="service" class="kr.co.sist.service.ServiceImpl">
+<!-- 의존성 주입 -->
+<constructor-arg ref="dao"/>
+</bean>
+</beans>
